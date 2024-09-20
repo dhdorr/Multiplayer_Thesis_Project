@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbt46cd5id8yl"]
+
+[ext_resource type="PackedScene" uid="uid://bwdh6w24baf1e" path="res://Demo/view_bounds.tscn" id="2_umho5"]
+
+[node name="Client_View" type="Node2D"]
+
+[node name="View_Bounds" parent="." instance=ExtResource("2_umho5")]

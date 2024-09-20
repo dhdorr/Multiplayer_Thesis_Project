@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://br1csp5vi826h"]
+
+[ext_resource type="PackedScene" uid="uid://bwdh6w24baf1e" path="res://Demo/view_bounds.tscn" id="1_c3ofa"]
+
+[node name="Server_View" type="Node2D"]
+
+[node name="View_Bounds" parent="." instance=ExtResource("1_c3ofa")]
+position = Vector2(0, 248)
+
+[node name="Polygon2D" parent="View_Bounds/StaticBody2D" index="0"]
+color = Color(1, 0.494562, 0.494096, 1)
+
+[node name="Polygon2D2" parent="View_Bounds/StaticBody2D2" index="0"]
+color = Color(1, 0.494118, 0.494118, 1)
+
+[editable path="View_Bounds"]
