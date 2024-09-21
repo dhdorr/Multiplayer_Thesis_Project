@@ -5,7 +5,6 @@
 [node name="Server_View" type="Node2D"]
 
 [node name="View_Bounds" parent="." instance=ExtResource("1_c3ofa")]
-position = Vector2(0, 248)
 
 [node name="Polygon2D" parent="View_Bounds/StaticBody2D" index="0"]
 color = Color(1, 0.494562, 0.494096, 1)

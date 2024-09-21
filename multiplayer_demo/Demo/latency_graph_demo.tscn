@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctwomxb4idcsc"]
+[gd_scene load_steps=9 format=3 uid="uid://ctwomxb4idcsc"]
 
 [ext_resource type="Script" path="res://Demo/latency_graph_demo.gd" id="1_nundi"]
 [ext_resource type="PackedScene" uid="uid://sxmscfpyf7pw" path="res://Demo/client_graph.tscn" id="2_c7oik"]
@@ -6,12 +6,18 @@
 [ext_resource type="PackedScene" uid="uid://bbt46cd5id8yl" path="res://Demo/client_view.tscn" id="4_6y3xv"]
 [ext_resource type="PackedScene" uid="uid://bn604q74b1m8x" path="res://Demo/client_player.tscn" id="5_gygp8"]
 [ext_resource type="PackedScene" uid="uid://br1csp5vi826h" path="res://Demo/server_view.tscn" id="5_ogaed"]
+[ext_resource type="PackedScene" uid="uid://wncxhpl5ls7y" path="res://Demo/server_player.tscn" id="7_ffcou"]
+[ext_resource type="Script" path="res://Demo/link_layer.gd" id="8_5of5x"]
 
 [node name="Latency_Graph_Demo" type="Node2D"]
 script = ExtResource("1_nundi")
 
 [node name="Client_Graph" parent="." instance=ExtResource("2_c7oik")]
 unique_name_in_owner = true
+
+[node name="Client_Marker" type="Marker2D" parent="Client_Graph"]
+unique_name_in_owner = true
+position = Vector2(32, 32)
 
 [node name="Server_Graph" parent="." instance=ExtResource("3_nvax0")]
 unique_name_in_owner = true
@@ -21,8 +27,16 @@ unique_name_in_owner = true
 position = Vector2(0, 256)
 
 [node name="Client_Player" parent="Client_View" instance=ExtResource("5_gygp8")]
-position = Vector2(320, 256)
+unique_name_in_owner = true
+position = Vector2(128, 192)
 
 [node name="Server_View" parent="." instance=ExtResource("5_ogaed")]
 unique_name_in_owner = true
-position = Vector2(576, 8)
+position = Vector2(576, 256)
+
+[node name="Server_Player" parent="Server_View" instance=ExtResource("7_ffcou")]
+unique_name_in_owner = true
+position = Vector2(128, 192)
+
+[node name="Link_Layer" type="Node2D" parent="."]
+script = ExtResource("8_5of5x")
