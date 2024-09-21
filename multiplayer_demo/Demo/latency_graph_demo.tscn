@@ -22,6 +22,10 @@ position = Vector2(32, 32)
 [node name="Server_Graph" parent="." instance=ExtResource("3_nvax0")]
 unique_name_in_owner = true
 
+[node name="Server_Marker" type="Marker2D" parent="Server_Graph"]
+unique_name_in_owner = true
+position = Vector2(32, 192)
+
 [node name="Client_View" parent="." instance=ExtResource("4_6y3xv")]
 unique_name_in_owner = true
 position = Vector2(0, 256)

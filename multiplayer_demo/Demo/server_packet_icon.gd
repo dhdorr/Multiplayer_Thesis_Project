@@ -3,7 +3,6 @@ extends Sprite2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 
-
 func anim(anim_name: String) -> void:
 	animation_player.play(anim_name)
 	
