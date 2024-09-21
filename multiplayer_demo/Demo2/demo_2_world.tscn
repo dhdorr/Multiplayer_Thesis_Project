@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://1c1bqt4usdg0"]
+
+[ext_resource type="Script" path="res://Demo2/demo_2_world.gd" id="1_1agkf"]
+[ext_resource type="Script" path="res://Demo2/demo2_input_manager.gd" id="2_elibb"]
+[ext_resource type="PackedScene" uid="uid://bkr04a16d6j3g" path="res://Demo2/demo_2_player_client.tscn" id="3_ar4eh"]
+
+[node name="Demo2_World" type="Node2D"]
+script = ExtResource("1_1agkf")
+
+[node name="Input_Manager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_elibb")
+
+[node name="Demo2_Player_Client" parent="." instance=ExtResource("3_ar4eh")]
+unique_name_in_owner = true
