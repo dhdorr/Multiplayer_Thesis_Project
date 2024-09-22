@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://1c1bqt4usdg0"]
+[gd_scene load_steps=8 format=3 uid="uid://1c1bqt4usdg0"]
 
 [ext_resource type="Script" path="res://Demo2/demo_2_world.gd" id="1_1agkf"]
 [ext_resource type="Script" path="res://Demo2/demo2_input_manager.gd" id="2_elibb"]
 [ext_resource type="PackedScene" uid="uid://bkr04a16d6j3g" path="res://Demo2/demo_2_player_client.tscn" id="3_ar4eh"]
+[ext_resource type="Script" path="res://Demo2/network_layer.gd" id="4_6onnb"]
+[ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="5_bs1cx"]
+[ext_resource type="Script" path="res://Demo2/demo_2_player_server.gd" id="5_wvvy1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dklo"]
+size = Vector2(128, 128)
 
 [node name="Demo2_World" type="Node2D"]
 script = ExtResource("1_1agkf")
@@ -13,3 +19,19 @@ script = ExtResource("2_elibb")
 
 [node name="Demo2_Player_Client" parent="." instance=ExtResource("3_ar4eh")]
 unique_name_in_owner = true
+
+[node name="Network_Layer" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_6onnb")
+
+[node name="Demo2_Player_Server" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(576, 0)
+script = ExtResource("5_wvvy1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Demo2_Player_Server"]
+modulate = Color(1, 0.279027, 0.668648, 1)
+texture = ExtResource("5_bs1cx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Demo2_Player_Server"]
+shape = SubResource("RectangleShape2D_5dklo")
