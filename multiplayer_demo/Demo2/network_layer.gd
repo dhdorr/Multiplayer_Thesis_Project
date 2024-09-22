@@ -4,10 +4,10 @@ extends Node
 
 
 func simulate_network(buff : Array[Vector2]) -> void:
-	var temp : Array[Vector2]
-	temp.append_array(buff)
+	#var temp : Array[Vector2]
+	#temp.append_array(buff)
 	
 	get_tree().create_timer(network_latency / 1000.0).timeout.connect(func() -> void:
-		SignalBus.deliver_to_server.emit(temp)
+		SignalBus.deliver_to_server.emit(buff.duplicate())
 	)
 	

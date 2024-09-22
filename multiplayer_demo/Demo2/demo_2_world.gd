@@ -22,17 +22,17 @@ func _ready() -> void:
 
 
 func test_delivery(buff : Array[Vector2]) -> void:
-	var temp : Array[Vector2]
-	temp.append_array(buff)
+	#var temp : Array[Vector2]
+	#temp.append_array(buff)
 	
-	SignalBus.transmit_to_client.emit(temp)
+	SignalBus.transmit_to_client.emit(buff.duplicate())
 	
-	SignalBus.simulate_latency.emit(temp)
+	SignalBus.simulate_latency.emit(buff.duplicate())
 	
 
 func deliver_to_server(buff: Array[Vector2]) -> void:
-	var temp : Array[Vector2]
-	temp.append_array(buff)
+	#var temp : Array[Vector2]
+	#temp.append_array(buff)
 	
-	SignalBus.transmit_to_server.emit(temp)
+	SignalBus.transmit_to_server.emit(buff.duplicate())
 	
