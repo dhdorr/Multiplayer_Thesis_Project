@@ -16,8 +16,6 @@ func _physics_process(delta: float) -> void:
 	player_input_buffer.clear()
 
 func consume_input_buffer(recv_buff: Array[Vector2]) -> void:
-	#print("in server")
-	#player_input_buffer.append_array(recv_buff)
-	#player_input_buffer.clear()
+
 	player_input_buffer = recv_buff
 	

@@ -41,3 +41,7 @@ width = 8.0
 [node name="Marker2D" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(96, 0)
+
+[node name="NetworkMarker2D" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(96, 64)

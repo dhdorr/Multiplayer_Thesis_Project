@@ -1,9 +1,6 @@
 extends Node
 
 
-## input delay in frames
-@export_range(0.0, 20.0, 0.1) var input_delay := 3.0
-
 var direction : Vector2
 var input_buffer : Array[Vector2] = [Vector2.ZERO]
 var delay_inc := 0.0
@@ -15,7 +12,7 @@ func _physics_process(delta: float) -> void:
 
 	delay_inc += delta
 	
-	if delay_inc >= input_delay * delta:
+	if delay_inc >= Settings.input_delay * delta:
 		SignalBus.dump_input_buffer.emit(input_buffer.duplicate())
 		delay_inc = 0.0
 		input_buffer.clear()
