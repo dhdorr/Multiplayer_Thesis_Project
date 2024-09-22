@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var player_input_buffer :Array[Vector2] = [Vector2.ZERO,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO,Vector2.ZERO]
+var player_input_buffer :Array[Vector2] = [Vector2.ZERO]
 var last_dir := Vector2.ZERO
 
 func _ready() -> void:

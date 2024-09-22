@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://djtlfmu1eu1uf"]
+
+[ext_resource type="Script" path="res://Demo2/demo_2_client_graph.gd" id="1_2i0u0"]
+
+[node name="Demo2_Client_Graph" type="Node2D"]
+script = ExtResource("1_2i0u0")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+color = Color(0, 0.862745, 0.658824, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "Client"
+
+[node name="Line2D" type="Line2D" parent="Control"]
+points = PackedVector2Array(64, 32, 1152, 32)
+width = 8.0
+
+[node name="Marker2D" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(96, 0)
