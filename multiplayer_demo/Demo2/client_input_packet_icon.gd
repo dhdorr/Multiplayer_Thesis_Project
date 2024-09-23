@@ -1,10 +1,12 @@
 extends Node2D
 
 @onready var frame_line_marker_2d: Marker2D = %Frame_Line_Marker2D
+@onready var label: Label = %Label
 
 
-func set_up_packet(num : float) -> void:
-
+func set_up_packet(num : float, counter : int) -> void:
+	label.text = str(counter)
+	
 	var frame_width : float = 0.0
 	if Settings.input_delay == 0.0:
 		frame_width = num / Settings.max_fps

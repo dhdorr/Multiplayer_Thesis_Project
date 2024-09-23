@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c241ws1n7bywx"]
+
+[ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="1_ct8ij"]
+[ext_resource type="Script" path="res://Demo2/network_packet_icon.gd" id="1_i6cmu"]
+
+[node name="Network_Packet_Icon" type="Node2D"]
+script = ExtResource("1_i6cmu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_ct8ij")
