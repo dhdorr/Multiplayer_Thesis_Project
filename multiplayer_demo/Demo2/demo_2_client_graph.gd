@@ -7,7 +7,9 @@ const CLIENT_INPUT_PACKET_ICON = preload("res://Demo2/client_input_packet_icon.t
 
 @onready var marker_2d: Marker2D = %Marker2D
 @onready var network_marker_2d: Marker2D = %NetworkMarker2D
+
 var frame_counter := 0
+
 
 func spawn_packet_icon(buff: Array[Vector2]) -> void:
 	var icon_instance = CLIENT_INPUT_PACKET_ICON.instantiate()
