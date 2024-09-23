@@ -36,7 +36,7 @@ text = "Client"
 
 [node name="Client_Line2D" type="Line2D" parent="Control"]
 unique_name_in_owner = true
-points = PackedVector2Array(64, 32, 1152, 32)
+points = PackedVector2Array(64, 32, 2304, 32)
 width = 8.0
 
 [node name="Marker2D" type="Marker2D" parent="."]
