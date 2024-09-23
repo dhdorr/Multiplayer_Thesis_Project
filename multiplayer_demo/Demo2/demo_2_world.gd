@@ -2,9 +2,9 @@ extends Node2D
 
 ## Sets the speed of the simulation.
 ## Lower value = slower frame processing
-@export_range(0.01, 1.0, 0.01) var time_scale := 1.0
+@export_range(0.02, 1.0, 0.01) var time_scale := 1.0
 ## input delay in frames
-@export_range(0.0, 20.0, 0.1) var input_delay := 3.0
+@export_range(0.0, 10.0, 1.0) var input_delay := 2.0
 ## Network latency in miliseconds
 @export_range(0.0, 300.0, 0.1) var network_latency := 50.0
 

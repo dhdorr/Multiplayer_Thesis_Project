@@ -10,8 +10,7 @@
 
 [node name="Demo2_World" type="Node2D"]
 script = ExtResource("1_1agkf")
-time_scale = 0.02
-network_latency = 73.6
+time_scale = 0.05
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1624.0
@@ -71,9 +70,10 @@ polygon = PackedVector2Array(0, 648, 8, 640, 568, 640, 576, 648)
 unique_name_in_owner = true
 position = Vector2(288, 480)
 
+[node name="Demo2_Server_Graph" parent="." instance=ExtResource("7_bej55")]
+unique_name_in_owner = true
+position = Vector2(0, 248)
+
 [node name="Demo2_Client_Graph" parent="." instance=ExtResource("6_f8put")]
 unique_name_in_owner = true
 position = Vector2(0, 16)
-
-[node name="Demo2_Server_Graph" parent="." instance=ExtResource("7_bej55")]
-position = Vector2(0, 240)

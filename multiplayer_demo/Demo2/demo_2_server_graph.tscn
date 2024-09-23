@@ -41,7 +41,7 @@ width = 8.0
 
 [node name="NetworkMarker2D" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(80, 0)
+position = Vector2(64, 0)
 
 [node name="ColorRect" type="ColorRect" parent="NetworkMarker2D"]
 offset_right = 40.0
@@ -50,4 +50,4 @@ color = Color(1, 0.58186, 0.116501, 1)
 
 [node name="Marker2D" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(80, 56)
+position = Vector2(64, 56)

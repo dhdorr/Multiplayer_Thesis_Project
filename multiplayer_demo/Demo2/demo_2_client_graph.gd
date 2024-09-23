@@ -3,6 +3,7 @@ extends Node2D
 
 const NETWORK_PACKET_ICON = preload("res://Demo2/network_packet_icon.tscn")
 const CLIENT_INPUT_PACKET_ICON = preload("res://Demo2/client_input_packet_icon.tscn")
+@onready var demo_2_server_graph: Node2D = %Demo2_Server_Graph
 
 @onready var marker_2d: Marker2D = %Marker2D
 @onready var network_marker_2d: Marker2D = %NetworkMarker2D
@@ -14,7 +15,7 @@ func spawn_packet_icon(buff: Array[Vector2]) -> void:
 	icon_instance.position = marker_2d.position
 	
 	# experimenting with width of frame * frames per second
-	icon_instance.set_up_packet(64.0 * 60.0, frame_counter)
+	icon_instance.set_up_packet(Settings.time_line_length, frame_counter)
 	frame_counter += 1
 	
 	spawn_networked_packet_icon()
@@ -24,7 +25,7 @@ func spawn_networked_packet_icon() -> void:
 	var icon_instance = NETWORK_PACKET_ICON.instantiate()
 	add_child(icon_instance)
 	icon_instance.position = network_marker_2d.position
-	icon_instance.set_up_network_packet(64.0 * 60.0)
+	icon_instance.set_up_network_packet(Settings.time_line_length, demo_2_server_graph.position.y)
 
 
 # Make a destroy func that plays a short tween of the packet fading out and shrinking

@@ -8,6 +8,7 @@ var original_time_scale := Engine.time_scale
 var original_physics_tick_rate := Engine.physics_ticks_per_second
 
 var max_fps := 60.0
+var time_line_length := 60.0 * 80.0 
 
 
 func get_network_latency_seconds() -> float:
