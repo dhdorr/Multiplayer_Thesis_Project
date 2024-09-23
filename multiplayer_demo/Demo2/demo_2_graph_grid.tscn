@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djxua6avo0iwl"]
+
+[ext_resource type="Script" path="res://Demo2/demo_2_graph_grid.gd" id="1_gedpu"]
+
+[node name="Demo2_Graph_Grid" type="Node2D"]
+script = ExtResource("1_gedpu")

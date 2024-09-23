@@ -43,11 +43,69 @@ width = 8.0
 unique_name_in_owner = true
 position = Vector2(64, 0)
 
-[node name="ColorRect" type="ColorRect" parent="NetworkMarker2D"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Control" type="Control" parent="NetworkMarker2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 48.0
+
+[node name="ColorRect" type="ColorRect" parent="NetworkMarker2D/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(1, 0.58186, 0.116501, 1)
+
+[node name="Label" type="Label" parent="NetworkMarker2D/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 18
+text = "Buffer"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Marker2D" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(64, 56)
+
+[node name="Half_RTT_Marker2D" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(64, 0)
+
+[node name="Control" type="Control" parent="Half_RTT_Marker2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 48.0
+
+[node name="ColorRect" type="ColorRect" parent="Half_RTT_Marker2D/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1.92523e-06, 0.576635, 0.898186, 1)
+
+[node name="Label" type="Label" parent="Half_RTT_Marker2D/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "Half RTT"
+horizontal_alignment = 1
+vertical_alignment = 1
