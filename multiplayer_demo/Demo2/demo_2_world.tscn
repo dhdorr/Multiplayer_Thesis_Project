@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://1c1bqt4usdg0"]
+[gd_scene load_steps=8 format=3 uid="uid://1c1bqt4usdg0"]
 
 [ext_resource type="Script" path="res://Demo2/demo_2_world.gd" id="1_1agkf"]
 [ext_resource type="Script" path="res://Demo2/demo2_input_manager.gd" id="2_elibb"]
@@ -6,9 +6,11 @@
 [ext_resource type="Script" path="res://Demo2/network_layer.gd" id="4_6onnb"]
 [ext_resource type="PackedScene" uid="uid://bm2kxjrujetg7" path="res://Demo2/demo_2_player_server.tscn" id="5_gqcfy"]
 [ext_resource type="PackedScene" uid="uid://djtlfmu1eu1uf" path="res://Demo2/demo_2_client_graph.tscn" id="6_f8put"]
+[ext_resource type="PackedScene" uid="uid://cfif3m2my6fjc" path="res://Demo2/demo_2_server_graph.tscn" id="7_bej55"]
 
 [node name="Demo2_World" type="Node2D"]
 script = ExtResource("1_1agkf")
+time_scale = 0.1
 
 [node name="Input_Manager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -65,3 +67,7 @@ position = Vector2(288, 480)
 
 [node name="Demo2_Client_Graph" parent="." instance=ExtResource("6_f8put")]
 unique_name_in_owner = true
+position = Vector2(0, 16)
+
+[node name="Demo2_Server_Graph" parent="." instance=ExtResource("7_bej55")]
+position = Vector2(0, 240)

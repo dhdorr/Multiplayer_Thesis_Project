@@ -1,7 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://5jp0lqdbnb50"]
+[gd_scene load_steps=3 format=3 uid="uid://5jp0lqdbnb50"]
 
 [ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="1_ud3ab"]
+[ext_resource type="Script" path="res://Demo2/client_input_packet_icon.gd" id="2_5efcw"]
 
 [node name="Client_Input_Packet_Icon" type="Sprite2D"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_ud3ab")
+script = ExtResource("2_5efcw")
+
+[node name="Frame_Line_Marker2D" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(64, 0)
+
+[node name="Frame_Line2D" type="Line2D" parent="Frame_Line_Marker2D"]
+points = PackedVector2Array(0, -96, 0, 608)
+width = 4.0

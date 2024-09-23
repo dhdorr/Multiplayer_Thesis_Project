@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://djtlfmu1eu1uf"]
+[gd_scene load_steps=2 format=3 uid="uid://cfif3m2my6fjc"]
 
-[ext_resource type="Script" path="res://Demo2/demo_2_client_graph.gd" id="1_2i0u0"]
+[ext_resource type="Script" path="res://Demo2/demo_2_server_graph.gd" id="1_07uga"]
 
-[node name="Demo2_Client_Graph" type="Node2D"]
-script = ExtResource("1_2i0u0")
+[node name="Demo2_Server_Graph" type="Node2D"]
+script = ExtResource("1_07uga")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -15,7 +15,7 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-color = Color(0, 0.862745, 0.658824, 1)
+color = Color(1, 0.501961, 0.619608, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
@@ -32,17 +32,22 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 18
-text = "Client"
+text = "Server"
 
-[node name="Client_Line2D" type="Line2D" parent="Control"]
+[node name="Server_Line2D" type="Line2D" parent="Control"]
 unique_name_in_owner = true
 points = PackedVector2Array(64, 32, 1152, 32)
 width = 8.0
 
-[node name="Marker2D" type="Marker2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(80, 8)
-
 [node name="NetworkMarker2D" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(80, 64)
+position = Vector2(80, 0)
+
+[node name="ColorRect" type="ColorRect" parent="NetworkMarker2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0.58186, 0.116501, 1)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(80, 56)
