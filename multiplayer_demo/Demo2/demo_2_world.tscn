@@ -10,9 +10,8 @@
 
 [node name="Demo2_World" type="Node2D"]
 script = ExtResource("1_1agkf")
-time_scale = 0.05
-input_delay = 1.0
-network_latency = 75.7
+time_scale = 0.02
+network_latency = 73.6
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1624.0
