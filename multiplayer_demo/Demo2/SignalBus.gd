@@ -18,3 +18,4 @@ signal spawn_client_graph_network_packet(buff : Array[Vector2])
 signal transmit_input_buffer_to_server(buff : Array[Vector2])
 
 signal display_graphs
+signal update_time_scale_from_ui

@@ -36,6 +36,7 @@ func _on_close_button_pressed() -> void:
 
 func _on_time_scale_h_slider_drag_ended(value_changed: bool) -> void:
 	Settings.time_scale = time_scale_h_slider.value
+	SignalBus.update_time_scale_from_ui.emit()
 
 
 func _on_latency_h_slider_drag_ended(value_changed: bool) -> void:

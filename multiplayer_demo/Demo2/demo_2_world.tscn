@@ -101,7 +101,7 @@ visible = false
 position = Vector2(0, 16)
 
 [node name="Settings_UI_Control" parent="." instance=ExtResource("8_0sw2i")]
-offset_left = 1048.0
-offset_top = 80.0
-offset_right = 1088.0
-offset_bottom = 120.0
+offset_left = 1024.0
+offset_top = 95.0
+offset_right = 1064.0
+offset_bottom = 135.0

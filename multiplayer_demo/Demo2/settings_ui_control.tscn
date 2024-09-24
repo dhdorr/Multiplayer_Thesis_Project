@@ -11,7 +11,7 @@ script = ExtResource("1_buh33")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-offset_right = 69.0
+offset_right = 70.0
 offset_bottom = 40.0
 
 [node name="Settings_Button" type="Button" parent="VBoxContainer"]
@@ -22,10 +22,10 @@ text = "Settings"
 [node name="BG_Control" type="Control" parent="."]
 unique_name_in_owner = true
 anchors_preset = 0
-offset_left = -136.0
-offset_top = -8.0
-offset_right = 80.0
-offset_bottom = 328.0
+offset_left = -104.0
+offset_top = -16.0
+offset_right = 112.0
+offset_bottom = 320.0
 
 [node name="ColorRect" type="ColorRect" parent="BG_Control"]
 layout_mode = 1
@@ -39,10 +39,10 @@ color = Color(0.325441, 0.325441, 0.325441, 1)
 [node name="Settings_VBox" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = -128.0
-offset_top = -8.0
-offset_right = 76.0
-offset_bottom = 113.0
+offset_left = -96.0
+offset_top = -16.0
+offset_right = 108.0
+offset_bottom = 313.0
 
 [node name="Close_Button" type="Button" parent="Settings_VBox"]
 layout_mode = 2
@@ -54,13 +54,17 @@ layout_mode = 2
 [node name="Graph_CheckButton" type="CheckButton" parent="Settings_VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Show Frame Graphs"
+tooltip_text = "Toggle display of frame graph"
+text = "Show Frame Graph"
 
 [node name="HSeparator6" type="HSeparator" parent="Settings_VBox"]
 layout_mode = 2
 
 [node name="VBoxContainer5" type="VBoxContainer" parent="Settings_VBox"]
 layout_mode = 2
+tooltip_text = "Sets the speed of the simulation.
+Lower value = slower frame processing.
+Use this for watching the network graphs"
 theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Settings_VBox/VBoxContainer5"]
@@ -81,6 +85,8 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Settings_VBox"]
 layout_mode = 2
+tooltip_text = "Network latency in miliseconds.
+The time it takes for packets to travel across the network"
 theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Settings_VBox/VBoxContainer"]
@@ -99,6 +105,8 @@ layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Settings_VBox"]
 layout_mode = 2
+tooltip_text = "Server-side receipt buffer in frames.
+Inputs are stored into a buffer that is consumed after this delay"
 theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Settings_VBox/VBoxContainer2"]
@@ -117,6 +125,8 @@ layout_mode = 2
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Settings_VBox"]
 layout_mode = 2
+tooltip_text = "Transmission delay in frames. 
+Witholds sending input buffer for the set amount of frames"
 theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Settings_VBox/VBoxContainer3"]
@@ -134,6 +144,8 @@ layout_mode = 2
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="Settings_VBox"]
 layout_mode = 2
+tooltip_text = "Client-side input delay in frames.
+Inputs are stored into a buffer that is consumed after this delay"
 theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Settings_VBox/VBoxContainer4"]

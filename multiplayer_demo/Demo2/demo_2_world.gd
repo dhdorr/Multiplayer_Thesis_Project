@@ -35,6 +35,8 @@ func _ready() -> void:
 	set_time_scales()
 	
 	SignalBus.display_graphs.connect(show_graphs)
+	SignalBus.update_time_scale_from_ui.connect(set_time_scales)
+	
 	# Every frame that client input is processed, spawn a graph icon
 	SignalBus.client_frame_procesed.connect(demo_2_client_graph.spawn_packet_icon)
 	# When client input delay expires, send buffered input directly to client player for prediction
@@ -48,6 +50,7 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	pass
 	#if Settings.time_scale != time_scale:
 		#set_time_scales()
 	#Settings.input_delay = input_delay
@@ -56,9 +59,6 @@ func _process(delta: float) -> void:
 	#Settings.client_tick_rate_factor = tick_rate_factor
 	#Settings.server_input_buffer_time = server_input_buffer
 	
-	if Input.is_action_just_pressed("show_graph"):
-		showing_graph = !showing_graph
-		show_graphs(showing_graph)
 	
 
 func set_time_scales() -> void:
