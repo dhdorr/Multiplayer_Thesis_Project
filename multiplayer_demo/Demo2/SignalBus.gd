@@ -16,3 +16,5 @@ signal client_transmission_delay_expired(buff : Array[Vector2])
 signal spawn_client_graph_input_packet(buff : Array[Vector2])
 signal spawn_client_graph_network_packet(buff : Array[Vector2])
 signal transmit_input_buffer_to_server(buff : Array[Vector2])
+
+signal display_graphs

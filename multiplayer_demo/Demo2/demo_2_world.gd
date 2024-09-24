@@ -34,6 +34,7 @@ func _ready() -> void:
 	demo_2_client_graph.visible = false
 	set_time_scales()
 	
+	SignalBus.display_graphs.connect(show_graphs)
 	# Every frame that client input is processed, spawn a graph icon
 	SignalBus.client_frame_procesed.connect(demo_2_client_graph.spawn_packet_icon)
 	# When client input delay expires, send buffered input directly to client player for prediction
@@ -47,31 +48,32 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-	if Settings.time_scale != time_scale:
-		set_time_scales()
-	Settings.input_delay = input_delay
-	Settings.transmission_delay = transmission_delay
-	Settings.network_latency = network_latency
-	Settings.client_tick_rate_factor = tick_rate_factor
-	Settings.server_input_buffer_time = server_input_buffer
+	#if Settings.time_scale != time_scale:
+		#set_time_scales()
+	#Settings.input_delay = input_delay
+	#Settings.transmission_delay = transmission_delay
+	##Settings.network_latency = network_latency
+	#Settings.client_tick_rate_factor = tick_rate_factor
+	#Settings.server_input_buffer_time = server_input_buffer
 	
 	if Input.is_action_just_pressed("show_graph"):
-		#get_tree().create_tween().tween_property(self, "time_scale", 0.02, 0.25).finished.connect(func() -> void:
-			#demo_2_client_graph.visible = true
-		#)
-		#time_scale = lerpf(time_scale, 0.02, 1.0)
 		showing_graph = !showing_graph
-		if showing_graph:
-			
-			demo_2_client_graph.visible = showing_graph
-			time_scale = 0.02
-		else:
-			
-			demo_2_client_graph.visible = showing_graph
-			time_scale = 1.0
+		show_graphs(showing_graph)
 	
-	
+
 func set_time_scales() -> void:
-	Settings.time_scale = time_scale
+	#Settings.time_scale = time_scale
 	Engine.time_scale = Settings.original_time_scale * Settings.time_scale
-	Engine.physics_ticks_per_second = Settings.original_physics_tick_rate * time_scale
+	Engine.physics_ticks_per_second = Settings.original_physics_tick_rate * Settings.time_scale
+	
+
+func show_graphs(is_visible : bool) -> void:
+	if is_visible:
+		
+		demo_2_client_graph.visible = is_visible
+		Settings.time_scale = 0.02
+	else:
+		demo_2_client_graph.visible = is_visible
+		Settings.time_scale = 1.0
+	
+	set_time_scales()

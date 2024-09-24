@@ -1,0 +1,156 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhg1w6tigbrdg"]
+
+[ext_resource type="Script" path="res://Demo2/settings_ui_control.gd" id="1_buh33"]
+
+[node name="Settings_UI_Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_buh33")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 69.0
+offset_bottom = 40.0
+
+[node name="Settings_Button" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Settings"
+
+[node name="BG_Control" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -136.0
+offset_top = -8.0
+offset_right = 80.0
+offset_bottom = 328.0
+
+[node name="ColorRect" type="ColorRect" parent="BG_Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.325441, 0.325441, 0.325441, 1)
+
+[node name="Settings_VBox" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -128.0
+offset_top = -8.0
+offset_right = 76.0
+offset_bottom = 113.0
+
+[node name="Close_Button" type="Button" parent="Settings_VBox"]
+layout_mode = 2
+text = "Close Menu"
+
+[node name="HSeparator2" type="HSeparator" parent="Settings_VBox"]
+layout_mode = 2
+
+[node name="Graph_CheckButton" type="CheckButton" parent="Settings_VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show Frame Graphs"
+
+[node name="HSeparator6" type="HSeparator" parent="Settings_VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="Settings_VBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Settings_VBox/VBoxContainer5"]
+layout_mode = 2
+text = "Time Scale"
+horizontal_alignment = 1
+
+[node name="Time_Scale_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer5" groups=["sliders"]]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 0.02
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HSeparator" type="HSeparator" parent="Settings_VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings_VBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Settings_VBox/VBoxContainer"]
+layout_mode = 2
+text = "Network Latency"
+horizontal_alignment = 1
+
+[node name="Latency_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer" groups=["sliders"]]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 200.0
+value = 50.0
+
+[node name="HSeparator3" type="HSeparator" parent="Settings_VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Settings_VBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Settings_VBox/VBoxContainer2"]
+layout_mode = 2
+text = "Server Input Buffer"
+horizontal_alignment = 1
+
+[node name="Server_Buffer_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer2" groups=["sliders"]]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 5.0
+value = 1.0
+
+[node name="HSeparator4" type="HSeparator" parent="Settings_VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Settings_VBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Settings_VBox/VBoxContainer3"]
+layout_mode = 2
+text = "Transmission Delay"
+horizontal_alignment = 1
+
+[node name="Client_Transmission_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer3" groups=["sliders"]]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 3.0
+
+[node name="HSeparator5" type="HSeparator" parent="Settings_VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Settings_VBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Settings_VBox/VBoxContainer4"]
+layout_mode = 2
+text = "Client Input Delay"
+horizontal_alignment = 1
+
+[node name="Client_Input_Delay_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer4" groups=["sliders"]]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 20.0
+
+[connection signal="pressed" from="VBoxContainer/Settings_Button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Settings_VBox/Close_Button" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Settings_VBox/Graph_CheckButton" to="." method="_on_graph_check_button_pressed"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer5/Time_Scale_HSlider" to="." method="_on_time_scale_h_slider_drag_ended"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer/Latency_HSlider" to="." method="_on_latency_h_slider_drag_ended"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer2/Server_Buffer_HSlider" to="." method="_on_server_buffer_h_slider_drag_ended"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer3/Client_Transmission_HSlider" to="." method="_on_client_transmission_h_slider_drag_ended"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer4/Client_Input_Delay_HSlider" to="." method="_on_client_input_delay_h_slider_drag_ended"]
