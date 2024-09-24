@@ -25,6 +25,17 @@ script = ExtResource("2_elibb")
 unique_name_in_owner = true
 script = ExtResource("4_6onnb")
 
+[node name="Demo2_Client_Graph" parent="." instance=ExtResource("6_f8put")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 16)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_top = 280.0
+offset_right = 1624.0
+offset_bottom = 1096.0
+color = Color(0.20035, 0.214157, 0.262898, 1)
+
 [node name="Client_View" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Client_View"]
@@ -93,11 +104,6 @@ text = "Server"
 [node name="Demo2_Server_Graph" parent="." instance=ExtResource("7_bej55")]
 unique_name_in_owner = true
 position = Vector2(0, 248)
-
-[node name="Demo2_Client_Graph" parent="." instance=ExtResource("6_f8put")]
-unique_name_in_owner = true
-visible = false
-position = Vector2(0, 16)
 
 [node name="Settings_UI_Control" parent="." instance=ExtResource("8_0sw2i")]
 offset_left = 1024.0

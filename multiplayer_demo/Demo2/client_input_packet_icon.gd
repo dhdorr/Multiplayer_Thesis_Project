@@ -5,7 +5,7 @@ extends Node2D
 
 
 func set_up_packet(num : float, counter : int) -> void:
-	#label.text = str(counter)
+	label.text = str(counter)
 	#
 	## scale width of frame with transmission delay
 	#var frame_width : float = 0.0
