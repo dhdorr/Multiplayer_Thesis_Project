@@ -17,6 +17,14 @@ func _physics_process(delta: float) -> void:
 	input_buffer.append(direction)
 	transmit_input_buffer.append(direction)
 	
+	# firing a projectile
+	# using a temporary magic number vector2 because serialized states
+	# are not implemented yet
+	if Input.is_action_just_pressed("fire_projectile"):
+		input_buffer.append(Settings.magic_fire_projectile_input)
+		transmit_input_buffer.append(Settings.magic_fire_projectile_input)
+	# ^^^ temporary ^^^
+	
 	t_delay_inc += delta
 	delay_inc += delta
 	

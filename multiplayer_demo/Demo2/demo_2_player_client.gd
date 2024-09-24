@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+const PROJECTILE_NODE_2D = preload("res://Demo2/projectile_node_2d.tscn")
 var player_input_buffer :Array[Vector2] = [Vector2.ZERO]
 var last_dir := Vector2.ZERO
 
@@ -19,7 +19,16 @@ func _physics_process(delta: float) -> void:
 	# this way, if the server ever responds with a correction,
 	# we can just swap out the input buffer with the update
 	if player_input_buffer.size() > 0:
-		last_dir = player_input_buffer.pop_front()
+		var player_input : Vector2 = player_input_buffer.pop_front()
+		# testing, remove later
+		if player_input == Settings.magic_fire_projectile_input:
+			var temp_projectile := PROJECTILE_NODE_2D.instantiate()
+			add_sibling(temp_projectile)
+			temp_projectile.position = Vector2(self.position.x, self.position.y - 64)
+		else:
+			last_dir = player_input
+		# ^^^^^^
+		#last_dir = player_input_buffer.pop_front()
 	self.velocity = self.velocity.move_toward(last_dir * 300.0, delta * 1600.0)
 	move_and_slide()
 

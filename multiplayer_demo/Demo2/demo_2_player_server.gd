@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+const PROJECTILE_NODE_2D = preload("res://Demo2/projectile_node_2d.tscn")
 # server
 
 var player_input_buffer :Array[Vector2] = [Vector2.ZERO]
@@ -15,14 +15,19 @@ func _physics_process(delta: float) -> void:
 		delay_counter = 0.0
 		# can simulate many frames of movement in one physics process frame
 		# by using a for loop and calling move and slide each iteration.
-		var test_count : int = 0
 		# funny enough, this actually causes time warping
 		# where when the time scale is lowered, the server responds before the client
 		for i in player_input_buffer:
-			test_count += 1
+			#var player_input : Vector2 = player_input_buffer.pop_front()
+			# testing, remove later
+			if i == Settings.magic_fire_projectile_input:
+				var temp_projectile := PROJECTILE_NODE_2D.instantiate()
+				add_sibling(temp_projectile)
+				temp_projectile.position = Vector2(self.position.x, self.position.y - 64)
+				continue
+			# ^^^^^^
 			velocity = velocity.move_toward(i * 300.0, delta * 1600)
 			move_and_slide()
-		#print("simulated ", test_count, " frames")
 		player_input_buffer.clear()
 	
 	

@@ -33,6 +33,7 @@ var showing_graph := false
 func _ready() -> void:
 	demo_2_client_graph.visible = false
 	set_time_scales()
+	display_settings()
 	
 	SignalBus.display_graphs.connect(show_graphs)
 	SignalBus.update_time_scale_from_ui.connect(set_time_scales)
@@ -64,3 +65,11 @@ func show_graphs(is_visible : bool) -> void:
 		Settings.time_scale = 1.0
 	
 	set_time_scales()
+
+func display_settings() -> void:
+	print(Settings.time_scale)
+	print(Settings.network_latency)
+	print(Settings.server_input_buffer_time)
+	print(Settings.input_delay)
+	print(Settings.transmission_delay)
+	
