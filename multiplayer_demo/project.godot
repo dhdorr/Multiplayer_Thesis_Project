@@ -24,6 +24,10 @@ Settings="*res://Demo2/settings.gd"
 
 window/size/always_on_top=true
 
+[editor]
+
+movie_writer/movie_file="C:/Godot/Multiplayer_Thesis_Project/Multiplayer_Thesis_Project/multiplayer_demo/test_screen_record_mp_demo.avi"
+
 [input]
 
 move_left={
