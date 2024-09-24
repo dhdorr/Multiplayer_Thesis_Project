@@ -1,7 +1,7 @@
 extends Node
 
 var time_scale := 1.0
-var input_delay := 1.0
+var input_delay := 0.0
 var transmission_delay := 0.0
 var network_latency := 50.0
 var client_tick_rate_factor := 1.0

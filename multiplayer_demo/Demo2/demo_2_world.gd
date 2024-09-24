@@ -1,25 +1,25 @@
 extends Node2D
 
-## Sets the speed of the simulation.
-## Lower value = slower frame processing.
-## Use this for watching the network graphs
-@export_range(0.02, 1.0, 0.01) var time_scale := 1.0
-## Client-side input delay in frames.
-## Inputs are stored into a buffer that is consumed after this delay
-@export_range(0.0, 10.0, 1.0) var input_delay := 0.0
-## Transmission delay in frames. 
-## Witholds sending input buffer for the set amount of frames
-@export_range(0.0, 10.0, 1.0) var transmission_delay := 0.0
-## Changes tick rate for client inputs.
-## Inversly scales client-side physics_process tick delta.
-## 1.0 = 60FPS, 1.5 = 90FPS
-@export_range(0.0, 2.0, 0.1) var tick_rate_factor := 1.0
-## Network latency in miliseconds.
-## The time it takes for packets to travel across the network
-@export_range(0.0, 300.0, 0.1) var network_latency := 50.0
-## Server-side receipt buffer in frames.
-## Inputs are stored into a buffer that is consumed after this delay
-@export_range(0.0, 5.0, 1.0) var server_input_buffer := 1.0
+### Sets the speed of the simulation.
+### Lower value = slower frame processing.
+### Use this for watching the network graphs
+#@export_range(0.02, 1.0, 0.01) var time_scale := 1.0
+### Client-side input delay in frames.
+### Inputs are stored into a buffer that is consumed after this delay
+#@export_range(0.0, 10.0, 1.0) var input_delay := 0.0
+### Transmission delay in frames. 
+### Witholds sending input buffer for the set amount of frames
+#@export_range(0.0, 10.0, 1.0) var transmission_delay := 0.0
+### Changes tick rate for client inputs.
+### Inversly scales client-side physics_process tick delta.
+### 1.0 = 60FPS, 1.5 = 90FPS
+#@export_range(0.0, 2.0, 0.1) var tick_rate_factor := 1.0
+### Network latency in miliseconds.
+### The time it takes for packets to travel across the network
+#@export_range(0.0, 300.0, 0.1) var network_latency := 50.0
+### Server-side receipt buffer in frames.
+### Inputs are stored into a buffer that is consumed after this delay
+#@export_range(0.0, 5.0, 1.0) var server_input_buffer := 1.0
 
 @onready var input_manager: Node = %Input_Manager
 @onready var demo_2_player_client: CharacterBody2D = %Demo2_Player_Client
@@ -46,19 +46,7 @@ func _ready() -> void:
 	# Emitted from network layer, spawns a network packet icon in the client graph
 	SignalBus.spawn_client_graph_network_packet.connect(demo_2_client_graph.spawn_networked_packet_icon)
 	# Emitted from the network layer, transmits input buffer to server player for consumption
-	SignalBus.transmit_input_buffer_to_server.connect(demo_2_player_server.consume_input_buffer)
-	
-
-func _process(delta: float) -> void:
-	pass
-	#if Settings.time_scale != time_scale:
-		#set_time_scales()
-	#Settings.input_delay = input_delay
-	#Settings.transmission_delay = transmission_delay
-	##Settings.network_latency = network_latency
-	#Settings.client_tick_rate_factor = tick_rate_factor
-	#Settings.server_input_buffer_time = server_input_buffer
-	
+	SignalBus.transmit_input_buffer_to_server.connect(demo_2_player_server.add_to_input_buffer)
 	
 
 func set_time_scales() -> void:
@@ -69,7 +57,6 @@ func set_time_scales() -> void:
 
 func show_graphs(is_visible : bool) -> void:
 	if is_visible:
-		
 		demo_2_client_graph.visible = is_visible
 		Settings.time_scale = 0.02
 	else:
