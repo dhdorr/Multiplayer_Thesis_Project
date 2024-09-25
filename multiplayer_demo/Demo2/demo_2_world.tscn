@@ -106,6 +106,8 @@ unique_name_in_owner = true
 position = Vector2(0, 248)
 
 [node name="Settings_UI_Control" parent="." instance=ExtResource("8_0sw2i")]
+unique_name_in_owner = true
+visible = false
 offset_left = 1024.0
 offset_top = 95.0
 offset_right = 1064.0

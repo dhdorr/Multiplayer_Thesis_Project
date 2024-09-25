@@ -35,6 +35,8 @@ func _ready() -> void:
 	set_time_scales()
 	display_settings()
 	
+	%Settings_UI_Control.visible = true
+	
 	SignalBus.display_graphs.connect(show_graphs)
 	SignalBus.update_time_scale_from_ui.connect(set_time_scales)
 	

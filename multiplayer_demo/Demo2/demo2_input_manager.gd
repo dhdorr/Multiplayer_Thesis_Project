@@ -23,6 +23,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("fire_projectile"):
 		input_buffer.append(Settings.magic_fire_projectile_input)
 		transmit_input_buffer.append(Settings.magic_fire_projectile_input)
+		print("projectile fired from client")
+		#print("input managers buffer: ", input_buffer)
+		#print("transmission buffer: ", transmit_input_buffer)
 	# ^^^ temporary ^^^
 	
 	t_delay_inc += delta

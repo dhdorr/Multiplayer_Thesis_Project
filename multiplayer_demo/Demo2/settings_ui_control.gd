@@ -22,39 +22,42 @@ func _ready() -> void:
 		#n.drag_ended.connect(_on_slider_drag_ended)
 
 func _on_settings_button_pressed() -> void:
-	print("open settings menu")
 	settings_v_box.visible = true
 	bg_control.visible = true
 	
 
 
 func _on_close_button_pressed() -> void:
-	print("close settings menu")
 	settings_v_box.visible = false
 	bg_control.visible = false
 
 
 func _on_time_scale_h_slider_drag_ended(value_changed: bool) -> void:
 	Settings.time_scale = time_scale_h_slider.value
+	$Settings_VBox/VBoxContainer5/HBoxContainer/TS_Label.text = str(Settings.time_scale)
 	SignalBus.update_time_scale_from_ui.emit()
 
 
 func _on_latency_h_slider_drag_ended(value_changed: bool) -> void:
 	Settings.network_latency = latency_h_slider.value
+	$Settings_VBox/VBoxContainer/HBoxContainer/NL_Label.text = str(Settings.network_latency)
 
 
 func _on_server_buffer_h_slider_drag_ended(value_changed: bool) -> void:
 	Settings.server_input_buffer_time = server_buffer_h_slider.value
-
+	$Settings_VBox/VBoxContainer2/HBoxContainer/SB_Label.text = str(Settings.server_input_buffer_time)
 
 func _on_client_transmission_h_slider_drag_ended(value_changed: bool) -> void:
 	Settings.transmission_delay = client_transmission_h_slider.value
+	$Settings_VBox/VBoxContainer3/HBoxContainer/TD_Label.text = str(Settings.transmission_delay)
 
 
 func _on_client_input_delay_h_slider_drag_ended(value_changed: bool) -> void:
 	Settings.input_delay = client_input_delay_h_slider.value
+	$Settings_VBox/VBoxContainer4/HBoxContainer/ID_Label.text = str(Settings.input_delay)
 
 
 func _on_graph_check_button_pressed() -> void:
 	SignalBus.display_graphs.emit(graph_check_button.button_pressed)
 	time_scale_h_slider.value = Settings.time_scale
+	$Settings_VBox/VBoxContainer5/HBoxContainer/TS_Label.text = str(Settings.time_scale)

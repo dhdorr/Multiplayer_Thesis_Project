@@ -17,6 +17,7 @@ offset_bottom = 40.0
 [node name="Settings_Button" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 text = "Settings"
 
 [node name="BG_Control" type="Control" parent="."]
@@ -32,6 +33,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.325441, 0.325441, 0.325441, 1)
@@ -55,6 +57,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Toggle display of frame graph"
+focus_mode = 0
 text = "Show Frame Graph"
 
 [node name="HSeparator6" type="HSeparator" parent="Settings_VBox"]
@@ -72,9 +75,20 @@ layout_mode = 2
 text = "Time Scale"
 horizontal_alignment = 1
 
-[node name="Time_Scale_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer5" groups=["sliders"]]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings_VBox/VBoxContainer5"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TS_Label" type="Label" parent="Settings_VBox/VBoxContainer5/HBoxContainer"]
+layout_mode = 2
+text = "1.0"
+
+[node name="Time_Scale_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer5/HBoxContainer" groups=["sliders"]]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 min_value = 0.02
 max_value = 1.0
 step = 0.01
@@ -94,9 +108,20 @@ layout_mode = 2
 text = "Network Latency"
 horizontal_alignment = 1
 
-[node name="Latency_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer" groups=["sliders"]]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings_VBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NL_Label" type="Label" parent="Settings_VBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "50.0"
+vertical_alignment = 1
+
+[node name="Latency_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer/HBoxContainer" groups=["sliders"]]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 max_value = 200.0
 value = 50.0
 
@@ -114,9 +139,20 @@ layout_mode = 2
 text = "Server Input Buffer"
 horizontal_alignment = 1
 
-[node name="Server_Buffer_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer2" groups=["sliders"]]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings_VBox/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SB_Label" type="Label" parent="Settings_VBox/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "1.0"
+vertical_alignment = 1
+
+[node name="Server_Buffer_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer2/HBoxContainer" groups=["sliders"]]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 max_value = 5.0
 value = 1.0
 
@@ -134,9 +170,18 @@ layout_mode = 2
 text = "Transmission Delay"
 horizontal_alignment = 1
 
-[node name="Client_Transmission_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer3" groups=["sliders"]]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings_VBox/VBoxContainer3"]
+layout_mode = 2
+
+[node name="TD_Label" type="Label" parent="Settings_VBox/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+text = "0.0"
+
+[node name="Client_Transmission_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer3/HBoxContainer" groups=["sliders"]]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 max_value = 3.0
 
 [node name="HSeparator5" type="HSeparator" parent="Settings_VBox"]
@@ -153,16 +198,25 @@ layout_mode = 2
 text = "Client Input Delay"
 horizontal_alignment = 1
 
-[node name="Client_Input_Delay_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer4" groups=["sliders"]]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings_VBox/VBoxContainer4"]
+layout_mode = 2
+
+[node name="ID_Label" type="Label" parent="Settings_VBox/VBoxContainer4/HBoxContainer"]
+layout_mode = 2
+text = "0.0"
+
+[node name="Client_Input_Delay_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer4/HBoxContainer" groups=["sliders"]]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 max_value = 20.0
 
 [connection signal="pressed" from="VBoxContainer/Settings_Button" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Settings_VBox/Close_Button" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="Settings_VBox/Graph_CheckButton" to="." method="_on_graph_check_button_pressed"]
-[connection signal="drag_ended" from="Settings_VBox/VBoxContainer5/Time_Scale_HSlider" to="." method="_on_time_scale_h_slider_drag_ended"]
-[connection signal="drag_ended" from="Settings_VBox/VBoxContainer/Latency_HSlider" to="." method="_on_latency_h_slider_drag_ended"]
-[connection signal="drag_ended" from="Settings_VBox/VBoxContainer2/Server_Buffer_HSlider" to="." method="_on_server_buffer_h_slider_drag_ended"]
-[connection signal="drag_ended" from="Settings_VBox/VBoxContainer3/Client_Transmission_HSlider" to="." method="_on_client_transmission_h_slider_drag_ended"]
-[connection signal="drag_ended" from="Settings_VBox/VBoxContainer4/Client_Input_Delay_HSlider" to="." method="_on_client_input_delay_h_slider_drag_ended"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer5/HBoxContainer/Time_Scale_HSlider" to="." method="_on_time_scale_h_slider_drag_ended"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer/HBoxContainer/Latency_HSlider" to="." method="_on_latency_h_slider_drag_ended"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer2/HBoxContainer/Server_Buffer_HSlider" to="." method="_on_server_buffer_h_slider_drag_ended"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer3/HBoxContainer/Client_Transmission_HSlider" to="." method="_on_client_transmission_h_slider_drag_ended"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer4/HBoxContainer/Client_Input_Delay_HSlider" to="." method="_on_client_input_delay_h_slider_drag_ended"]
