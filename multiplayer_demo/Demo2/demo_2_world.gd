@@ -39,6 +39,7 @@ func _ready() -> void:
 	
 	SignalBus.display_graphs.connect(show_graphs)
 	SignalBus.update_time_scale_from_ui.connect(set_time_scales)
+	SignalBus.reset_input_delay.connect(reset_input_delay)
 	
 	# Every frame that client input is processed, spawn a graph icon
 	SignalBus.client_frame_procesed.connect(demo_2_client_graph.spawn_packet_icon)
@@ -75,3 +76,9 @@ func display_settings() -> void:
 	print(Settings.input_delay)
 	print(Settings.transmission_delay)
 	
+func reset_input_delay() -> void:
+	SignalBus.client_input_delay_expired.disconnect(demo_2_player_client.consume_input_buffer)
+	get_tree().create_timer(0.02).timeout.connect(func() -> void: 
+		demo_2_player_client.clear_input_buffer()
+		SignalBus.client_input_delay_expired.connect(demo_2_player_client.consume_input_buffer)
+		)

@@ -45,3 +45,6 @@ func consume_input_buffer(recv_buff: Array[Vector2]) -> void:
 	#for i in recv_buff:
 		#player_input_buffer.append(i)
 	player_input_buffer.append_array(recv_buff)
+
+func clear_input_buffer() -> void:
+	player_input_buffer.clear()

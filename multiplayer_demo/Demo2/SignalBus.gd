@@ -19,3 +19,4 @@ signal transmit_input_buffer_to_server(buff : Array[Vector2])
 
 signal display_graphs
 signal update_time_scale_from_ui
+signal reset_input_delay

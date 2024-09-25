@@ -24,6 +24,7 @@ func _physics_process(delta: float) -> void:
 		input_buffer.append(Settings.magic_fire_projectile_input)
 		transmit_input_buffer.append(Settings.magic_fire_projectile_input)
 		print("projectile fired from client")
+		#print("input delay is: ", Settings.input_delay)
 		#print("input managers buffer: ", input_buffer)
 		#print("transmission buffer: ", transmit_input_buffer)
 	# ^^^ temporary ^^^
