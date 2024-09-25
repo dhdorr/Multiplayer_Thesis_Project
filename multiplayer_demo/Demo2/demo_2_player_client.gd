@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 			var temp_projectile := PROJECTILE_NODE_2D.instantiate()
 			add_sibling(temp_projectile)
 			temp_projectile.position = Vector2(self.position.x, self.position.y - 64)
-			print("Displaying projectile on client")
+			#print("Displaying projectile on client")
 			#print("Client input buffer size: ", player_input_buffer.size())
 			#print("Client input buffer elements: ", player_input_buffer)
 			

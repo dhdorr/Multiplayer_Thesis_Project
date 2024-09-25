@@ -52,6 +52,14 @@ func _ready() -> void:
 	# Emitted from the network layer, transmits input buffer to server player for consumption
 	SignalBus.transmit_input_buffer_to_server.connect(demo_2_player_server.add_to_input_buffer)
 	
+func _physics_process(delta: float) -> void:
+	%Net_Latency_Label.text = "Network Latency: " + str(Settings.network_latency)
+	%Time_Scale_Label2.text = "Time Scale: " + str(Settings.time_scale)
+	%Input_Delay_Label3.text = "Input Delay: " + str(Settings.input_delay)
+	%Server_Buffer_Label4.text = "Server Buffer: " + str(Settings.server_input_buffer_time)
+	%Transmission_Delay_Label4.text = "Transmission Delay: " + str(Settings.transmission_delay)
+
+
 
 func set_time_scales() -> void:
 	#Settings.time_scale = time_scale
@@ -70,6 +78,7 @@ func show_graphs(is_visible : bool) -> void:
 	set_time_scales()
 
 func display_settings() -> void:
+	return
 	print(Settings.time_scale)
 	print(Settings.network_latency)
 	print(Settings.server_input_buffer_time)

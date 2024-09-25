@@ -156,34 +156,6 @@ size_flags_vertical = 1
 max_value = 5.0
 value = 1.0
 
-[node name="HSeparator4" type="HSeparator" parent="Settings_VBox"]
-layout_mode = 2
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="Settings_VBox"]
-layout_mode = 2
-tooltip_text = "Transmission delay in frames. 
-Witholds sending input buffer for the set amount of frames"
-theme_override_constants/separation = 0
-
-[node name="Label" type="Label" parent="Settings_VBox/VBoxContainer3"]
-layout_mode = 2
-text = "Transmission Delay"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings_VBox/VBoxContainer3"]
-layout_mode = 2
-
-[node name="TD_Label" type="Label" parent="Settings_VBox/VBoxContainer3/HBoxContainer"]
-layout_mode = 2
-text = "0.0"
-
-[node name="Client_Transmission_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer3/HBoxContainer" groups=["sliders"]]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 3.0
-
 [node name="HSeparator5" type="HSeparator" parent="Settings_VBox"]
 layout_mode = 2
 
@@ -212,11 +184,39 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 max_value = 20.0
 
+[node name="HSeparator4" type="HSeparator" parent="Settings_VBox"]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Settings_VBox"]
+layout_mode = 2
+tooltip_text = "Transmission delay in frames. 
+Witholds sending input buffer for the set amount of frames"
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Settings_VBox/VBoxContainer3"]
+layout_mode = 2
+text = "Transmission Delay"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings_VBox/VBoxContainer3"]
+layout_mode = 2
+
+[node name="TD_Label" type="Label" parent="Settings_VBox/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+text = "0.0"
+
+[node name="Client_Transmission_HSlider" type="HSlider" parent="Settings_VBox/VBoxContainer3/HBoxContainer" groups=["sliders"]]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 3.0
+
 [connection signal="pressed" from="VBoxContainer/Settings_Button" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Settings_VBox/Close_Button" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="Settings_VBox/Graph_CheckButton" to="." method="_on_graph_check_button_pressed"]
 [connection signal="drag_ended" from="Settings_VBox/VBoxContainer5/HBoxContainer/Time_Scale_HSlider" to="." method="_on_time_scale_h_slider_drag_ended"]
 [connection signal="drag_ended" from="Settings_VBox/VBoxContainer/HBoxContainer/Latency_HSlider" to="." method="_on_latency_h_slider_drag_ended"]
 [connection signal="drag_ended" from="Settings_VBox/VBoxContainer2/HBoxContainer/Server_Buffer_HSlider" to="." method="_on_server_buffer_h_slider_drag_ended"]
-[connection signal="drag_ended" from="Settings_VBox/VBoxContainer3/HBoxContainer/Client_Transmission_HSlider" to="." method="_on_client_transmission_h_slider_drag_ended"]
 [connection signal="drag_ended" from="Settings_VBox/VBoxContainer4/HBoxContainer/Client_Input_Delay_HSlider" to="." method="_on_client_input_delay_h_slider_drag_ended"]
+[connection signal="drag_ended" from="Settings_VBox/VBoxContainer3/HBoxContainer/Client_Transmission_HSlider" to="." method="_on_client_transmission_h_slider_drag_ended"]
