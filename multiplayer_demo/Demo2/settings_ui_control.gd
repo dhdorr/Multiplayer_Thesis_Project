@@ -56,7 +56,7 @@ func _on_client_input_delay_h_slider_drag_ended(value_changed: bool) -> void:
 	SignalBus.reset_input_delay.emit()
 	Settings.input_delay = float(client_input_delay_h_slider.value)
 	$Settings_VBox/VBoxContainer4/HBoxContainer/ID_Label.text = str(Settings.input_delay)
-	print("\n input delay: ", Settings.input_delay)
+	#print("\n input delay: ", Settings.input_delay)
 
 
 func _on_graph_check_button_pressed() -> void:
