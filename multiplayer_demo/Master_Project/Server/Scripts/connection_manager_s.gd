@@ -41,6 +41,7 @@ func receive_client_input_packets() -> void:
 				TYPE_VECTOR2:
 					print("vector: ", packet)
 				TYPE_PACKED_BYTE_ARRAY:
+					break
 					print(packet.get_string_from_utf8())
 					#print("String Received: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
 					#print(peers.size())

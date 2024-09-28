@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://oc5n0wht35jn"]
+[gd_scene load_steps=7 format=3 uid="uid://oc5n0wht35jn"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/network_layer_c.gd" id="1_vljt5"]
 [ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="2_64f4p"]
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/player.gd" id="2_nxxdh"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/connection_manager_c.gd" id="3_r78h7"]
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/input_manager_c.gd" id="5_ijgc0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s6ixw"]
+radius = 62.482
 
 [node name="Client_Wrapper" type="Node"]
 
@@ -10,8 +15,22 @@
 unique_name_in_owner = true
 script = ExtResource("1_vljt5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Character_Controller" type="Node" parent="."]
+
+[node name="Player" type="CharacterBody2D" parent="Character_Controller"]
+unique_name_in_owner = true
+script = ExtResource("2_nxxdh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Character_Controller/Player"]
 texture = ExtResource("2_64f4p")
 
-[node name="Connection_Manager_C" type="Node" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character_Controller/Player"]
+shape = SubResource("CircleShape2D_s6ixw")
+
+[node name="Connection_Manager_C" type="Node" parent="Character_Controller"]
+unique_name_in_owner = true
 script = ExtResource("3_r78h7")
+
+[node name="Input_Manager_C" type="Node" parent="Character_Controller"]
+unique_name_in_owner = true
+script = ExtResource("5_ijgc0")

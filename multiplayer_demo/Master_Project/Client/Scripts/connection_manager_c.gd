@@ -1,8 +1,12 @@
 extends Node
 
+#@onready var input_manager_c: Node = %Input_Manager_C
+
 var e_client := PacketPeerUDP.new()
 
 var connected := false
+
+var player_input_buffer : Array[Vector2]
 
 func _ready() -> void:
 	connect_client_to_server()
@@ -28,5 +32,13 @@ func _physics_process(delta: float) -> void:
 		print("Connected: %s" % e_client.get_packet().get_string_from_utf8())
 		connected = true
 	if Input.is_action_just_pressed("fire_projectile") and connected:
-		var input_vec := Vector2(1.0, 0.0)
+		var input_vec := Vector2(11.0, 11.0)
 		send_input(input_vec)
+		
+	if player_input_buffer.size() > 0:
+		# will be refactored later to include controls for rendering delays
+		send_input(player_input_buffer.pop_front())
+
+
+func get_input(input_vec: Vector2) -> void:
+	player_input_buffer.append(input_vec)
