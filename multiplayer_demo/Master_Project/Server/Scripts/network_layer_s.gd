@@ -17,7 +17,6 @@ func start_server() -> void:
 func check_for_new_client_connections() -> void:
 	e_server.poll()
 	if e_server.is_connection_available():
-		print("here?")
 		var peer : PacketPeerUDP = e_server.take_connection()
 		var packet := peer.get_packet()
 		print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
@@ -28,11 +27,29 @@ func check_for_new_client_connections() -> void:
 		peers.append(peer)
 
 
+func send_world_state_updates_to_clients() -> void:
+	for peer in peers:
+		peer.put_packet("take this update!".to_utf8_buffer())
+
+
+func receive_client_input_packets() -> void:
+	for peer in peers:
+		if peer.get_available_packet_count() > 0:
+			var packet = peer.get_packet()
+			if packet.get_string_from_utf8().contains("hello"):
+				print(packet.get_string_from_utf8())
+			else:
+				var packet_var = packet.decode_var(0)
+				if  typeof(packet_var) == TYPE_VECTOR2:
+					print("vector: ", packet_var)
+			
+
+
 func _process(delta: float) -> void:
 	check_for_new_client_connections()
+
+
+func _physics_process(delta: float) -> void:
+	send_world_state_updates_to_clients()
 	
-	for p in peers:
-		#print(p)
-		if p.get_available_packet_count() > 0:
-			p.put_packet("help me!".to_utf8_buffer())
-			print("HELP PLEASE: %s" % p.get_packet().get_string_from_utf8())
+	receive_client_input_packets()

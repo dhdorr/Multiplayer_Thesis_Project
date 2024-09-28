@@ -6,7 +6,7 @@ const SERVER_WRAPPER = preload("res://Master_Project/Server/Scenes/server_wrappe
 func _ready() -> void:
 	print(OS.get_cmdline_args())
 	if OS.get_cmdline_args()[1] == "host":
-		print("spawning server...")
+		print("spawning server")
 		var server := SERVER_WRAPPER.instantiate()
 		add_child(server)
 		#var e_server := ENetMultiplayerPeer.new()
