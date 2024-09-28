@@ -14,3 +14,7 @@ func _physics_process(delta: float) -> void:
 	
 	player.get_input(direction)
 	connection_manager_c.get_input(direction)
+
+
+func get_position_update_from_server(pos : Vector2) -> void:
+	pass

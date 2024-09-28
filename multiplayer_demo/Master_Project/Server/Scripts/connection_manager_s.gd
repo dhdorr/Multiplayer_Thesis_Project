@@ -2,6 +2,7 @@ extends Node
 
 
 @onready var e_server := UDPServer.new()
+@onready var world_state_manager_s: Node = %World_State_Manager_S
 
 var peers : Array[PacketPeerUDP]
 
@@ -27,10 +28,9 @@ func check_for_new_client_connections() -> void:
 		peers.append(peer)
 
 
-func send_world_state_updates_to_clients() -> void:
+func send_world_state_updates_to_clients(world_state : Vector2) -> void:
 	for peer in peers:
-		%Network_Layer_S.simulate_sending_packet_over_network(peer, "take this update!".to_utf8_buffer())
-		#peer.put_packet("take this update!".to_utf8_buffer())
+		%Network_Layer_S.simulate_sending_update_over_network(peer, world_state)
 
 
 func receive_client_input_packets() -> void:
@@ -39,12 +39,12 @@ func receive_client_input_packets() -> void:
 			var packet = peer.get_var()
 			match typeof(packet):
 				TYPE_VECTOR2:
-					print("vector: ", packet)
+					#print("vector: ", packet)
+					# pass to world state manager
+					world_state_manager_s.get_input(packet)
 				TYPE_PACKED_BYTE_ARRAY:
 					break
-					print(packet.get_string_from_utf8())
 					#print("String Received: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
-					#print(peers.size())
 
 
 func _process(delta: float) -> void:

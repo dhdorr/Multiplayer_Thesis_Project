@@ -1,6 +1,7 @@
 extends Node
 
 #@onready var input_manager_c: Node = %Input_Manager_C
+@onready var player: CharacterBody2D = %Player
 
 var e_client := PacketPeerUDP.new()
 
@@ -27,10 +28,19 @@ func send_input(input_vec : Vector2) -> void:
 func _physics_process(delta: float) -> void:
 	if !connected:
 		send_connection_string()
-		#send_string_over_network("hello, world!".to_utf8_buffer())
+		
 	if e_client.get_available_packet_count() > 0:
-		print("Connected: %s" % e_client.get_packet().get_string_from_utf8())
-		connected = true
+		var packet = e_client.get_var()
+		match typeof(packet):
+			TYPE_VECTOR2:
+				if connected:
+					print("Update position from server: %s" % str(packet))
+					player.position = packet
+			TYPE_PACKED_BYTE_ARRAY:
+				if !connected:
+					print("Connected: %s" % e_client.get_packet().get_string_from_utf8())
+					connected = true
+		
 	if Input.is_action_just_pressed("fire_projectile") and connected:
 		var input_vec := Vector2(11.0, 11.0)
 		send_input(input_vec)
