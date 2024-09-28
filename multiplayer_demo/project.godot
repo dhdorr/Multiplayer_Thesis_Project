@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Multiplayer_Demo"
-run/main_scene="res://Demo2/demo_2_world.tscn"
+run/main_scene="res://Master_Project/master_world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -27,6 +27,7 @@ window/size/always_on_top=true
 [editor]
 
 movie_writer/movie_file="C:/Godot/Multiplayer_Thesis_Project/Multiplayer_Thesis_Project/multiplayer_demo/test_screen_record_mp_demo.avi"
+run/main_run_args="host client"
 
 [input]
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlq8hxveyyxxj"]
+
+[ext_resource type="Script" path="res://Master_Project/master_world.gd" id="1_py1ie"]
+
+[node name="Master_World" type="Node"]
+script = ExtResource("1_py1ie")

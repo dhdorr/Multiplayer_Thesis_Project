@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://oc5n0wht35jn"]
+
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/network_layer_c.gd" id="1_vljt5"]
+[ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="2_64f4p"]
+
+[node name="Client_Wrapper" type="Node"]
+
+[node name="Network_Layer_C" type="Node" parent="."]
+script = ExtResource("1_vljt5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_64f4p")
