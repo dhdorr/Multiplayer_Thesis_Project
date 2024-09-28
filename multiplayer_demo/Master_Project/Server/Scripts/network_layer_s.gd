@@ -35,13 +35,11 @@ func send_world_state_updates_to_clients() -> void:
 func receive_client_input_packets() -> void:
 	for peer in peers:
 		if peer.get_available_packet_count() > 0:
-			var packet = peer.get_packet()
-			if packet.get_string_from_utf8().contains("hello"):
+			var packet = peer.get_var()
+			if typeof(packet) == TYPE_VECTOR2:
+				print("vector: ", packet)
+			elif typeof(packet) == TYPE_PACKED_BYTE_ARRAY:
 				print(packet.get_string_from_utf8())
-			else:
-				var packet_var = packet.decode_var(0)
-				if  typeof(packet_var) == TYPE_VECTOR2:
-					print("vector: ", packet_var)
 			
 
 

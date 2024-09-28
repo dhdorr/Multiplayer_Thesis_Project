@@ -18,7 +18,7 @@ func connect_client_to_server() -> void:
 
 func _physics_process(delta: float) -> void:
 	if !connected:
-		e_client.put_packet("hello, world!".to_utf8_buffer())
+		e_client.put_var("hello, world!".to_utf8_buffer())
 	if e_client.get_available_packet_count() > 0:
 		#print("Connected: %s" % e_client.get_packet().get_string_from_utf8())
 		connected = true
