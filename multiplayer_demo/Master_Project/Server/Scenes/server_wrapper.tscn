@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4tbltb0brf1f"]
+[gd_scene load_steps=4 format=3 uid="uid://c4tbltb0brf1f"]
 
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/network_layer_s.gd" id="1_bxdm2"]
 [ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="2_0imiu"]
+[ext_resource type="Script" path="res://Master_Project/Server/Scripts/connection_manager_s.gd" id="3_gqffu"]
 
 [node name="Server_Wrapper" type="Node"]
 
 [node name="Network_Layer_S" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_bxdm2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 1, 1)
 texture = ExtResource("2_0imiu")
+
+[node name="Connection_Manager_S" type="Node" parent="."]
+script = ExtResource("3_gqffu")
