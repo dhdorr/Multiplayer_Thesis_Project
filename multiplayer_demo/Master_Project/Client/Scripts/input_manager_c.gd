@@ -10,5 +10,7 @@ func _physics_process(delta: float) -> void:
 	
 
 class Buffer_On_Receipt extends Node:
+	# Always gets written to by the Connection Manager
+	# then consumed by the player
 	static var buffer : Array[Vector2]
 	

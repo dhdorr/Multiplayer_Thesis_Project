@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func start_server() -> void:
 	e_server.listen(12345)
+	print("Server started on port: ", 12345)
 
 
 func check_for_new_client_connections() -> void:
@@ -39,12 +40,10 @@ func receive_client_input_packets() -> void:
 			var packet = peer.get_var()
 			match typeof(packet):
 				TYPE_VECTOR2:
-					#print("vector: ", packet)
 					# pass to world state manager
 					world_state_manager_s.get_input(packet)
 				TYPE_PACKED_BYTE_ARRAY:
 					break
-					#print("String Received: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
 
 
 func _process(delta: float) -> void:

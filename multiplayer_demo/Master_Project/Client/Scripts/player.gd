@@ -7,6 +7,7 @@ var ACCELERATION : float = 1500.0
 
 
 func _ready() -> void:
+	# Enable manager modules via composition
 	add_child(input_manager)
 
 func _physics_process(delta: float) -> void:
@@ -17,7 +18,6 @@ func _physics_process(delta: float) -> void:
 		
 	if input_manager.input_buffer.size() > 0:
 		# will be refactored later to include controls for rendering delays
-		
 		var desired_velocity : Vector2 = input_manager.input_buffer.pop_front() * SPEED
 		self.velocity = self.velocity.move_toward(desired_velocity, delta * ACCELERATION)
 		move_and_slide()

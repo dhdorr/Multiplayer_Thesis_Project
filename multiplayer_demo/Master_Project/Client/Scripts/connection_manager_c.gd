@@ -1,4 +1,4 @@
-extends Node
+class_name Connection_Manager_Client extends Node
 
 
 @onready var input_manager := Input_Manager_Client.new()
