@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var input_manager := Input_Manager_Client.new()
+@onready var buffer_consumer := Buffer_On_Receipt.Buffer_Consumer.new()
 
 var SPEED : float = 300.0
 var ACCELERATION : float = 1500.0
@@ -9,12 +10,14 @@ var ACCELERATION : float = 1500.0
 func _ready() -> void:
 	# Enable manager modules via composition
 	add_child(input_manager)
+	add_child(buffer_consumer)
 
 func _physics_process(delta: float) -> void:
 	# Consume position updates from the server
 	# will need to be refactored to support server reconciliation, later
-	if input_manager.Buffer_On_Receipt.buffer.size() > 0:
-		self.position = input_manager.Buffer_On_Receipt.buffer.pop_front()
+	if buffer_consumer.buffer.size() > 0:
+		#print(buffer_consumer.buffer)
+		self.position = buffer_consumer.buffer.pop_front()
 		
 	if input_manager.input_buffer.size() > 0:
 		# will be refactored later to include controls for rendering delays

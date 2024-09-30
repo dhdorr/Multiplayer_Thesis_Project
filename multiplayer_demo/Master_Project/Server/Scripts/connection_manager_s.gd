@@ -18,7 +18,7 @@ func start_server() -> void:
 func check_for_new_client_connections() -> void:
 	if e_server.is_connection_available():
 		var peer : PacketPeerUDP = e_server.take_connection()
-		var packet = peer.get_var()
+		var packet = peer.get_packet()
 		match typeof(packet):
 			TYPE_PACKED_BYTE_ARRAY:
 				print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])

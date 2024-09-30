@@ -2,6 +2,7 @@ class_name Connection_Manager_Client extends Node
 
 
 @onready var input_manager := Input_Manager_Client.new()
+@onready var buffer_listener := Buffer_On_Receipt.Buffer_Listener.new()
 
 var e_client := PacketPeerUDP.new()
 
@@ -10,8 +11,9 @@ var connected := false
 
 func _ready() -> void:
 	connect_client_to_server()
-	# Enable input manager
+	# Enable component modules
 	add_child(input_manager)
+	add_child(buffer_listener)
 
 
 func connect_client_to_server() -> void:
@@ -36,7 +38,9 @@ func _physics_process(delta: float) -> void:
 			TYPE_VECTOR2:
 				if connected:
 					#print("Update position from server: %s" % str(packet))
-					input_manager.Buffer_On_Receipt.buffer.append(packet)
+					# Send incomming packets to Buffer On Receipt
+					# packets will be delayed in reaching the client for x frames
+					buffer_listener.buffer.append(packet)
 			TYPE_PACKED_BYTE_ARRAY:
 				if !connected:
 					print("Connected: %s" % packet.get_string_from_utf8())
