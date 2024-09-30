@@ -1,9 +1,9 @@
 extends Node
 
-var network_latency_ms := 25.0
+var network_latency_ms := 50.0
 
 
-func simulate_sending_input_over_network(client: PacketPeerUDP, content: Vector2) -> void:
+func simulate_sending_input_over_network(client: PacketPeerUDP, content: Dictionary) -> void:
 	get_tree().create_timer(network_latency_ms / 1000).timeout.connect(
 		func() -> void:
 			client.put_var(content)

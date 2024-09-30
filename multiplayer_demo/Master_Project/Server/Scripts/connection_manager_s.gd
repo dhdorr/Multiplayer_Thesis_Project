@@ -32,6 +32,10 @@ func check_for_new_client_connections() -> void:
 func send_world_state_updates_to_clients(world_state : Vector2) -> void:
 	for peer in peers:
 		%Network_Layer_S.simulate_sending_update_over_network(peer, world_state)
+		
+func send_world_state_updates_to_clients_2(world_state : Dictionary) -> void:
+	for peer in peers:
+		%Network_Layer_S.simulate_sending_update_over_network_2(peer, world_state[1])
 
 
 func receive_client_input_packets() -> void:
@@ -42,6 +46,9 @@ func receive_client_input_packets() -> void:
 				TYPE_VECTOR2:
 					# pass to world state manager
 					world_state_manager_s.get_input(packet)
+				TYPE_DICTIONARY:
+					# pass to world state manager
+					world_state_manager_s.get_input_2(packet)
 				TYPE_PACKED_BYTE_ARRAY:
 					break
 

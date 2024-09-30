@@ -8,6 +8,7 @@ var e_client := PacketPeerUDP.new()
 
 var connected := false
 
+var packet_id := 0
 
 func _ready() -> void:
 	connect_client_to_server()
@@ -24,7 +25,10 @@ func send_connection_string() -> void:
 
 
 func send_input(input_vec : Vector2) -> void:
-	%Network_Layer_C.simulate_sending_input_over_network(e_client, input_vec)
+	packet_id += 1
+	var input_dict : Dictionary = {"player_id" : 1, "input_vec" : input_vec, "packet_id": packet_id}
+	input_manager.append_to_packet_arr(input_dict)
+	%Network_Layer_C.simulate_sending_input_over_network(e_client, input_dict)
 
 
 func _physics_process(delta: float) -> void:
@@ -34,6 +38,9 @@ func _physics_process(delta: float) -> void:
 	if e_client.get_available_packet_count() > 0:
 		var packet = e_client.get_var()
 		match typeof(packet):
+			TYPE_DICTIONARY:
+				if connected:
+					buffer_manager_c.append_to_buffer_dict(packet)
 			TYPE_VECTOR2:
 				if connected:
 					#print("Update position from server: %s" % str(packet))
