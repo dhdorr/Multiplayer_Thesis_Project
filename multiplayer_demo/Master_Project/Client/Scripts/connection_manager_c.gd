@@ -1,16 +1,17 @@
 extends Node
 
-#@onready var input_manager_c: Node = %Input_Manager_C
-@onready var player: CharacterBody2D = %Player
+
+@onready var input_manager := Input_Manager_Client.new()
 
 var e_client := PacketPeerUDP.new()
 
 var connected := false
 
-var player_input_buffer : Array[Vector2]
 
 func _ready() -> void:
 	connect_client_to_server()
+	# Enable input manager
+	add_child(input_manager)
 
 
 func connect_client_to_server() -> void:
@@ -28,27 +29,23 @@ func send_input(input_vec : Vector2) -> void:
 func _physics_process(delta: float) -> void:
 	if !connected:
 		send_connection_string()
-		
+	# Received packet from server
 	if e_client.get_available_packet_count() > 0:
 		var packet = e_client.get_var()
 		match typeof(packet):
 			TYPE_VECTOR2:
 				if connected:
 					print("Update position from server: %s" % str(packet))
-					player.position = packet
+					input_manager.Buffer_On_Receipt.buffer.append(packet)
 			TYPE_PACKED_BYTE_ARRAY:
 				if !connected:
 					print("Connected: %s" % e_client.get_packet().get_string_from_utf8())
 					connected = true
-		
+	# Testing shooting projectile packet
 	if Input.is_action_just_pressed("fire_projectile") and connected:
 		var input_vec := Vector2(11.0, 11.0)
 		send_input(input_vec)
 		
-	if player_input_buffer.size() > 0:
+	if input_manager.input_buffer.size() > 0:
 		# will be refactored later to include controls for rendering delays
-		send_input(player_input_buffer.pop_front())
-
-
-func get_input(input_vec: Vector2) -> void:
-	player_input_buffer.append(input_vec)
+		send_input(input_manager.input_buffer.pop_front())
