@@ -9,6 +9,7 @@ var is_buffer_ready := false
 func append_to_buffer(recv : Vector2) -> void:
 	buffer.append(recv)
 	if is_first_packet:
+		print("delaying first packet")
 		add_child(timer)
 		timer.one_shot = true
 		timer.start(1.0/60.0)
