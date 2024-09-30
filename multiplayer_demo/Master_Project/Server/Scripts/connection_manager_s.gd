@@ -17,13 +17,13 @@ func start_server() -> void:
 func check_for_new_client_connections() -> void:
 	if e_server.is_connection_available():
 		var peer : PacketPeerUDP = e_server.take_connection()
-		var packet := peer.get_packet()
-		print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
-		print("Received data: %s" % [packet.get_string_from_utf8()])
-		
-		var response : PackedByteArray = "welcome!".to_utf8_buffer()
-		#peer.put_packet(response)
+		var packet = peer.get_var()
+		match typeof(packet):
+			TYPE_PACKED_BYTE_ARRAY:
+				print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
+				print("Received data: %s" % [packet.get_string_from_utf8()])
 		# confirm connection
+		var response : PackedByteArray = "welcome!".to_utf8_buffer()
 		%Network_Layer_S.simulate_sending_packet_over_network(peer, response)
 		peers.append(peer)
 

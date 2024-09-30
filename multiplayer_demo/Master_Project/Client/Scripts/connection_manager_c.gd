@@ -35,11 +35,11 @@ func _physics_process(delta: float) -> void:
 		match typeof(packet):
 			TYPE_VECTOR2:
 				if connected:
-					print("Update position from server: %s" % str(packet))
+					#print("Update position from server: %s" % str(packet))
 					input_manager.Buffer_On_Receipt.buffer.append(packet)
 			TYPE_PACKED_BYTE_ARRAY:
 				if !connected:
-					print("Connected: %s" % e_client.get_packet().get_string_from_utf8())
+					print("Connected: %s" % packet.get_string_from_utf8())
 					connected = true
 	# Testing shooting projectile packet
 	if Input.is_action_just_pressed("fire_projectile") and connected:
