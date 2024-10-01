@@ -23,7 +23,6 @@ func _physics_process(delta: float) -> void:
 		
 		server_reconciliation(delta)
 		
-		
 		current_packet += 1
 
 
@@ -37,6 +36,7 @@ func server_reconciliation(delta : float) -> void:
 	if buffer_manager_c.is_buffer_ready and buffer_manager_c.buffer_d.size() > 0:
 		var packet : Dictionary = buffer_manager_c.buffer_d.pop_front()
 		player.position = packet["position"]
+		player.velocity = packet["velocity"]
 		
 		var last_confirmed_packet_id : int = packet["packet_id"]
 		var range : int = input_history.size() - last_confirmed_packet_id
@@ -48,4 +48,5 @@ func server_reconciliation(delta : float) -> void:
 
 func calculate_movement(dir : Vector2, vel: Vector2, delta : float) -> Vector2:
 	var desired_velocity = dir * 300.0
-	return desired_velocity
+	return player.velocity.move_toward(desired_velocity, delta * 1600.0)
+	#return desired_velocity

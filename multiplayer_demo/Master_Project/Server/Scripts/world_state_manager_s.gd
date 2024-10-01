@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 		$CharacterBody2D.velocity = calculate_movement(pp["input_vec"], $CharacterBody2D.velocity, delta)
 		$CharacterBody2D.move_and_slide()
 		
-		world_state_dict[pp["player_id"]] = {"position": $CharacterBody2D.position, "packet_id": pp["packet_id"]}
+		world_state_dict[pp["player_id"]] = {"position": $CharacterBody2D.position, "packet_id": pp["packet_id"], "velocity": $CharacterBody2D.velocity}
 	if player_packets.size() > 0:
 		connection_manager_s.send_world_state_updates_to_clients_2(world_state_dict)
 		player_packets.clear()
@@ -38,4 +38,5 @@ func _physics_process(delta: float) -> void:
 
 func calculate_movement(dir : Vector2, vel: Vector2, delta : float) -> Vector2:
 	var desired_velocity = dir * 300.0
-	return desired_velocity
+	return $CharacterBody2D.velocity.move_toward(desired_velocity, delta * 1600.0)
+	#return desired_velocity
