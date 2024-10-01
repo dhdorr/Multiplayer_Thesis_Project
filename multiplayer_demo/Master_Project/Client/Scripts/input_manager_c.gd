@@ -35,7 +35,8 @@ func server_reconciliation(delta : float) -> void:
 		var packet : Dictionary = buffer_manager_c.buffer_d.pop_front()
 		player.position = packet["position"]
 		var last_confirmed_packet_id : int = packet["packet_id"]
-		for i in range(last_confirmed_packet_id, input_history.size()):
+		var range : int = input_history.size() - last_confirmed_packet_id
+		for i in range(last_confirmed_packet_id + 1, input_history.size()):
 			player.velocity = input_history[i]["input_vec"]
-			#player.velocity = player.velocity.move_toward(input_history[i]["input_vec"] * 300.0, delta * 1600.0)
+			#player.velocity = player.velocity.move_toward(input_history[i]["input_vec"] * 300.0, (delta * 1600.0) / range)
 			player.move_and_slide()
