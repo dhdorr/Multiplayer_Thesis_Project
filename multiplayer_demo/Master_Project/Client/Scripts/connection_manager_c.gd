@@ -1,7 +1,7 @@
 class_name Connection_Manager_Client extends Node
 
 
-@onready var input_manager := Input_Manager_Client.new()
+#@onready var input_manager := Input_Manager_Client.new()
 @onready var buffer_manager_c: Buffer_Manager_C = %Buffer_Manager_C
 
 var e_client := PacketPeerUDP.new()
@@ -10,10 +10,12 @@ var connected := false
 
 var packet_id := 0
 
+var player_id := "0"
+
 func _ready() -> void:
 	connect_client_to_server()
 	# Enable component modules
-	add_child(input_manager)
+	#add_child(input_manager)
 
 
 func connect_client_to_server() -> void:
@@ -24,10 +26,7 @@ func send_connection_string() -> void:
 	%Network_Layer_C.simulate_send_string_over_network(e_client, "hello, world!".to_utf8_buffer())
 
 
-func send_input(input_vec : Vector2) -> void:
-	packet_id += 1
-	var input_dict : Dictionary = {"player_id" : 1, "input_vec" : input_vec, "packet_id": packet_id}
-	input_manager.append_to_packet_arr(input_dict)
+func send_input(input_dict : Dictionary) -> void:
 	%Network_Layer_C.simulate_sending_input_over_network(e_client, input_dict)
 
 
@@ -41,21 +40,13 @@ func _physics_process(delta: float) -> void:
 			TYPE_DICTIONARY:
 				if connected:
 					buffer_manager_c.append_to_buffer_dict(packet)
-			TYPE_VECTOR2:
-				if connected:
-					#print("Update position from server: %s" % str(packet))
-					# Send incomming packets to Buffer On Receipt
-					# packets will be delayed in reaching the client for x frames
-					buffer_manager_c.append_to_buffer(packet)
 			TYPE_PACKED_BYTE_ARRAY:
+				# connection confirmed
 				if !connected:
 					print("Connected: %s" % packet.get_string_from_utf8())
 					connected = true
-	# Testing shooting projectile packet
-	if Input.is_action_just_pressed("fire_projectile") and connected:
-		var input_vec := Vector2(11.0, 11.0)
-		send_input(input_vec)
+					player_id = packet.get_string_from_utf8()
 		
-	if input_manager.input_buffer.size() > 0:
-		# will be refactored later to include controls for rendering delays
-		send_input(input_manager.input_buffer.pop_front())
+	#if input_manager.input_buffer.size() > 0:
+		## will be refactored later to include controls for rendering delays
+		#send_input(input_manager.input_buffer.pop_front())
