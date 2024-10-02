@@ -17,7 +17,8 @@ func _physics_process(delta: float) -> void:
 		# Predict player movement immediately as input comes in
 		# this movement will be overwritten by the server's response
 		# during the reconciliation step
-		client_prediction(delta)
+		if SettingsMp.enable_client_prediction:
+			client_prediction(delta)
 		
 		# Generating serialized input packet and sending it out
 		generate_input_packet()
@@ -26,7 +27,13 @@ func _physics_process(delta: float) -> void:
 		# the client must apply that new state, which rewinds the player back
 		# a few frames. SO we have to re-simulate the inputs from that past
 		# state until now
-		server_reconciliation(delta)
+		if buffer_manager_c.is_buffer_ready and buffer_manager_c.buffer_d.size() > 0:
+			var packet : Dictionary = buffer_manager_c.buffer_d.pop_front()
+			player.position = packet["position"]
+			player.velocity = packet["velocity"]
+			
+			if SettingsMp.enable_server_reconciliation:
+				server_reconciliation(delta, packet)
 		
 		current_packet += 1
 
@@ -42,22 +49,24 @@ func generate_input_packet() -> void:
 	input_history.append(input_dict)
 
 
-func server_reconciliation(delta : float) -> void:
+func server_reconciliation(delta : float, packet: Dictionary) -> void:
 	#print("called deferred...")
-	if buffer_manager_c.is_buffer_ready and buffer_manager_c.buffer_d.size() > 0:
-		var packet : Dictionary = buffer_manager_c.buffer_d.pop_front()
-		player.position = packet["position"]
-		player.velocity = packet["velocity"]
-		
-		var last_confirmed_packet_id : int = packet["packet_id"]
-		var range : int = input_history.size() - last_confirmed_packet_id
-		for i in range(last_confirmed_packet_id + 1, input_history.size()):
-
-			player.velocity = calculate_movement(input_history[i]["input_vec"], player.velocity, delta)
-			player.move_and_slide()
+	var last_confirmed_packet_id : int = packet["packet_id"]
+	var range : int = input_history.size() - last_confirmed_packet_id
+	for i in range(last_confirmed_packet_id + 1, input_history.size()):
+		player.velocity = calculate_movement(input_history[i]["input_vec"], player.velocity, delta)
+		player.move_and_slide()
 
 
 func calculate_movement(dir : Vector2, vel: Vector2, delta : float) -> Vector2:
 	var desired_velocity = dir * 300.0
 	return player.velocity.move_toward(desired_velocity, delta * 1600.0)
 	#return desired_velocity
+
+
+func _on_prediction_check_button_toggled(toggled_on: bool) -> void:
+	SettingsMp.enable_client_prediction = toggled_on
+
+
+func _on_reconciliation_check_button_toggled(toggled_on: bool) -> void:
+	SettingsMp.enable_server_reconciliation = toggled_on

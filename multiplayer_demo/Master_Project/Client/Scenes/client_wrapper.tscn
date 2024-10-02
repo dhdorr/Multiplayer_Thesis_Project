@@ -39,3 +39,61 @@ script = ExtResource("5_qlrtr")
 [node name="Input_Manager_C" type="Node" parent="Character_Controller"]
 unique_name_in_owner = true
 script = ExtResource("6_iwvh1")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -264.0
+offset_top = 30.0
+offset_right = -40.0
+offset_bottom = 94.0
+grow_horizontal = 0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129412, 0.14902, 0.180392, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Client Prediction"
+
+[node name="Prediction_CheckButton" type="CheckButton" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Server Reconciliation"
+
+[node name="Reconciliation_CheckButton" type="CheckButton" parent="Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+button_pressed = true
+
+[connection signal="toggled" from="Control/VBoxContainer/HBoxContainer/Prediction_CheckButton" to="Character_Controller/Input_Manager_C" method="_on_prediction_check_button_toggled"]
+[connection signal="toggled" from="Control/VBoxContainer/HBoxContainer2/Reconciliation_CheckButton" to="Character_Controller/Input_Manager_C" method="_on_reconciliation_check_button_toggled"]
