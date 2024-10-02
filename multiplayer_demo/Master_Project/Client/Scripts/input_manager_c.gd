@@ -14,13 +14,18 @@ func _physics_process(delta: float) -> void:
 	if connection_manager_c.connected:
 		direction = Input.get_vector("move_left","move_right","move_up","move_down")
 		
+		# Predict player movement immediately as input comes in
+		# this movement will be overwritten by the server's response
+		# during the reconciliation step
 		client_prediction(delta)
 		
-		# Generating serialized packet and sending it out
-		var input_dict : Dictionary = {"player_id" : connection_manager_c.player_id, "input_vec" : direction, "packet_id": current_packet}
-		connection_manager_c.send_input(input_dict)
-		input_history.append(input_dict)
+		# Generating serialized input packet and sending it out
+		generate_input_packet()
 		
+		# When the server sends the client a new state (position and velocity)
+		# the client must apply that new state, which rewinds the player back
+		# a few frames. SO we have to re-simulate the inputs from that past
+		# state until now
 		server_reconciliation(delta)
 		
 		current_packet += 1
@@ -29,6 +34,12 @@ func _physics_process(delta: float) -> void:
 func client_prediction(delta: float) -> void:
 		player.velocity = calculate_movement(direction, player.velocity, delta)
 		player.move_and_slide()
+
+
+func generate_input_packet() -> void:
+	var input_dict : Dictionary = {"player_id" : connection_manager_c.player_id, "input_vec" : direction, "packet_id": current_packet}
+	connection_manager_c.send_input(input_dict)
+	input_history.append(input_dict)
 
 
 func server_reconciliation(delta : float) -> void:
