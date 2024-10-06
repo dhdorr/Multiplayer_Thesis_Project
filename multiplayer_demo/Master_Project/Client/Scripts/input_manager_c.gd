@@ -3,6 +3,7 @@ class_name Input_Manager_Client extends Node
 @onready var connection_manager_c: Connection_Manager_Client = %Connection_Manager_C
 @onready var player: Test_Player = %Player
 @onready var buffer_manager_c: Buffer_Manager_C = %Buffer_Manager_C
+@onready var ghost_manager_c: Ghost_Manager_C = %Ghost_Manager_C
 
 var direction : Vector2
 var input_buffer : Array[Vector2]
@@ -29,6 +30,10 @@ func _physics_process(delta: float) -> void:
 		# state until now
 		if buffer_manager_c.is_buffer_ready and buffer_manager_c.buffer_d.size() > 0:
 			var packet : Dictionary = buffer_manager_c.buffer_d.pop_front()
+			
+			# Spawn in ghost for each peer
+			ghost_manager_c.spawn_peer_characters(packet)
+			
 			if packet.has(connection_manager_c.player_id):
 				player.position = packet[connection_manager_c.player_id]["position"]
 				player.velocity = packet[connection_manager_c.player_id]["velocity"]

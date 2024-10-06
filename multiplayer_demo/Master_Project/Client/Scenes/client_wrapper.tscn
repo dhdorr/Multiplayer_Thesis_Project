@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://oc5n0wht35jn"]
+[gd_scene load_steps=9 format=3 uid="uid://oc5n0wht35jn"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/network_layer_c.gd" id="1_vljt5"]
 [ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="2_64f4p"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/connection_manager_c.gd" id="3_r78h7"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/buffer_manager_c.gd" id="5_qlrtr"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/input_manager_c.gd" id="6_iwvh1"]
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/ghost_manager_c.gd" id="7_trb1a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6ixw"]
 radius = 64.0
@@ -94,6 +95,10 @@ text = "Server Reconciliation"
 [node name="Reconciliation_CheckButton" type="CheckButton" parent="Control/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 button_pressed = true
+
+[node name="Ghost_Manager_C" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_trb1a")
 
 [connection signal="toggled" from="Control/VBoxContainer/HBoxContainer/Prediction_CheckButton" to="Character_Controller/Input_Manager_C" method="_on_prediction_check_button_toggled"]
 [connection signal="toggled" from="Control/VBoxContainer/HBoxContainer2/Reconciliation_CheckButton" to="Character_Controller/Input_Manager_C" method="_on_reconciliation_check_button_toggled"]
