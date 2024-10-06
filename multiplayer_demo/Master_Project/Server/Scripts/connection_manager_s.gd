@@ -18,6 +18,9 @@ func start_server() -> void:
 
 func check_for_new_client_connections() -> void:
 	if e_server.is_connection_available():
+		# max peer count
+		if peers.size() == 2:
+			return
 		var peer : PacketPeerUDP = e_server.take_connection()
 		var packet = peer.get_packet()
 		match typeof(packet):
