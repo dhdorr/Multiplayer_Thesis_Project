@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://5xprkqwrsyka"]
+
+[ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="1_vyhnw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6224"]
+radius = 64.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 1, 1)
+texture = ExtResource("1_vyhnw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e6224")

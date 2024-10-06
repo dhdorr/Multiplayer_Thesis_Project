@@ -4,6 +4,7 @@ class_name Connection_Manager_Server extends Node
 @onready var e_server := UDPServer.new()
 @onready var world_state_manager_s: World_State_Manager = %World_State_Manager_S
 
+
 var peers : Array[PacketPeerUDP]
 
 func _ready() -> void:
@@ -21,21 +22,22 @@ func check_for_new_client_connections() -> void:
 		var packet = peer.get_packet()
 		match typeof(packet):
 			TYPE_PACKED_BYTE_ARRAY:
-				print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
-				print("Received data: %s" % [packet.get_string_from_utf8()])
-		# confirm connection
-		var response : PackedByteArray = "0001".to_utf8_buffer()
-		%Network_Layer_S.simulate_sending_packet_over_network(peer, response)
-		peers.append(peer)
-
-
-#func send_world_state_updates_to_clients(world_state : Vector2) -> void:
-	#for peer in peers:
-		#%Network_Layer_S.simulate_sending_update_over_network(peer, world_state)
+				var connection_string : String = packet.get_string_from_utf8()
+				if connection_string == "hello, world!":
+					print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
+					print("Received data: %s" % [packet.get_string_from_utf8()])
+				# confirm connection
+				peers.append(peer)
+				var player_init_dict : Dictionary = {"player_id": peers.size(), "position": Vector2((peers.size() - 1) * 64.0 * 3.0 + 64.0, 100.0)}
+				print(player_init_dict)
+				world_state_manager_s.init_player_positions(player_init_dict)
+				#var response : PackedByteArray = "0001".to_utf8_buffer()
+				%Network_Layer_S.simulate_sending_packet_over_network(peer, player_init_dict)
 		
+
 func send_world_state_updates_to_clients_2(world_state : Dictionary) -> void:
 	for peer in peers:
-		%Network_Layer_S.simulate_sending_update_over_network_2(peer, world_state["0001"])
+		%Network_Layer_S.simulate_sending_update_over_network_2(peer, world_state)
 
 
 func receive_client_input_packets() -> void:

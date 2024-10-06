@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		# this movement will be overwritten by the server's response
 		# during the reconciliation step
 		if SettingsMp.enable_client_prediction:
-			client_prediction(delta)
+			client_prediction(delta, direction)
 		
 		# Generating serialized input packet and sending it out
 		generate_input_packet()
@@ -29,17 +29,18 @@ func _physics_process(delta: float) -> void:
 		# state until now
 		if buffer_manager_c.is_buffer_ready and buffer_manager_c.buffer_d.size() > 0:
 			var packet : Dictionary = buffer_manager_c.buffer_d.pop_front()
-			player.position = packet["position"]
-			player.velocity = packet["velocity"]
-			
-			if SettingsMp.enable_server_reconciliation:
-				server_reconciliation(delta, packet)
+			if packet.has(connection_manager_c.player_id):
+				player.position = packet[connection_manager_c.player_id]["position"]
+				player.velocity = packet[connection_manager_c.player_id]["velocity"]
+				
+				if SettingsMp.enable_server_reconciliation:
+					server_reconciliation(delta, packet)
 		
 		current_packet += 1
 
 
-func client_prediction(delta: float) -> void:
-		player.velocity = calculate_movement(direction, player.velocity, delta)
+func client_prediction(delta: float, dir: Vector2) -> void:
+		player.velocity = calculate_movement(dir, player.velocity, delta)
 		player.move_and_slide()
 
 
@@ -51,7 +52,7 @@ func generate_input_packet() -> void:
 
 func server_reconciliation(delta : float, packet: Dictionary) -> void:
 	#print("called deferred...")
-	var last_confirmed_packet_id : int = packet["packet_id"]
+	var last_confirmed_packet_id : int = packet[connection_manager_c.player_id]["packet_id"]
 	var range : int = input_history.size() - last_confirmed_packet_id
 	for i in range(last_confirmed_packet_id + 1, input_history.size()):
 		player.velocity = calculate_movement(input_history[i]["input_vec"], player.velocity, delta)
@@ -70,3 +71,6 @@ func _on_prediction_check_button_toggled(toggled_on: bool) -> void:
 
 func _on_reconciliation_check_button_toggled(toggled_on: bool) -> void:
 	SettingsMp.enable_server_reconciliation = toggled_on
+
+func init_player_position(packet: Dictionary) -> void:
+	player.position = packet["position"]

@@ -1,8 +1,8 @@
 class_name Connection_Manager_Client extends Node
 
 
-#@onready var input_manager := Input_Manager_Client.new()
 @onready var buffer_manager_c: Buffer_Manager_C = %Buffer_Manager_C
+@onready var input_manager_c: Input_Manager_Client = %Input_Manager_C
 
 var e_client := PacketPeerUDP.new()
 
@@ -10,7 +10,7 @@ var connected := false
 
 var packet_id := 0
 
-var player_id := "0"
+var player_id : int = 0
 
 func _ready() -> void:
 	connect_client_to_server()
@@ -39,14 +39,11 @@ func _physics_process(delta: float) -> void:
 		match typeof(packet):
 			TYPE_DICTIONARY:
 				if connected:
+					# Process update from the authoritative server
 					buffer_manager_c.append_to_buffer_dict(packet)
-			TYPE_PACKED_BYTE_ARRAY:
-				# connection confirmed
 				if !connected:
-					print("Connected: %s" % packet.get_string_from_utf8())
+					print("Connected: %s" % packet)
 					connected = true
-					player_id = packet.get_string_from_utf8()
-		
-	#if input_manager.input_buffer.size() > 0:
-		## will be refactored later to include controls for rendering delays
-		#send_input(input_manager.input_buffer.pop_front())
+					player_id = packet["player_id"]
+					input_manager_c.init_player_position(packet)
+					

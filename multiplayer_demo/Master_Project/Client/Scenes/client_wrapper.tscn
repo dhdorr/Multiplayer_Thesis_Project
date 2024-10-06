@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/input_manager_c.gd" id="6_iwvh1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6ixw"]
-radius = 62.482
+radius = 64.0
 
 [node name="Client_Wrapper" type="Node"]
 
