@@ -6,7 +6,7 @@ var buffer_d : Array[Dictionary]
 var waiting_for_first_packet := true
 var is_buffer_ready := false
 
-
+var last_consumed_packet : Dictionary
 var counter : int = 0
 
 func _physics_process(delta: float) -> void:
@@ -35,7 +35,10 @@ func append_to_buffer_dict(recv : Dictionary) -> void:
 func remove_from_buffer() -> void:
 	if buffer_d.size() > 0:
 		var temp : Dictionary = buffer_d.pop_front()
+		last_consumed_packet = temp
 		SignalBusMp.dispense_from_buffer_manager.emit(temp)
+	else:
+		SignalBusMp.dispense_from_buffer_manager.emit(last_consumed_packet)
 
 
 func test_buff_stuff() -> void:
