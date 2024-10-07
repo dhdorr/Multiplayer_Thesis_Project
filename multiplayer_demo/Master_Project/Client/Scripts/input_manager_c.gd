@@ -11,6 +11,16 @@ var packet_arr : Array[Dictionary]
 var input_history : Array[Dictionary]
 var current_packet := 0
 
+var temp_packet : Dictionary
+
+func _ready() -> void:
+	# emitted from buffer_manager_c
+	SignalBusMp.dispense_from_buffer_manager.connect(init_temp_packet)
+
+
+func init_temp_packet(packet : Dictionary) -> void:
+	temp_packet = packet
+
 func _physics_process(delta: float) -> void:
 	if connection_manager_c.connected:
 		direction = Input.get_vector("move_left","move_right","move_up","move_down")
@@ -28,8 +38,8 @@ func _physics_process(delta: float) -> void:
 		# the client must apply that new state, which rewinds the player back
 		# a few frames. SO we have to re-simulate the inputs from that past
 		# state until now
-		if buffer_manager_c.is_buffer_ready and buffer_manager_c.buffer_d.size() > 0:
-			var packet : Dictionary = buffer_manager_c.buffer_d.pop_front()
+		if !temp_packet.is_empty():
+			var packet : Dictionary = temp_packet
 			
 			# Spawn in ghost for each peer
 			ghost_manager_c.spawn_peer_characters(packet)

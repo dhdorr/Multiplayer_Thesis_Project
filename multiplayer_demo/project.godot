@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 SignalBus="*res://Demo2/SignalBus.gd"
 Settings="*res://Demo2/settings.gd"
 SettingsMp="*res://Master_Project/Globals/Settings_MP.gd"
+SignalBusMp="*res://Master_Project/Globals/SignalBus_MP.gd"
 
 [display]
 

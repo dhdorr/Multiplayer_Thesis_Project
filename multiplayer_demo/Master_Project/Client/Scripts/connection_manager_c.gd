@@ -39,8 +39,11 @@ func _physics_process(delta: float) -> void:
 		match typeof(packet):
 			TYPE_DICTIONARY:
 				if connected:
-					# Process update from the authoritative server
-					buffer_manager_c.append_to_buffer_dict(packet)
+					if buffer_manager_c.waiting_for_first_packet:
+						buffer_manager_c.start_buffer_on_receipt(packet)
+					else:
+						# Process update from the authoritative server
+						buffer_manager_c.append_to_buffer_dict(packet)
 				if !connected:
 					print("Connected: %s" % packet)
 					connected = true

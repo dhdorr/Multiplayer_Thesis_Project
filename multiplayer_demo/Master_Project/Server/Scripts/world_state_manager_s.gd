@@ -23,7 +23,7 @@ func get_input_dict(input_dict : Dictionary) -> void:
 	
 func _physics_process(delta: float) -> void:
 	count += 1
-	if count < delay:
+	if count <= delay:
 		return
 	else:
 		count = 0
