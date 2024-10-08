@@ -21,6 +21,8 @@ script = ExtResource("1_vljt5")
 
 [node name="Player" type="CharacterBody2D" parent="Character_Controller"]
 unique_name_in_owner = true
+collision_layer = 2
+motion_mode = 1
 script = ExtResource("2_nxxdh")
 
 [node name="Sprite2D" type="Sprite2D" parent="Character_Controller/Player"]

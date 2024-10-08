@@ -10,16 +10,19 @@ var input_buffer : Array[Vector2]
 var packet_arr : Array[Dictionary]
 var input_history : Array[Dictionary]
 var current_packet := 0
-
+var last_recv_packet_id := -1
 var temp_packet : Dictionary
 
-func _ready() -> void:
-	# emitted from buffer_manager_c
-	SignalBusMp.dispense_from_buffer_manager.connect(init_temp_packet)
+#func _ready() -> void:
+	 ##emitted from buffer_manager_c
+	#SignalBusMp.dispense_player_update_from_buffer_manager.connect(init_temp_packet)
 
 
-func init_temp_packet(packet : Dictionary) -> void:
-	temp_packet = packet
+func update_player_authoritative_position(packet : Dictionary) -> void:
+	# getting the most recent player update, cuz why not?
+	if packet[connection_manager_c.player_id]["packet_id"] != last_recv_packet_id:
+		last_recv_packet_id = packet[connection_manager_c.player_id]["packet_id"]
+		temp_packet = packet.duplicate()
 
 func _physics_process(delta: float) -> void:
 	if connection_manager_c.connected:
@@ -42,7 +45,7 @@ func _physics_process(delta: float) -> void:
 			var packet : Dictionary = temp_packet
 			
 			# Spawn in ghost for each peer
-			ghost_manager_c.spawn_peer_characters(packet)
+			#ghost_manager_c.spawn_peer_characters(packet)
 			
 			if packet.has(connection_manager_c.player_id):
 				player.position = packet[connection_manager_c.player_id]["position"]

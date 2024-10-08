@@ -33,9 +33,10 @@ func check_for_new_client_connections() -> void:
 				peers.append(peer)
 				var player_init_dict : Dictionary = {"player_id": peers.size(), "position": Vector2((peers.size() - 1) * 64.0 * 3.0 + 64.0, 100.0)}
 				print(player_init_dict)
+				var response : Dictionary = {"init": player_init_dict}
 				world_state_manager_s.init_player_positions(player_init_dict)
 				#var response : PackedByteArray = "0001".to_utf8_buffer()
-				%Network_Layer_S.simulate_sending_packet_over_network(peer, player_init_dict)
+				%Network_Layer_S.simulate_sending_packet_over_network(peer, response)
 		
 
 func send_world_state_updates_to_clients_2(world_state : Dictionary) -> void:
@@ -51,8 +52,6 @@ func receive_client_input_packets() -> void:
 				TYPE_DICTIONARY:
 					# pass to world state manager
 					world_state_manager_s.get_input_dict(packet)
-				TYPE_PACKED_BYTE_ARRAY:
-					break
 
 
 func _process(delta: float) -> void:

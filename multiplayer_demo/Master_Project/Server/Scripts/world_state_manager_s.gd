@@ -12,7 +12,7 @@ var packet_id := 0
 
 var player_packets : Array[Dictionary]
 
-var delay := 10
+#var delay := 10
 var count := 0
 
 var server_player_dict : Dictionary
@@ -22,23 +22,23 @@ func get_input_dict(input_dict : Dictionary) -> void:
 	
 	
 func _physics_process(delta: float) -> void:
-	count += 1
-	if count <= delay:
-		return
-	else:
+	
+	if count >= SettingsMp.get_server_tick_rate():
+		for pp in player_packets:
+			server_player_dict[pp["player_id"]].velocity = calculate_movement(server_player_dict[pp["player_id"]], pp["input_vec"], delta)
+			server_player_dict[pp["player_id"]].move_and_slide()
+			
+			world_state_dict[pp["player_id"]] = {"position": server_player_dict[pp["player_id"]].position, "packet_id": pp["packet_id"], "velocity": server_player_dict[pp["player_id"]].velocity}
+
+		if player_packets.size() > 0:
+			connection_manager_s.send_world_state_updates_to_clients_2(world_state_dict)
+			player_packets.clear()
+			
 		count = 0
+	else:
+		count += 1
 	
-	var index : int = 0
-	for pp in player_packets:
-		server_player_dict[pp["player_id"]].velocity = calculate_movement(server_player_dict[pp["player_id"]], pp["input_vec"], delta)
-		server_player_dict[pp["player_id"]].move_and_slide()
-		
-		world_state_dict[pp["player_id"]] = {"position": server_player_dict[pp["player_id"]].position, "packet_id": pp["packet_id"], "velocity": server_player_dict[pp["player_id"]].velocity}
-	
-	if player_packets.size() > 0:
-		connection_manager_s.send_world_state_updates_to_clients_2(world_state_dict)
-		player_packets.clear()
-		
+
 
 func calculate_movement(player: CharacterBody2D, dir : Vector2, delta : float) -> Vector2:
 	var desired_velocity = dir * 300.0

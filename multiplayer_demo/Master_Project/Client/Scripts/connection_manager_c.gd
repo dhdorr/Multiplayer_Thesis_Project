@@ -47,6 +47,6 @@ func _physics_process(delta: float) -> void:
 				if !connected:
 					print("Connected: %s" % packet)
 					connected = true
-					player_id = packet["player_id"]
-					input_manager_c.init_player_position(packet)
+					player_id = packet["init"]["player_id"]
+					input_manager_c.init_player_position(packet["init"])
 					

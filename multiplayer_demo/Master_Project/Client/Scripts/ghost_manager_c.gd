@@ -6,26 +6,25 @@ const PLAYER_S = preload("res://Master_Project/Server/Scenes/player_s.tscn")
 
 var ghost_dict : Dictionary
 
-func spawn_peer_characters(packet: Dictionary) -> void:
-	for ghost_id in packet:
-		if ghost_id != connection_manager_c.player_id and not ghost_dict.has(ghost_id):
-			var new_player : CharacterBody2D = PLAYER_S.instantiate()
-			ghost_dict[ghost_id] = new_player
-			add_child(new_player)
-			new_player.position = packet[ghost_id]["position"]
 
-		elif ghost_dict.has(ghost_id):
-			# Will need to implement client side entity interpolation here
-			# once interpolation is done, investigate rollback?
-			var new_position : Vector2 = packet[ghost_id]["position"]
-			var new_velocity : Vector2 = packet[ghost_id]["velocity"]
-			var tween := get_tree().create_tween()
-			tween.tween_property(ghost_dict[ghost_id], "position", new_position, get_physics_process_delta_time() * 3.0 * 10.0)
-			#ghost_dict[ghost_id].velocity = new_velocity
-			#ghost_dict[ghost_id].position = new_position
-			ghost_dict[ghost_id].move_and_slide()
+func spawn_peer_characters_2(world_state: Dictionary) -> void:
+	for p_id : int in world_state:
+		if p_id == connection_manager_c.player_id:
+			continue
+		var temp_vec : Vector2 = world_state[p_id]["position"]
+		
+		if !ghost_dict.has(p_id):
+			ghost_dict[p_id] = PLAYER_S.instantiate()
+			add_child(ghost_dict[p_id])
+		
+		move_ghost(world_state[p_id], p_id)
 
+
+func move_ghost(player: Dictionary, p_id : int) -> void:
+	ghost_dict[p_id].position = player["position"]
 
 # Ghost manager should have its own input buffer for packets (fed from the
 # buffer manager) to make it easier to interpolate entities independantly
 # from the input manager
+# this way we get as soon as possible updates for the player,
+# and we can create a buffer for interpolation / rollback for the entities

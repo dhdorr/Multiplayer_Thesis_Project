@@ -6,6 +6,7 @@
 radius = 64.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+motion_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 1, 1)
