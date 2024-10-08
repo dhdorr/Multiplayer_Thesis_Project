@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://oc5n0wht35jn"]
+[gd_scene load_steps=10 format=3 uid="uid://oc5n0wht35jn"]
 
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/client_wrapper.gd" id="1_5mjhx"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/network_layer_c.gd" id="1_vljt5"]
 [ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="2_64f4p"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/player.gd" id="2_nxxdh"]
@@ -12,6 +13,7 @@
 radius = 64.0
 
 [node name="Client_Wrapper" type="Node"]
+script = ExtResource("1_5mjhx")
 
 [node name="Network_Layer_C" type="Node" parent="."]
 unique_name_in_owner = true
@@ -101,6 +103,14 @@ button_pressed = true
 [node name="Ghost_Manager_C" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("7_trb1a")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 512.0
+offset_top = 67.0
+offset_right = 628.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 32
+text = "Client - "
 
 [connection signal="toggled" from="Control/VBoxContainer/HBoxContainer/Prediction_CheckButton" to="Character_Controller/Input_Manager_C" method="_on_prediction_check_button_toggled"]
 [connection signal="toggled" from="Control/VBoxContainer/HBoxContainer2/Reconciliation_CheckButton" to="Character_Controller/Input_Manager_C" method="_on_reconciliation_check_button_toggled"]

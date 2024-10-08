@@ -8,7 +8,7 @@ var player_input_buffer : Array[Vector2]
 var last_input : Vector2 = Vector2.ZERO
 # key = string, value = variant
 var world_state_dict : Dictionary
-var packet_id := 0
+var update_packet_id := 1
 
 var player_packets : Array[Dictionary]
 
@@ -28,10 +28,16 @@ func _physics_process(delta: float) -> void:
 			server_player_dict[pp["player_id"]].velocity = calculate_movement(server_player_dict[pp["player_id"]], pp["input_vec"], delta)
 			server_player_dict[pp["player_id"]].move_and_slide()
 			
-			world_state_dict[pp["player_id"]] = {"position": server_player_dict[pp["player_id"]].position, "packet_id": pp["packet_id"], "velocity": server_player_dict[pp["player_id"]].velocity}
+			world_state_dict[pp["player_id"]] = {
+				"position": server_player_dict[pp["player_id"]].position, 
+				"packet_id": pp["packet_id"], 
+				"velocity": server_player_dict[pp["player_id"]].velocity,
+				"server_update_id": update_packet_id,
+				}
 
 		if player_packets.size() > 0:
 			connection_manager_s.send_world_state_updates_to_clients_2(world_state_dict)
+			update_packet_id += 1
 			player_packets.clear()
 			
 		count = 0

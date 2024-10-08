@@ -49,4 +49,4 @@ func _physics_process(delta: float) -> void:
 					connected = true
 					player_id = packet["init"]["player_id"]
 					input_manager_c.init_player_position(packet["init"])
-					
+					SignalBusMp.update_client_label.emit(player_id)

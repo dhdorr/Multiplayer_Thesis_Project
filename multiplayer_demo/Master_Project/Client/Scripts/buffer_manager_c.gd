@@ -9,7 +9,7 @@ var buffer_d : Array[Dictionary]
 var waiting_for_first_packet := true
 var is_buffer_ready := false
 # latency in terms of frames (16.667 ms)
-var latency_variance : int = 3
+var latency_variance : int = 0
 var last_consumed_packet : Dictionary
 var counter : int = 0
 
@@ -52,9 +52,11 @@ func append_to_buffer_dict(recv : Dictionary) -> void:
 
 
 func remove_from_buffer() -> void:
+	# Will need to add the ability to generate a packet if a server update
+	# gets lost or is very late. We can assume last input still holds true
+	# or interpolate between the last packet and the latest one.
 	consumable_queue.append_array(buffer_d)
 	buffer_d.clear()
-	
 
 
 func consume_from_queue() -> void:

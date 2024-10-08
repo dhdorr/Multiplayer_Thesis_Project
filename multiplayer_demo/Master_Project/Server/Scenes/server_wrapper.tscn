@@ -22,3 +22,11 @@ script = ExtResource("3_0ptnt")
 [node name="Packet_Manager_S" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("5_fgpr2")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 512.0
+offset_top = 80.0
+offset_right = 611.0
+offset_bottom = 125.0
+theme_override_font_sizes/font_size = 32
+text = "Server"
