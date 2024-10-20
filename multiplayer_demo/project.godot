@@ -31,6 +31,10 @@ window/size/always_on_top=true
 movie_writer/movie_file="C:/Godot/Multiplayer_Thesis_Project/Multiplayer_Thesis_Project/multiplayer_demo/test_screen_record_mp_demo.avi"
 run/main_run_args="host client"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/rabbit-gd/plugin.cfg")
+
 [input]
 
 move_left={

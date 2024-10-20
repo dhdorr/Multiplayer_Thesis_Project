@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://do12blucy0pau"]
+
+[ext_resource type="Script" path="res://ServerTest/rabbit_mq.gd" id="1_v117b"]
+
+[node name="Rabbit_MQ" type="Node2D"]
+script = ExtResource("1_v117b")
