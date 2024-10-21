@@ -31,8 +31,6 @@ func _ready() -> void:
 			print("got message ", body.get_string_from_utf8())
 			channel.basic_ack(method.delivery_tag)
 			
-			#var body_as_string : String = body.get_string_from_utf8()
-			#var temp_variant = str_to_var(body_as_string)
 			var temp_variant = bytes_to_var(body)
 			var my_dict = type_convert(temp_variant, TYPE_DICTIONARY)
 			var my_vec = type_convert(temp_variant, TYPE_VECTOR2)
@@ -41,7 +39,6 @@ func _ready() -> void:
 				print("vector type: ", temp_variant)
 			elif type_convert(temp_variant, TYPE_DICTIONARY) != {}:
 				print("dictionary type: ", temp_variant)
-			#print("trying shit: ", testme.decode_var(0))
 			,)
 	
 	if consume[0] != OK:

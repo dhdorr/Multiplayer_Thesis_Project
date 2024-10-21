@@ -33,7 +33,7 @@ run/main_run_args="host client"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/rabbit-gd/plugin.cfg")
+enabled=PackedStringArray("res://addons/mixamo_animation_retargeter/plugin.cfg", "res://addons/rabbit-gd/plugin.cfg")
 
 [input]
 
