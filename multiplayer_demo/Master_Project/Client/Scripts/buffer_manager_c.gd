@@ -1,8 +1,8 @@
 class_name Buffer_Manager_C extends Node
 
-@onready var ghost_manager_c: Ghost_Manager_C = %Ghost_Manager_C
+@onready var ghost_manager_c: Ghost_Manager_C
 @onready var connection_manager_c: Connection_Manager_Client = %Connection_Manager_C
-@onready var input_manager_c: Input_Manager_Client = %Input_Manager_C
+@onready var input_manager_c: Input_Manager_Client
 
 #var buffer : Array[Vector2]
 var buffer_d : Array[Dictionary]
@@ -15,6 +15,10 @@ var counter : int = 0
 
 var consumable_queue : Array[Dictionary]
 var consumable_counter : int = 0
+
+#func _ready() -> void:
+	#input_manager_c = get_tree().get_nodes_in_group("input_mgr").front()
+	#ghost_manager_c = get_tree().get_nodes_in_group("ghost_mgr").front()
 
 func _physics_process(delta: float) -> void:
 	if !waiting_for_first_packet:
@@ -40,6 +44,8 @@ func _physics_process(delta: float) -> void:
 		
 
 func start_buffer_on_receipt(recv: Dictionary) -> void:
+	input_manager_c = get_tree().get_nodes_in_group("input_mgr").front()
+	ghost_manager_c = get_tree().get_nodes_in_group("ghost_mgr").front()
 	print("testing: ", get_physics_process_delta_time())
 	buffer_d.append(recv)
 	is_buffer_ready = true

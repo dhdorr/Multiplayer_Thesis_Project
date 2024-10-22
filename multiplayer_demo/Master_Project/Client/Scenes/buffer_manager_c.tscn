@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://k6xgchxb0b47"]
+
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/buffer_manager_c.gd" id="1_476op"]
+
+[node name="Buffer_Manager_C" type="Node"]
+script = ExtResource("1_476op")

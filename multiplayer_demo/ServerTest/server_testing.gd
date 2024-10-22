@@ -15,6 +15,7 @@ func _ready() -> void:
 		print(multiplayer.peer_connected.connect(testme))
 	elif OS.get_cmdline_args()[1] == "client":
 		var e_client := ENetMultiplayerPeer.new()
+		
 		e_client.create_client("127.0.0.1", 12345)
 		multiplayer.multiplayer_peer = e_client
 		

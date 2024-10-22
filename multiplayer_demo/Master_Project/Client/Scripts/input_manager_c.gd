@@ -1,9 +1,9 @@
 class_name Input_Manager_Client extends Node
 
-@onready var connection_manager_c: Connection_Manager_Client = %Connection_Manager_C
+var connection_manager_c: Connection_Manager_Client
 @onready var player: Test_Player = %Player
-@onready var buffer_manager_c: Buffer_Manager_C = %Buffer_Manager_C
-@onready var ghost_manager_c: Ghost_Manager_C = %Ghost_Manager_C
+var buffer_manager_c: Buffer_Manager_C
+#@onready var ghost_manager_c: Ghost_Manager_C = %Ghost_Manager_C
 
 var direction : Vector2
 var input_buffer : Array[Vector2]
@@ -13,9 +13,21 @@ var current_packet := 0
 var last_recv_packet_id := -1
 var temp_packet : Dictionary
 
-#func _ready() -> void:
-	 ##emitted from buffer_manager_c
-	#SignalBusMp.dispense_player_update_from_buffer_manager.connect(init_temp_packet)
+
+func _init() -> void:
+	set_physics_process(false)
+
+func _ready() -> void:
+	var wrapper := get_tree().get_nodes_in_group("client_wrap")
+	var cl_wr : Client_Wrapper = wrapper[0]
+	var siblings := wrapper[0].get_children()
+	for s in siblings:
+		if s.is_in_group("conn_mgr"):
+			connection_manager_c = s
+		elif s.is_in_group("buff_mgr"):
+			buffer_manager_c = s
+	
+	set_physics_process(true)
 
 
 func update_player_authoritative_position(packet : Dictionary) -> void:
@@ -25,6 +37,8 @@ func update_player_authoritative_position(packet : Dictionary) -> void:
 		temp_packet = packet.duplicate()
 
 func _physics_process(delta: float) -> void:
+	if not is_node_ready():
+		return
 	if connection_manager_c.connected:
 		direction = Input.get_vector("move_left","move_right","move_up","move_down")
 		

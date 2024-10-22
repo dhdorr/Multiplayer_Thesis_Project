@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkt435u32pvok"]
+
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/connection_manager_c.gd" id="1_skcdd"]
+
+[node name="Connection_Manager_C" type="Node"]
+script = ExtResource("1_skcdd")

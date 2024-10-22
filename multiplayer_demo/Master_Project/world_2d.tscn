@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dim3sjemhjkod"]
+
+[node name="World_2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-64, 0)
+
+[node name="Polygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-64, 512, 320, 512, 512, 576, 832, 576, 1024, 512, 1216, 512, 1216, 704, -64, 704)
+
+[node name="Polygon2D2" type="Polygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-64, 512, 320, 512, 512, 576, 832, 576, 1024, 512, 1216, 512, 1216, 704, -64, 704)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(64, 0)
+
+[node name="Polygon2D2" type="CollisionPolygon2D" parent="StaticBody2D2"]
+polygon = PackedVector2Array(512, 384, 576, 384, 640, 320, 640, 128, 448, 128, 448, 320)
+
+[node name="Polygon2D3" type="Polygon2D" parent="StaticBody2D2"]
+polygon = PackedVector2Array(512, 384, 576, 384, 640, 320, 640, 128, 448, 128, 448, 320)

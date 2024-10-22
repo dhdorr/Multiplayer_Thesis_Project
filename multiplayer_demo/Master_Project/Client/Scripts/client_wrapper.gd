@@ -1,5 +1,6 @@
-extends Node
+class_name Client_Wrapper extends Node
 
+var player_init : Dictionary
 
 func _ready() -> void:
 	SignalBusMp.update_client_label.connect(update_label)

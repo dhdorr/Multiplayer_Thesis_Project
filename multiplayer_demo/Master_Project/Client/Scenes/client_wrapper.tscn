@@ -1,108 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://oc5n0wht35jn"]
+[gd_scene load_steps=7 format=3 uid="uid://oc5n0wht35jn"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/client_wrapper.gd" id="1_5mjhx"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/network_layer_c.gd" id="1_vljt5"]
-[ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="2_64f4p"]
-[ext_resource type="Script" path="res://Master_Project/Client/Scripts/player.gd" id="2_nxxdh"]
-[ext_resource type="Script" path="res://Master_Project/Client/Scripts/connection_manager_c.gd" id="3_r78h7"]
-[ext_resource type="Script" path="res://Master_Project/Client/Scripts/buffer_manager_c.gd" id="5_qlrtr"]
-[ext_resource type="Script" path="res://Master_Project/Client/Scripts/input_manager_c.gd" id="6_iwvh1"]
-[ext_resource type="Script" path="res://Master_Project/Client/Scripts/ghost_manager_c.gd" id="7_trb1a"]
+[ext_resource type="PackedScene" uid="uid://v1kfhkowk1jl" path="res://Master_Project/Client/Scenes/start_screen_menu.tscn" id="2_bgvgk"]
+[ext_resource type="PackedScene" uid="uid://dkt435u32pvok" path="res://Master_Project/Client/Scenes/connection_manager_c.tscn" id="3_ykdst"]
+[ext_resource type="PackedScene" uid="uid://k6xgchxb0b47" path="res://Master_Project/Client/Scenes/buffer_manager_c.tscn" id="5_g274q"]
+[ext_resource type="PackedScene" uid="uid://b34yxr3ms5ak8" path="res://Master_Project/Client/Scenes/ghost_manager_c.tscn" id="6_n7uas"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_s6ixw"]
-radius = 64.0
-
-[node name="Client_Wrapper" type="Node"]
+[node name="Client_Wrapper" type="Node" groups=["client_wrap"]]
 script = ExtResource("1_5mjhx")
+
+[node name="Start_Screen_Menu" parent="." instance=ExtResource("2_bgvgk")]
 
 [node name="Network_Layer_C" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_vljt5")
 
-[node name="Character_Controller" type="Node" parent="."]
-
-[node name="Player" type="CharacterBody2D" parent="Character_Controller"]
+[node name="Connection_Manager_C" parent="." groups=["conn_mgr"] instance=ExtResource("3_ykdst")]
 unique_name_in_owner = true
-collision_layer = 2
-motion_mode = 1
-script = ExtResource("2_nxxdh")
 
-[node name="Sprite2D" type="Sprite2D" parent="Character_Controller/Player"]
-texture = ExtResource("2_64f4p")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Character_Controller/Player"]
-shape = SubResource("CircleShape2D_s6ixw")
-
-[node name="Connection_Manager_C" type="Node" parent="Character_Controller"]
+[node name="Buffer_Manager_C" parent="." groups=["buff_mgr"] instance=ExtResource("5_g274q")]
 unique_name_in_owner = true
-script = ExtResource("3_r78h7")
 
-[node name="Buffer_Manager_C" type="Node" parent="Character_Controller"]
-unique_name_in_owner = true
-script = ExtResource("5_qlrtr")
-
-[node name="Input_Manager_C" type="Node" parent="Character_Controller"]
-unique_name_in_owner = true
-script = ExtResource("6_iwvh1")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -264.0
-offset_top = 30.0
-offset_right = -40.0
-offset_bottom = 94.0
-grow_horizontal = 0
-
-[node name="ColorRect" type="ColorRect" parent="Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.129412, 0.14902, 0.180392, 1)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Client Prediction"
-
-[node name="Prediction_CheckButton" type="CheckButton" parent="Control/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-button_pressed = true
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Server Reconciliation"
-
-[node name="Reconciliation_CheckButton" type="CheckButton" parent="Control/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-button_pressed = true
-
-[node name="Ghost_Manager_C" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("7_trb1a")
+[node name="Ghost_Manager_C" parent="." instance=ExtResource("6_n7uas")]
 
 [node name="Label" type="Label" parent="."]
 offset_left = 512.0
@@ -111,6 +31,3 @@ offset_right = 628.0
 offset_bottom = 112.0
 theme_override_font_sizes/font_size = 32
 text = "Client - "
-
-[connection signal="toggled" from="Control/VBoxContainer/HBoxContainer/Prediction_CheckButton" to="Character_Controller/Input_Manager_C" method="_on_prediction_check_button_toggled"]
-[connection signal="toggled" from="Control/VBoxContainer/HBoxContainer2/Reconciliation_CheckButton" to="Character_Controller/Input_Manager_C" method="_on_reconciliation_check_button_toggled"]

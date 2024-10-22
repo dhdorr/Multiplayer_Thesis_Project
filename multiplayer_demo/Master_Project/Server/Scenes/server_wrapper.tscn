@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4tbltb0brf1f"]
+[gd_scene load_steps=6 format=3 uid="uid://c4tbltb0brf1f"]
 
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/network_layer_s.gd" id="1_bxdm2"]
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/world_state_manager_s.gd" id="3_0ptnt"]
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/connection_manager_s.gd" id="3_gqffu"]
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/packet_manager_s.gd" id="5_fgpr2"]
+[ext_resource type="PackedScene" uid="uid://dim3sjemhjkod" path="res://Master_Project/world_2d.tscn" id="5_jcndd"]
 
 [node name="Server_Wrapper" type="Node"]
 
@@ -14,6 +15,7 @@ script = ExtResource("1_bxdm2")
 [node name="Connection_Manager_S" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_gqffu")
+dest_port = 5007
 
 [node name="World_State_Manager_S" type="Node" parent="."]
 unique_name_in_owner = true
@@ -30,3 +32,5 @@ offset_right = 611.0
 offset_bottom = 125.0
 theme_override_font_sizes/font_size = 32
 text = "Server"
+
+[node name="World_2D" parent="." instance=ExtResource("5_jcndd")]
