@@ -1,5 +1,7 @@
 extends Node
 
+enum MP_PROCESS_TYPE {MP_SERVER, MP_CLIENT}
+
 var enable_client_prediction := true
 var enable_server_reconciliation := true
 var enable_client_entity_interpolation := true

@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4tbltb0brf1f"]
+[gd_scene load_steps=8 format=3 uid="uid://c4tbltb0brf1f"]
 
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/network_layer_s.gd" id="1_bxdm2"]
+[ext_resource type="Script" path="res://Master_Project/Server/Scripts/server_wrapper.gd" id="1_nu13o"]
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/world_state_manager_s.gd" id="3_0ptnt"]
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/connection_manager_s.gd" id="3_gqffu"]
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/packet_manager_s.gd" id="5_fgpr2"]
 [ext_resource type="PackedScene" uid="uid://dim3sjemhjkod" path="res://Master_Project/world_2d.tscn" id="5_jcndd"]
+[ext_resource type="PackedScene" uid="uid://b8lbxjngmhcbu" path="res://Master_Project/Client/Scenes/Settings_Toggle.tscn" id="6_dlpsl"]
 
 [node name="Server_Wrapper" type="Node"]
+script = ExtResource("1_nu13o")
 
 [node name="Network_Layer_S" type="Node" parent="."]
 unique_name_in_owner = true
@@ -27,10 +30,13 @@ script = ExtResource("5_fgpr2")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 512.0
-offset_top = 80.0
+offset_top = 64.0
 offset_right = 611.0
-offset_bottom = 125.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(1, 0.39449, 0.355857, 1)
 theme_override_font_sizes/font_size = 32
 text = "Server"
 
 [node name="World_2D" parent="." instance=ExtResource("5_jcndd")]
+
+[node name="Settings_Toggles" parent="." instance=ExtResource("6_dlpsl")]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd2a7mg7jildk"]
+[gd_scene load_steps=5 format=3 uid="uid://bd2a7mg7jildk"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/player.gd" id="1_ungwd"]
 [ext_resource type="Texture2D" uid="uid://xwonyl238knc" path="res://icon.svg" id="2_0jiar"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/input_manager_c.gd" id="3_u3amy"]
-[ext_resource type="PackedScene" uid="uid://b8lbxjngmhcbu" path="res://Master_Project/Client/Scenes/Settings_Toggle.tscn" id="4_xrdyu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6ixw"]
 radius = 64.0
@@ -25,5 +24,3 @@ shape = SubResource("CircleShape2D_s6ixw")
 [node name="Input_Manager_C" type="Node" parent="." groups=["input_mgr"]]
 unique_name_in_owner = true
 script = ExtResource("3_u3amy")
-
-[node name="Control" parent="." instance=ExtResource("4_xrdyu")]

@@ -4,3 +4,4 @@
 
 [node name="Master_World" type="Node"]
 script = ExtResource("1_py1ie")
+server_tick_rate = 30

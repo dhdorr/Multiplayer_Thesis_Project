@@ -16,9 +16,6 @@ var counter : int = 0
 var consumable_queue : Array[Dictionary]
 var consumable_counter : int = 0
 
-#func _ready() -> void:
-	#input_manager_c = get_tree().get_nodes_in_group("input_mgr").front()
-	#ghost_manager_c = get_tree().get_nodes_in_group("ghost_mgr").front()
 
 func _physics_process(delta: float) -> void:
 	if !waiting_for_first_packet:

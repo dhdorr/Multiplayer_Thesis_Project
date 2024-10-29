@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://oc5n0wht35jn"]
+[gd_scene load_steps=8 format=3 uid="uid://oc5n0wht35jn"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/client_wrapper.gd" id="1_5mjhx"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/network_layer_c.gd" id="1_vljt5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dkt435u32pvok" path="res://Master_Project/Client/Scenes/connection_manager_c.tscn" id="3_ykdst"]
 [ext_resource type="PackedScene" uid="uid://k6xgchxb0b47" path="res://Master_Project/Client/Scenes/buffer_manager_c.tscn" id="5_g274q"]
 [ext_resource type="PackedScene" uid="uid://b34yxr3ms5ak8" path="res://Master_Project/Client/Scenes/ghost_manager_c.tscn" id="6_n7uas"]
+[ext_resource type="PackedScene" uid="uid://b8lbxjngmhcbu" path="res://Master_Project/Client/Scenes/Settings_Toggle.tscn" id="7_1chsi"]
 
 [node name="Client_Wrapper" type="Node" groups=["client_wrap"]]
 script = ExtResource("1_5mjhx")
@@ -26,8 +27,10 @@ unique_name_in_owner = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = 512.0
-offset_top = 67.0
+offset_top = 64.0
 offset_right = 628.0
-offset_bottom = 112.0
+offset_bottom = 109.0
 theme_override_font_sizes/font_size = 32
 text = "Client - "
+
+[node name="Settings_Toggles" parent="." instance=ExtResource("7_1chsi")]

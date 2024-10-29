@@ -17,9 +17,9 @@ script = ExtResource("1_rv5ii")
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = -0.0851064
+anchor_top = -0.255319
 anchor_right = 1.03571
-anchor_bottom = 1.10638
+anchor_bottom = 1.3617
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.129412, 0.14902, 0.180392, 1)
@@ -27,12 +27,14 @@ metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = -0.255319
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 1.3617
 offset_left = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -64,6 +66,45 @@ size_flags_horizontal = 3
 button_pressed = true
 text = "Entity Interpolation"
 
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Tick Rate"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -6
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer4/VBoxContainer"]
+layout_mode = 2
+focus_mode = 1
+text = "10"
+placeholder_text = "10"
+alignment = 1
+max_length = 2
+editable = false
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer4/VBoxContainer"]
+z_index = 20
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+max_value = 60.0
+value = 10.0
+rounded = true
+editable = false
+scrollable = false
+
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/Prediction_CheckButton" to="." method="_on_prediction_check_button_toggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer2/Reconciliation_CheckButton" to="." method="_on_reconciliation_check_button_toggled"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer3/Interpolation_CheckButton" to="." method="_on_interpolation_check_button_toggled"]
+[connection signal="text_submitted" from="VBoxContainer/HBoxContainer4/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="drag_ended" from="VBoxContainer/HBoxContainer4/VBoxContainer/HSlider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer4/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
