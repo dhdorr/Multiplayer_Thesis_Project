@@ -15,3 +15,7 @@ func _on_connect_button_pressed() -> void:
 	add_sibling(WORLD_2D.instantiate())
 	add_sibling(CHARACTER_CONTROLLER.instantiate())
 	queue_free()
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

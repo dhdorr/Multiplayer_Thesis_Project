@@ -71,3 +71,4 @@ size_flags_horizontal = 3
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Connect_Button" to="." method="_on_connect_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Quit_Button" to="." method="_on_quit_button_pressed"]

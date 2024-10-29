@@ -2,6 +2,7 @@ extends Node
 
 var enable_client_prediction := true
 var enable_server_reconciliation := true
+var enable_client_entity_interpolation := true
 
 var server_tick_rate : int = 10
 
