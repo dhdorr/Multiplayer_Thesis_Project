@@ -56,8 +56,8 @@ func _physics_process(delta: float) -> void:
 		# a few frames. SO we have to re-simulate the inputs from that past
 		# state until now
 		if !temp_packet.is_empty():
-			var packet : Dictionary = temp_packet
-			
+			var packet : Dictionary = temp_packet.duplicate()
+			temp_packet.clear()
 			# Spawn in ghost for each peer
 			#ghost_manager_c.spawn_peer_characters(packet)
 			
