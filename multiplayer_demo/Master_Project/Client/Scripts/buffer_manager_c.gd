@@ -2,7 +2,8 @@ class_name Buffer_Manager_C extends Node
 
 @onready var ghost_manager_c: Ghost_Manager_C
 @onready var connection_manager_c: Connection_Manager_Client = %Connection_Manager_C
-@onready var input_manager_c: Input_Manager_Client
+#@onready var input_manager_c: Input_Manager_Client
+@onready var input_manager_c: Input_Manager_Client_3D
 
 #var buffer : Array[Vector2]
 var buffer_d : Array[Dictionary]

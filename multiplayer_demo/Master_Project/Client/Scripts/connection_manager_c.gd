@@ -1,7 +1,7 @@
 class_name Connection_Manager_Client extends Node
 
 @onready var buffer_manager_c: Buffer_Manager_C = %Buffer_Manager_C
-@onready var input_manager_c: Input_Manager_Client
+#@onready var input_manager_c: Input_Manager_Client
 
 var e_client := PacketPeerUDP.new()
 
@@ -69,7 +69,10 @@ func _handle_connection_response(packet: Variant) -> void:
 			connected = true
 			pending = false
 			player_id = packet["init"]["player_id"]
-			var siblings := get_tree().get_nodes_in_group("input_mgr")
-			input_manager_c = siblings[0]
-			input_manager_c.init_player_position(packet["init"])
+			var init_pos : Vector3 = packet["init"]["position"]
+			#var siblings := get_tree().get_nodes_in_group("input_mgr")
+			#input_manager_c = siblings[0]
+			#input_manager_c.init_player_position(packet["init"])
+			SettingsMp.init_player_position_3D(init_pos)
+			SignalBusMp.initialize_player_position_on_player.emit()
 			SignalBusMp.update_client_label.emit(player_id)

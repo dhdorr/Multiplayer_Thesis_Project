@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://g2fdnkg2usxx"]
+
+[ext_resource type="PackedScene" uid="uid://ddq7sfnhc783" path="res://Master_Project/assets/Characters/Scenes/character_soldier_01.tscn" id="1_rlkq1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l7ibu"]
+
+[node name="Player_S_3D" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_l7ibu")
+
+[node name="Character_Soldier_01" parent="." instance=ExtResource("1_rlkq1")]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddq7sfnhc783"]
+
+[ext_resource type="PackedScene" uid="uid://bnwhkn6umkeja" path="res://Master_Project/assets/Characters/Character_Soldier_01.fbx" id="1_2gvtx"]
+[ext_resource type="Texture2D" uid="uid://bq2hcd4b7cbj2" path="res://Master_Project/assets/Characters/Materials/Characters_Texture_Blue.png" id="2_gg8yg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rka3l"]
+albedo_texture = ExtResource("2_gg8yg")
+
+[node name="Character_Soldier_01" instance=ExtResource("1_2gvtx")]
+
+[node name="Item_Sword" parent="Skeleton3D" index="0"]
+transform = Transform3D(1, 2.98023e-08, 1.19209e-07, -1.12073e-07, 1, -8.9407e-08, -9.8204e-08, 1.2666e-07, 1, 0.00346232, 1.2903, -0.15997)
+bone_idx = 39
+
+[node name="Item_SwordHolder" parent="Skeleton3D" index="1"]
+transform = Transform3D(1, 2.98023e-08, 1.19209e-07, -1.12073e-07, 1, -8.9407e-08, -9.8204e-08, 1.2666e-07, 1, -5.17266e-15, 0, 1.49012e-08)
+bone_idx = 40
+
+[node name="Item_WaterCanteen" parent="Skeleton3D" index="2"]
+transform = Transform3D(1, 5.96046e-08, -1.19209e-07, -1.08966e-07, 1, 1.3411e-07, 7.67469e-08, -2.23517e-07, 1, -0.201144, 0.925973, 0.00419175)
+bone_idx = 51
+
+[node name="Item_WaterBladder_01" parent="Skeleton3D" index="3"]
+transform = Transform3D(1, 5.96046e-08, -1.19209e-07, -1.08966e-07, 1, 1.3411e-07, 7.67469e-08, -2.23517e-07, 1, 0.210928, 0.860962, -0.0171593)
+bone_idx = 52
+
+[node name="Character_Soldier_01" parent="Skeleton3D" index="4"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_rka3l")

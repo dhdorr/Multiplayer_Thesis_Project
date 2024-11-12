@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://brg2vkabpi7w2"]
+
+[ext_resource type="PackedScene" uid="uid://b4ijcc4axr62f" path="res://Master_Project/assets/Characters/Character_Knight_01.fbx" id="1_cbi3l"]
+[ext_resource type="Texture2D" uid="uid://vv1o50pcxj45" path="res://Master_Project/assets/Characters/Materials/Characters_Texture_Black.png" id="2_r1duh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2ban"]
+albedo_texture = ExtResource("2_r1duh")
+
+[node name="Character_Knight_01" instance=ExtResource("1_cbi3l")]
+
+[node name="Item_Pouch" parent="Skeleton3D" index="0"]
+transform = Transform3D(1.05988, 0, 0, 0, 1.05859, -0.0522582, 0, 0.0522581, 1.05859, -0.0485317, -0.0129148, -0.0471778)
+bone_idx = 49
+
+[node name="Item_SwordSheath" parent="Skeleton3D" index="1"]
+transform = Transform3D(0.258133, -0.238648, 0.93617, 0.549586, 0.833217, 0.0608647, -0.794558, 0.498794, 0.346239, 0.25719, 0.764104, -0.0605463)
+bone_idx = 50
+
+[node name="Character_Knight_01" parent="Skeleton3D" index="2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_f2ban")

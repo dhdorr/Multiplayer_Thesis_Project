@@ -2,7 +2,8 @@ class_name Ghost_Manager_C extends Node
 
 @onready var connection_manager_c: Connection_Manager_Client = %Connection_Manager_C
 
-const PLAYER_S = preload("res://Master_Project/Server/Scenes/player_s.tscn")
+#const PLAYER_S = preload("res://Master_Project/Server/Scenes/player_s.tscn")
+const PLAYER_S_3D = preload("res://Master_Project/Server/Scenes/player_s_3d.tscn")
 
 var ghost_dict : Dictionary
 
@@ -15,7 +16,8 @@ func spawn_peer_characters_2(world_state: Dictionary) -> void:
 			continue
 		
 		if !ghost_dict.has(p_id):
-			ghost_dict[p_id] = PLAYER_S.instantiate()
+			#ghost_dict[p_id] = PLAYER_S.instantiate()
+			ghost_dict[p_id] = PLAYER_S_3D.instantiate()
 			add_child(ghost_dict[p_id])
 			ghost_dict[p_id].position = world_state[p_id]["position"]
 			prev_ghost_pos_dict[p_id] = world_state[p_id]["position"]
@@ -49,7 +51,7 @@ func interpolate_ghosts(player: Dictionary, p_id: int) -> void:
 	#update_prev_ghost_pos(p_id, player["position"])
 
 
-func update_prev_ghost_pos(p_id: int, pos: Vector2) -> void:
+func update_prev_ghost_pos(p_id: int, pos: Vector3) -> void:
 	prev_ghost_pos_dict[p_id] = pos
 
 # Ghost manager should have its own input buffer for packets (fed from the
