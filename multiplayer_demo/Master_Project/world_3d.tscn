@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cp4i2qtyy8uoh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qeem"]
-albedo_color = Color(0.754771, 0.721167, 0.709295, 1)
+albedo_color = Color(0.680126, 0.641189, 0.627417, 1)
 uv1_triplanar = true
 
 [sub_resource type="Environment" id="Environment_k3578"]

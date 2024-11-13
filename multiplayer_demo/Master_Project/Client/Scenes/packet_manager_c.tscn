@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfpvkqlnfd6qd"]
+
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/packet_manager_c.gd" id="1_m7tdf"]
+
+[node name="Packet_Manager_C" type="Node" groups=["packet_mgr"]]
+script = ExtResource("1_m7tdf")

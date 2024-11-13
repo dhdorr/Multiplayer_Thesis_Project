@@ -11,6 +11,8 @@ var pending := false
 
 var player_id : int = 0
 
+#var packet_interface := CLIENT_PACKET_INTERFACE.new()
+
 #func _process(delta):
 	##if Input.is_action_just_pressed("fire_projectile") and !test_connected:
 		##_connect_to_server()
@@ -42,6 +44,8 @@ func send_connection_string() -> void:
 func send_input(input_dict : Dictionary) -> void:
 	%Network_Layer_C.simulate_sending_input_over_network(e_client, input_dict)
 
+func send_input_3D(packet: CLIENT_PACKET_INTERFACE) -> void:
+	%Network_Layer_C.simulate_sending_input_over_network_3D(e_client, packet)
 
 func _physics_process(delta: float) -> void:
 	if e_client.get_available_packet_count() > 0:

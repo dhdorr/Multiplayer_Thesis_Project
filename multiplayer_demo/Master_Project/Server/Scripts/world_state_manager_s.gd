@@ -25,7 +25,20 @@ var count := 0
 
 var server_player_dict : Dictionary
 
-func get_input_dict(input_dict : Dictionary) -> void:
+func get_input_dict(packet : Dictionary) -> void:
+	var input_dict : Dictionary = { 
+		"player_id": packet["player_id"], 
+		"packet_id": packet["packet_id"], 
+		"input_vec": packet["input_vector"],
+		}
+	player_packets.append(input_dict)
+
+func get_input_dict_3D(packet : CLIENT_PACKET_INTERFACE) -> void:
+	var input_dict : Dictionary = { 
+		"player_id": packet._player_id, 
+		"packet_id": packet._packet_id, 
+		"input_vec": packet._input_vector,
+		}
 	player_packets.append(input_dict)
 	
 	

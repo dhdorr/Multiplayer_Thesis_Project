@@ -82,6 +82,11 @@ func receive_client_input_packets() -> void:
 	for peer in peers:
 		if peer.get_available_packet_count() > 0:
 			var packet = peer.get_var()
+			
+			#if is_instance_of(packet, CLIENT_PACKET_INTERFACE):
+				#print("test class is a packet! :)")
+				#print(packet)
+				#world_state_manager_s.get_input_dict_3D(packet)
 			match typeof(packet):
 				TYPE_DICTIONARY:
 					# pass to world state manager

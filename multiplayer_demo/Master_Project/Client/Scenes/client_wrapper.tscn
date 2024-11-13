@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://oc5n0wht35jn"]
+[gd_scene load_steps=9 format=3 uid="uid://oc5n0wht35jn"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/client_wrapper.gd" id="1_5mjhx"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/network_layer_c.gd" id="1_vljt5"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://k6xgchxb0b47" path="res://Master_Project/Client/Scenes/buffer_manager_c.tscn" id="5_g274q"]
 [ext_resource type="PackedScene" uid="uid://b34yxr3ms5ak8" path="res://Master_Project/Client/Scenes/ghost_manager_c.tscn" id="6_n7uas"]
 [ext_resource type="PackedScene" uid="uid://b8lbxjngmhcbu" path="res://Master_Project/Client/Scenes/Settings_Toggle.tscn" id="7_1chsi"]
+[ext_resource type="PackedScene" uid="uid://cfpvkqlnfd6qd" path="res://Master_Project/Client/Scenes/packet_manager_c.tscn" id="8_pjssb"]
 
 [node name="Client_Wrapper" type="Node" groups=["client_wrap"]]
 script = ExtResource("1_5mjhx")
@@ -34,3 +35,5 @@ theme_override_font_sizes/font_size = 32
 text = "Client - "
 
 [node name="Settings_Toggles" parent="." instance=ExtResource("7_1chsi")]
+
+[node name="Packet_Manager_C" parent="." instance=ExtResource("8_pjssb")]
