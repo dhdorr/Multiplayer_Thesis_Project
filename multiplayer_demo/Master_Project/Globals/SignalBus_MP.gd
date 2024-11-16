@@ -7,4 +7,4 @@ signal update_client_label
 
 signal setup_settings_toggle(proc_type: int)
 
-signal initialize_player_position_on_player
+signal initialize_player_position_on_player(position: Vector3, rotation: Vector3)

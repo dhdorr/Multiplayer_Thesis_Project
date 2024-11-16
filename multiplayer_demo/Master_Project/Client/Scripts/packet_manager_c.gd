@@ -38,19 +38,10 @@ func write_to_client_packet(input_vector: Vector3, action_command: int) -> void:
 	connection_manager_c.send_input_3D(packet_dict)
 	
 	_packet_id += 1
-	
-	#packet.free()
 
 
 func append_to_packet_history(packet_d: Dictionary) -> void:
-	#var packet_dict : Dictionary = { 
-		#"player_id": packet._player_id, 
-		#"packet_id": packet._packet_id, 
-		#"input_vector": packet._input_vector,
-		#}
 	_packet_history.append(packet_d)
-	#_packet_history_2.append(packet)
-	#print(_packet_history)
 
 
 func register_confirmed_packet(id: int) -> void:

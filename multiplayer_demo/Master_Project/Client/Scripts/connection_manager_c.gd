@@ -74,9 +74,11 @@ func _handle_connection_response(packet: Variant) -> void:
 			pending = false
 			player_id = packet["init"]["player_id"]
 			var init_pos : Vector3 = packet["init"]["position"]
+			var init_rotation: Vector3 = packet["init"]["rotation"]
 			#var siblings := get_tree().get_nodes_in_group("input_mgr")
 			#input_manager_c = siblings[0]
 			#input_manager_c.init_player_position(packet["init"])
 			SettingsMp.init_player_position_3D(init_pos)
-			SignalBusMp.initialize_player_position_on_player.emit()
+			SignalBusMp.initialize_player_position_on_player.emit(init_pos, init_rotation)
+			
 			SignalBusMp.update_client_label.emit(player_id)

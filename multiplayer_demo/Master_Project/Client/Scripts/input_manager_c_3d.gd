@@ -8,6 +8,8 @@ class_name Input_Manager_Client_3D extends Node
 var connection_manager_c: Connection_Manager_Client
 @onready var player: CharacterBody3D = $".."
 
+@onready var camera_3d: Camera3D = $"../Camera_Pivot_3D/Camera3D"
+
 var buffer_manager_c: Buffer_Manager_C
 var packet_manager_c: PACKET_MANAGER_C
 #@onready var ghost_manager_c: Ghost_Manager_C = %Ghost_Manager_C
@@ -118,7 +120,15 @@ func server_reconciliation(delta : float) -> void:
 
 
 func calculate_movement(delta : float, player_velocity_ref : Vector3, direction : Vector3) -> Vector3:
-	var desired_ground_velocity : Vector3 = max_speed * direction
+	#var forward := camera_3d.global_basis.z
+	#var right := camera_3d.global_basis.x
+	var forward := player.global_basis.z
+	var right := player.global_basis.x
+	var move_direction := forward * direction.z + right * direction.x
+	move_direction.y = 0.0
+	move_direction = move_direction.normalized()
+	
+	var desired_ground_velocity : Vector3 = max_speed * move_direction
 	var steering_vector : Vector3 = desired_ground_velocity - player_velocity_ref
 	steering_vector.y = 0.0
 	
@@ -140,5 +150,7 @@ func _on_reconciliation_check_button_toggled(toggled_on: bool) -> void:
 	SettingsMp.enable_server_reconciliation = toggled_on
 
 # Use signals to grab position from memory
-func init_player_position() -> void:
-	player.position = SettingsMp.player_initial_position
+func init_player_position(position: Vector3, rotation: Vector3) -> void:
+	#player.position = SettingsMp.player_initial_position
+	player.position = position
+	player.rotation_degrees = rotation

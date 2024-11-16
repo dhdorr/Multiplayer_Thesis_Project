@@ -49,7 +49,8 @@ func _physics_process(delta: float) -> void:
 			
 			# Disable if not using 3D #
 			var player_velocity : Vector3 = server_player_dict[pp["player_id"]].velocity
-			var desired_velocity : Vector3 = calculate_movement_3D(delta, player_velocity, pp["input_vec"])
+			var player_basis : Basis = server_player_dict[pp["player_id"]].global_basis
+			var desired_velocity : Vector3 = calculate_movement_3D(delta, player_velocity, pp["input_vec"], player_basis)
 			server_player_dict[pp["player_id"]].velocity = desired_velocity
 			server_player_dict[pp["player_id"]].move_and_slide()
 			# ----------------------- #
@@ -59,11 +60,11 @@ func _physics_process(delta: float) -> void:
 			
 			world_state_dict[pp["player_id"]] = {
 				"position": server_player_dict[pp["player_id"]].position, 
+				"rotation": server_player_dict[pp["player_id"]].rotation,
 				"packet_id": pp["packet_id"], 
 				"velocity": server_player_dict[pp["player_id"]].velocity,
 				"server_update_id": update_packet_id,
 				}
-
 		if player_packets.size() > 0:
 			connection_manager_s.send_world_state_updates_to_clients_2(world_state_dict)
 			update_packet_id += 1
@@ -88,8 +89,14 @@ func init_player_positions(packet: Dictionary) -> void:
 
 
 # Disable if not using 3D scenes #
-func calculate_movement_3D(delta : float, player_velocity_ref : Vector3, direction : Vector3) -> Vector3:
-	var desired_ground_velocity : Vector3 = max_speed * direction
+func calculate_movement_3D(delta : float, player_velocity_ref : Vector3, direction : Vector3, basis: Basis) -> Vector3:
+	var forward : Vector3 = basis.z
+	var right : Vector3 = basis.x
+	var move_direction : Vector3 = forward * direction.z + right * direction.x
+	move_direction.y = 0.0
+	move_direction = move_direction.normalized()
+	
+	var desired_ground_velocity : Vector3 = max_speed * move_direction
 	var steering_vector : Vector3 = desired_ground_velocity - player_velocity_ref
 	steering_vector.y = 0.0
 	
@@ -108,3 +115,5 @@ func init_player_positions_3D(packet: Dictionary) -> void:
 	add_child(new_player)
 	server_player_dict[packet["player_id"]] = new_player
 	new_player.position = packet["position"]
+	new_player.rotation_degrees = packet["rotation"]
+	print("global basis z: ", new_player.global_basis.z)
