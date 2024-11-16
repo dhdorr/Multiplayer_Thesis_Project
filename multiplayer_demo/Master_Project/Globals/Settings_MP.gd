@@ -1,7 +1,7 @@
 extends Node
 
 enum MP_PROCESS_TYPE { MP_SERVER, MP_CLIENT }
-enum ACTION_COMMAND_TYPE { JUMP, REFLECT, SHOOT }
+enum ACTION_COMMAND_TYPE { NONE, JUMP, REFLECT, SHOOT }
 
 var enable_client_prediction := true
 var enable_server_reconciliation := true

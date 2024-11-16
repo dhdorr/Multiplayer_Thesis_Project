@@ -44,7 +44,7 @@ func send_connection_string() -> void:
 func send_input(input_dict : Dictionary) -> void:
 	%Network_Layer_C.simulate_sending_input_over_network(e_client, input_dict)
 
-func send_input_3D(packet: CLIENT_PACKET_INTERFACE) -> void:
+func send_input_3D(packet: Dictionary) -> void:
 	%Network_Layer_C.simulate_sending_input_over_network_3D(e_client, packet)
 
 func _physics_process(delta: float) -> void:
