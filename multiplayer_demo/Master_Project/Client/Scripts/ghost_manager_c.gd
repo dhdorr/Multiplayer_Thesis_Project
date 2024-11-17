@@ -26,26 +26,10 @@ func spawn_peer_characters_2(world_state: Dictionary) -> void:
 
 # Entity interpolation
 func move_ghost(player: Dictionary, p_id: int) -> void:
-	#ghost_dict[p_id].position = player["position"]
-	#ghost_dict[p_id].position = prev_ghost_pos_dict[p_id]
-	if SettingsMp.enable_client_entity_interpolation:
-		interpolate_ghosts(player, p_id)
-	else:
-		ghost_dict[p_id].position = player["position"]
-		#prev_ghost_pos_dict[p_id] = player["position"]
-		update_prev_ghost_pos(p_id, player["position"])
-	
-
-func interpolate_ghosts(player: Dictionary, p_id: int) -> void:
 	var ghost : PLAYER_GHOST_CLIENT = ghost_dict[p_id]
-	#var tween := get_tree().create_tween()
-	
-	#tween.tween_property(ghost_dict[p_id],"position", player["position"], SettingsMp.get_server_tick_rate() * get_physics_process_delta_time())
-	
 	ghost._skin_rotation =  player["skin_rotation"]
 	ghost._target_position = player["position"]
-	
-	#tween.finished.connect(update_prev_ghost_pos.bind(p_id, player["position"]))
+	update_prev_ghost_pos(p_id, player["position"])
 	
 
 
