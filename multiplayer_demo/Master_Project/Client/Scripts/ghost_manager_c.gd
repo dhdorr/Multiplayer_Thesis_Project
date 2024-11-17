@@ -15,12 +15,12 @@ func spawn_peer_characters_2(world_state: Dictionary) -> void:
 			continue
 		
 		if !ghost_dict.has(p_id):
-			#ghost_dict[p_id] = PLAYER_S.instantiate()
-			ghost_dict[p_id] = PLAYER_GHOST_C_3D.instantiate()
-			add_child(ghost_dict[p_id])
-			ghost_dict[p_id].position = world_state[p_id]["position"]
+			var ghost : PLAYER_GHOST_CLIENT = PLAYER_GHOST_C_3D.instantiate()
+			ghost_dict[p_id] = ghost
+			add_child(ghost)
+			ghost.position = world_state[p_id]["position"]
 			prev_ghost_pos_dict[p_id] = world_state[p_id]["position"]
-			ghost_dict[p_id].rotation = world_state[p_id]["rotation"]
+			ghost.rotation = world_state[p_id]["rotation"]
 		
 		move_ghost(world_state[p_id], p_id)
 
