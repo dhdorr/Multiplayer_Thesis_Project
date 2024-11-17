@@ -7,6 +7,14 @@
 albedo_texture = ExtResource("2_r1duh")
 
 [node name="Character_Knight_01" instance=ExtResource("1_cbi3l")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="." index="0"]
+bones/3/rotation = Quaternion(0.995186, 0.0980028, 6.93889e-16, -5.82867e-16)
+bones/4/rotation = Quaternion(0.99381, 0.11109, -1.11022e-16, -9.99201e-16)
+bones/8/position = Vector3(-2.52435e-31, 0.127669, 0.122722)
+bones/24/rotation = Quaternion(0.632486, -0.578548, -0.375471, -0.352513)
+bones/44/rotation = Quaternion(-0.705872, -0.0417752, 0.0641594, 0.70419)
 
 [node name="Item_Pouch" parent="Skeleton3D" index="0"]
 transform = Transform3D(1.05988, 0, 0, 0, 1.05859, -0.0522582, 0, 0.0522581, 1.05859, -0.0485317, -0.0129148, -0.0471778)
@@ -17,5 +25,4 @@ transform = Transform3D(0.258133, -0.238648, 0.93617, 0.549586, 0.833217, 0.0608
 bone_idx = 50
 
 [node name="Character_Knight_01" parent="Skeleton3D" index="2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_f2ban")

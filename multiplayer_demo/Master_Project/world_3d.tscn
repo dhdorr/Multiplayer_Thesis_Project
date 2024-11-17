@@ -6,9 +6,9 @@ uv1_triplanar = true
 
 [sub_resource type="Environment" id="Environment_k3578"]
 background_mode = 1
-background_color = Color(0.114897, 0.114897, 0.114897, 1)
+background_color = Color(0.190297, 0.205347, 0.239175, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.513232, 0.513233, 0.513232, 1)
+ambient_light_color = Color(0.597175, 0.597176, 0.597175, 1)
 tonemap_mode = 2
 fog_enabled = true
 fog_light_color = Color(0.214139, 0.235722, 0.269651, 1)
@@ -43,3 +43,7 @@ directional_shadow_max_distance = 42.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k3578")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, 0, 0.137793, 5.29177)
+text = "^ Forward Z ^"

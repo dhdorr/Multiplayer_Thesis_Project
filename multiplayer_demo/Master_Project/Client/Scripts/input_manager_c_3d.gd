@@ -7,7 +7,8 @@ class_name Input_Manager_Client_3D extends Node
 
 var connection_manager_c: Connection_Manager_Client
 @onready var player: CharacterBody3D = $".."
-@onready var character_knight_01: Node3D = $"../Character_Knight_01"
+#@onready var character_knight_01: Node3D = $"../Character_Knight_01"
+@onready var player_skin_3d: Node3D = %Player_Skin_3D
 
 @onready var camera_3d: Camera3D = $"../Camera_Pivot_3D/Camera3D"
 
@@ -79,7 +80,8 @@ func _physics_process(delta: float) -> void:
 		var mouse_ray := camera_3d.project_ray_normal(mouse_position_2d)
 		var world_mouse_position: Variant = _ground_plane.intersects_ray(camera_3d.global_position, mouse_ray)
 		if world_mouse_position != null and handle_mouse_input:
-			character_knight_01.look_at(world_mouse_position)
+			player_skin_3d.look_at(world_mouse_position)
+			#print(world_mouse_position)
 		
 		# -1 represents no action command, otherwise: SettingsMp.ACTION_COMMAND_TYPE
 		var action_command : int = -1
@@ -91,7 +93,7 @@ func _physics_process(delta: float) -> void:
 			client_prediction(delta, direction)
 		
 		# Generating serialized input packet and sending it out
-		generate_input_packet(direction, action_command, character_knight_01.rotation)
+		generate_input_packet(direction, action_command, player_skin_3d.rotation)
 		
 		# When the server sends the client a new state (position and velocity)
 		# the client must apply that new state, which rewinds the player back

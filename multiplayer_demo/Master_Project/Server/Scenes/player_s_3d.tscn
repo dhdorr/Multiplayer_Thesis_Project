@@ -12,4 +12,7 @@ script = ExtResource("1_do8up")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_l7ibu")
 
-[node name="Character_Soldier_01" parent="." groups=["skin"] instance=ExtResource("1_rlkq1")]
+[node name="Ghost_Skin_3D" type="Node3D" parent="." groups=["skin"]]
+unique_name_in_owner = true
+
+[node name="Character_Soldier_01" parent="Ghost_Skin_3D" instance=ExtResource("1_rlkq1")]
