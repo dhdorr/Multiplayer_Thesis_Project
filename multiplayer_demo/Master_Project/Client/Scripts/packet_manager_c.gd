@@ -12,7 +12,7 @@ static var _last_confirmed_packet_id: int = -1
 static var _confirmed_packet_id_history: Array[int]
 
 # Reusing the same packet to avoid memory usage
-@onready var packet := CLIENT_PACKET_INTERFACE.new(-1, -1, Vector3.INF, SettingsMp.ACTION_COMMAND_TYPE.NONE)
+@onready var packet := CLIENT_PACKET_INTERFACE.new(-1, -1, Vector3.INF, SettingsMp.ACTION_COMMAND_TYPE.NONE, Vector3.ZERO)
 
 func _ready() -> void:
 	pass
@@ -20,7 +20,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	pass
 
-func write_to_client_packet(input_vector: Vector3, action_command: int) -> void:
+func write_to_client_packet(input_vector: Vector3, action_command: int, skin_rotation: Vector3) -> void:
 	#var packet := CLIENT_PACKET_INTERFACE.new(
 		#_packet_id, 
 		#connection_manager_c.player_id, 
@@ -31,6 +31,8 @@ func write_to_client_packet(input_vector: Vector3, action_command: int) -> void:
 	packet._packet_id = _packet_id
 	packet._input_vector = input_vector
 	packet._action_command = action_command
+	packet._skin_rotation = skin_rotation
+	
 	# I wanted to use the interface class but godot's class implementation is not meant for networking :(
 	# I am forced to use a basic type, like a dictionary
 	var packet_dict : Dictionary = packet.packet_as_dict()

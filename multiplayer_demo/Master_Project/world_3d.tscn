@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://cp4i2qtyy8uoh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qeem"]
-albedo_color = Color(0.680126, 0.641189, 0.627417, 1)
+albedo_color = Color(0.290081, 0.471387, 0.302647, 1)
 uv1_triplanar = true
 
 [sub_resource type="Environment" id="Environment_k3578"]
 background_mode = 1
 background_color = Color(0.114897, 0.114897, 0.114897, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.485703, 0.485704, 0.485703, 1)
+ambient_light_color = Color(0.513232, 0.513233, 0.513232, 1)
 tonemap_mode = 2
 fog_enabled = true
 fog_light_color = Color(0.214139, 0.235722, 0.269651, 1)
@@ -16,6 +16,8 @@ fog_density = 0.0
 fog_sky_affect = 0.5
 fog_height = -1.0
 fog_height_density = 0.8
+adjustment_enabled = true
+adjustment_contrast = 1.2
 
 [node name="World_3D" type="Node3D"]
 
@@ -34,6 +36,7 @@ fov = 42.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5.16382, 10.0542)
+light_color = Color(0.949985, 0.971666, 0.906864, 1)
 shadow_enabled = true
 directional_shadow_mode = 0
 directional_shadow_max_distance = 42.0

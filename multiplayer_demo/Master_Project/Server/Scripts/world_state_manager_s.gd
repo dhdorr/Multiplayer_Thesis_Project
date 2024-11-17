@@ -30,17 +30,20 @@ func get_input_dict(packet : Dictionary) -> void:
 		"player_id": packet["player_id"], 
 		"packet_id": packet["packet_id"], 
 		"input_vec": packet["input_vector"],
+		"skin_rotation": packet["skin_rotation"],
 		}
 	player_packets.append(input_dict)
 
-func get_input_dict_3D(packet : CLIENT_PACKET_INTERFACE) -> void:
-	var input_dict : Dictionary = { 
-		"player_id": packet._player_id, 
-		"packet_id": packet._packet_id, 
-		"input_vec": packet._input_vector,
-		}
-	player_packets.append(input_dict)
-	
+# this doesn't work :( vvv
+#func get_input_dict_3D(packet : CLIENT_PACKET_INTERFACE) -> void:
+	#var input_dict : Dictionary = { 
+		#"player_id": packet._player_id, 
+		#"packet_id": packet._packet_id, 
+		#"input_vec": packet._input_vector,
+		#"skin_rotation": packet._skin_rotation,
+		#}
+	#player_packets.append(input_dict)
+# -------------------------------------------- #
 	
 func _physics_process(delta: float) -> void:
 	
@@ -52,6 +55,10 @@ func _physics_process(delta: float) -> void:
 			var player_basis : Basis = server_player_dict[pp["player_id"]].global_basis
 			var desired_velocity : Vector3 = calculate_movement_3D(delta, player_velocity, pp["input_vec"], player_basis)
 			server_player_dict[pp["player_id"]].velocity = desired_velocity
+			
+			var player_ghost : PLAYER_SKIN_SERVER = server_player_dict[pp["player_id"]]
+			player_ghost.rotate_skin(pp["skin_rotation"])
+			
 			server_player_dict[pp["player_id"]].move_and_slide()
 			# ----------------------- #
 			
@@ -61,6 +68,7 @@ func _physics_process(delta: float) -> void:
 			world_state_dict[pp["player_id"]] = {
 				"position": server_player_dict[pp["player_id"]].position, 
 				"rotation": server_player_dict[pp["player_id"]].rotation,
+				"skin_rotation": player_ghost.character_soldier_01.rotation,
 				"packet_id": pp["packet_id"], 
 				"velocity": server_player_dict[pp["player_id"]].velocity,
 				"server_update_id": update_packet_id,

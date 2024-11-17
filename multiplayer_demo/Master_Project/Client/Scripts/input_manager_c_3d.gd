@@ -7,6 +7,7 @@ class_name Input_Manager_Client_3D extends Node
 
 var connection_manager_c: Connection_Manager_Client
 @onready var player: CharacterBody3D = $".."
+@onready var character_knight_01: Node3D = $"../Character_Knight_01"
 
 @onready var camera_3d: Camera3D = $"../Camera_Pivot_3D/Camera3D"
 
@@ -22,8 +23,11 @@ var current_packet := 0
 var last_recv_packet_id := -1
 var temp_packet : Dictionary
 
+var _ground_plane := Plane(Vector3.UP)
+
 const GRAVITY := 40.0 * Vector3.DOWN
 
+var handle_mouse_input := true
 
 func _init() -> void:
 	set_physics_process(false)
@@ -42,6 +46,17 @@ func _ready() -> void:
 	
 	set_physics_process(true)
 
+func _notification(what):
+	if what == NOTIFICATION_WM_MOUSE_EXIT:
+		if not is_node_ready():
+			await ready # Wait until ready signal.
+		#Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+		handle_mouse_input = false
+	elif what == NOTIFICATION_WM_MOUSE_ENTER:
+		if not is_node_ready():
+			await ready
+		handle_mouse_input = true
+		
 
 func update_player_authoritative_position(packet : Dictionary) -> void:
 	# getting the most recent player update, cuz why not?
@@ -58,6 +73,14 @@ func _physics_process(delta: float) -> void:
 		var input_vector : Vector2 = Input.get_vector("move_left","move_right","move_up","move_down")
 		var direction : Vector3 = Vector3(input_vector.x, 0.0, input_vector.y)
 		
+		_ground_plane.d = player.global_position.y
+		# Raycast to get the mouse position in 3D space and make the player look at it.
+		var mouse_position_2d := get_viewport().get_mouse_position()
+		var mouse_ray := camera_3d.project_ray_normal(mouse_position_2d)
+		var world_mouse_position: Variant = _ground_plane.intersects_ray(camera_3d.global_position, mouse_ray)
+		if world_mouse_position != null and handle_mouse_input:
+			character_knight_01.look_at(world_mouse_position)
+		
 		# -1 represents no action command, otherwise: SettingsMp.ACTION_COMMAND_TYPE
 		var action_command : int = -1
 		
@@ -68,7 +91,7 @@ func _physics_process(delta: float) -> void:
 			client_prediction(delta, direction)
 		
 		# Generating serialized input packet and sending it out
-		generate_input_packet(direction, action_command)
+		generate_input_packet(direction, action_command, character_knight_01.rotation)
 		
 		# When the server sends the client a new state (position and velocity)
 		# the client must apply that new state, which rewinds the player back
@@ -96,23 +119,12 @@ func client_prediction(delta: float, direction : Vector3) -> void:
 	player.move_and_slide()
 
 
-func generate_input_packet(direction : Vector3, action_command: int) -> void:
-	#var input_dict : Dictionary = {"player_id" : connection_manager_c.player_id, "input_vec" : direction, "packet_id": current_packet}
-	#connection_manager_c.send_input(input_dict)
-	#input_history.append(input_dict)
-	
+func generate_input_packet(direction : Vector3, action_command: int, skin_rotation: Vector3) -> void:
 	# packet manager will maintain the history of generated packets -> for reconciliation
-	packet_manager_c.write_to_client_packet(direction, action_command)
+	packet_manager_c.write_to_client_packet(direction, action_command, skin_rotation)
 
 
 func server_reconciliation(delta : float) -> void:
-	#var last_confirmed_packet_id : int = packet[connection_manager_c.player_id]["packet_id"]
-	##var range : int = input_history.size() - last_confirmed_packet_id
-	#for i in range(last_confirmed_packet_id + 1, input_history.size()):
-		#var desired_velocity : Vector3 = calculate_movement(delta, player.velocity, input_history[i]["input_vec"])
-		#player.velocity = desired_velocity
-		#player.move_and_slide()
-	
 	# Rewrite using packet manager #
 	for i in range(packet_manager_c._last_confirmed_packet_id + 1, packet_manager_c._packet_history.size()):
 		client_prediction(delta, packet_manager_c._packet_history[i]["input_vector"])
@@ -120,8 +132,6 @@ func server_reconciliation(delta : float) -> void:
 
 
 func calculate_movement(delta : float, player_velocity_ref : Vector3, direction : Vector3) -> Vector3:
-	#var forward := camera_3d.global_basis.z
-	#var right := camera_3d.global_basis.x
 	var forward := player.global_basis.z
 	var right := player.global_basis.x
 	var move_direction := forward * direction.z + right * direction.x

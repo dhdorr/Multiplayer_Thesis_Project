@@ -2,8 +2,7 @@ class_name Ghost_Manager_C extends Node
 
 @onready var connection_manager_c: Connection_Manager_Client = %Connection_Manager_C
 
-#const PLAYER_S = preload("res://Master_Project/Server/Scenes/player_s.tscn")
-const PLAYER_S_3D = preload("res://Master_Project/Server/Scenes/player_s_3d.tscn")
+const PLAYER_GHOST_C_3D = preload("res://Master_Project/Client/Scenes/player_ghost_c_3d.tscn")
 
 var ghost_dict : Dictionary
 
@@ -17,7 +16,7 @@ func spawn_peer_characters_2(world_state: Dictionary) -> void:
 		
 		if !ghost_dict.has(p_id):
 			#ghost_dict[p_id] = PLAYER_S.instantiate()
-			ghost_dict[p_id] = PLAYER_S_3D.instantiate()
+			ghost_dict[p_id] = PLAYER_GHOST_C_3D.instantiate()
 			add_child(ghost_dict[p_id])
 			ghost_dict[p_id].position = world_state[p_id]["position"]
 			prev_ghost_pos_dict[p_id] = world_state[p_id]["position"]
@@ -38,18 +37,16 @@ func move_ghost(player: Dictionary, p_id: int) -> void:
 	
 
 func interpolate_ghosts(player: Dictionary, p_id: int) -> void:
-	#var test_vec := Vector2.ZERO
-	#test_vec = ghost_dict[p_id].position
-	#test_vec = test_vec.direction_to(player["position"])
-	#if test_vec != Vector2.ZERO:
-		#print(test_vec)
-		
-	var tween := get_tree().create_tween()
-	tween.tween_property(ghost_dict[p_id],"position", player["position"], SettingsMp.get_server_tick_rate() * get_physics_process_delta_time())
-	tween.finished.connect(update_prev_ghost_pos.bind(p_id, player["position"]))
+	var ghost : PLAYER_GHOST_CLIENT = ghost_dict[p_id]
+	#var tween := get_tree().create_tween()
 	
-	#prev_ghost_pos_dict[p_id] = player["position"]
-	#update_prev_ghost_pos(p_id, player["position"])
+	#tween.tween_property(ghost_dict[p_id],"position", player["position"], SettingsMp.get_server_tick_rate() * get_physics_process_delta_time())
+	
+	ghost._skin_rotation =  player["skin_rotation"]
+	ghost._target_position = player["position"]
+	
+	#tween.finished.connect(update_prev_ghost_pos.bind(p_id, player["position"]))
+	
 
 
 func update_prev_ghost_pos(p_id: int, pos: Vector3) -> void:
