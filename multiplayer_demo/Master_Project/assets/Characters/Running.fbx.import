@@ -1,15 +1,15 @@
 [remap]
 
-importer="animation_library"
+importer="scene"
 importer_version=1
-type="AnimationLibrary"
-uid="uid://bbova4vos36oi"
-path="res://.godot/imported/Jog Forward.fbx-889a7ed65609dc49bf920103c8536a20.res"
+type="PackedScene"
+uid="uid://bfb1q6dwmm4d7"
+path="res://.godot/imported/Running.fbx-5f79e78af7521daded2729e6f15e1a39.scn"
 
 [deps]
 
-source_file="res://Master_Project/assets/Characters/Animations/Jog Forward.fbx"
-dest_files=["res://.godot/imported/Jog Forward.fbx-889a7ed65609dc49bf920103c8536a20.res"]
+source_file="res://Master_Project/assets/Characters/Running.fbx"
+dest_files=["res://.godot/imported/Running.fbx-5f79e78af7521daded2729e6f15e1a39.scn"]
 
 [params]
 

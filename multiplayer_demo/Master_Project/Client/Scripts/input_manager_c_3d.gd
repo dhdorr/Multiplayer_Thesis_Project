@@ -7,9 +7,8 @@ class_name Input_Manager_Client_3D extends Node
 
 var connection_manager_c: Connection_Manager_Client
 @onready var player: CharacterBody3D = $".."
-#@onready var character_knight_01: Node3D = $"../Character_Knight_01"
 @onready var player_skin_3d: Node3D = %Player_Skin_3D
-
+@onready var test_rotation_3d: Node3D = $"../Test_Rotation_3D"
 @onready var camera_3d: Camera3D = $"../Camera_Pivot_3D/Camera3D"
 
 var buffer_manager_c: Buffer_Manager_C
@@ -47,6 +46,7 @@ func _ready() -> void:
 	
 	set_physics_process(true)
 
+
 func _notification(what):
 	if what == NOTIFICATION_WM_MOUSE_EXIT:
 		if not is_node_ready():
@@ -74,14 +74,12 @@ func _physics_process(delta: float) -> void:
 		var input_vector : Vector2 = Input.get_vector("move_left","move_right","move_up","move_down")
 		var direction : Vector3 = Vector3(input_vector.x, 0.0, input_vector.y)
 		
-		_ground_plane.d = player.global_position.y
-		# Raycast to get the mouse position in 3D space and make the player look at it.
-		var mouse_position_2d := get_viewport().get_mouse_position()
-		var mouse_ray := camera_3d.project_ray_normal(mouse_position_2d)
-		var world_mouse_position: Variant = _ground_plane.intersects_ray(camera_3d.global_position, mouse_ray)
-		if world_mouse_position != null and handle_mouse_input:
-			player_skin_3d.look_at(world_mouse_position)
-			#print(world_mouse_position)
+		if input_vector == Vector2.ZERO:
+			$"../Player_Skin_3D/Running/AnimationPlayer".play("Take 001")
+		elif $"../Player_Skin_3D/Running/AnimationPlayer".current_animation != "mixamo_com":
+			$"../Player_Skin_3D/Running/AnimationPlayer".play("mixamo_com")
+		
+		calculate_rotation()
 		
 		# -1 represents no action command, otherwise: SettingsMp.ACTION_COMMAND_TYPE
 		var action_command : int = -1
@@ -90,10 +88,11 @@ func _physics_process(delta: float) -> void:
 		# this movement will be overwritten by the server's response
 		# during the reconciliation step
 		if SettingsMp.enable_client_prediction:
-			client_prediction(delta, direction)
+			client_prediction(delta, direction, test_rotation_3d.rotation)
 		
 		# Generating serialized input packet and sending it out
-		generate_input_packet(direction, action_command, player_skin_3d.rotation)
+		#generate_input_packet(direction, action_command, player_skin_3d.rotation)
+		generate_input_packet(direction, action_command, test_rotation_3d.rotation)
 		
 		# When the server sends the client a new state (position and velocity)
 		# the client must apply that new state, which rewinds the player back
@@ -108,6 +107,7 @@ func _physics_process(delta: float) -> void:
 			if packet.has(connection_manager_c.player_id):
 				player.position = packet[connection_manager_c.player_id]["position"]
 				player.velocity = packet[connection_manager_c.player_id]["velocity"]
+				player_skin_3d.rotation = packet[connection_manager_c.player_id]["skin_rotation"]
 				
 				if SettingsMp.enable_server_reconciliation:
 					server_reconciliation(delta)
@@ -115,7 +115,8 @@ func _physics_process(delta: float) -> void:
 		#current_packet += 1
 
 
-func client_prediction(delta: float, direction : Vector3) -> void:
+func client_prediction(delta: float, direction : Vector3, skin_rotation: Vector3) -> void:
+	player_skin_3d.rotation = skin_rotation
 	var desired_velocity : Vector3 = calculate_movement(delta, player.velocity, direction)
 	player.velocity = desired_velocity
 	player.move_and_slide()
@@ -129,9 +130,22 @@ func generate_input_packet(direction : Vector3, action_command: int, skin_rotati
 func server_reconciliation(delta : float) -> void:
 	# Rewrite using packet manager #
 	for i in range(packet_manager_c._last_confirmed_packet_id + 1, packet_manager_c._packet_history.size()):
-		client_prediction(delta, packet_manager_c._packet_history[i]["input_vector"])
+		client_prediction(delta, packet_manager_c._packet_history[i]["input_vector"],packet_manager_c._packet_history[i]["skin_rotation"])
 	# ---------------------------- #
 
+
+func calculate_rotation() -> void:
+	_ground_plane.d = player.global_position.y
+	# Raycast to get the mouse position in 3D space and make the player look at it.
+	var mouse_position_2d := get_viewport().get_mouse_position()
+	var mouse_ray := camera_3d.project_ray_normal(mouse_position_2d)
+	var world_mouse_position: Variant = _ground_plane.intersects_ray(camera_3d.global_position, mouse_ray)
+	if world_mouse_position != null and handle_mouse_input:
+		#player_skin_3d.look_at(world_mouse_position)
+		# test rotation spins an invisible node and I send its rotation as input to the server
+		# this allows for rotation to be reconciled with the server
+		test_rotation_3d.look_at(world_mouse_position)
+		#print(world_mouse_position)
 
 func calculate_movement(delta : float, player_velocity_ref : Vector3, direction : Vector3) -> Vector3:
 	var forward := player.global_basis.z

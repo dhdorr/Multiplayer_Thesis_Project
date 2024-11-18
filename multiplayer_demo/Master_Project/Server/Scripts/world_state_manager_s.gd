@@ -62,9 +62,6 @@ func _physics_process(delta: float) -> void:
 			server_player_dict[pp["player_id"]].move_and_slide()
 			# ----------------------- #
 			
-			#server_player_dict[pp["player_id"]].velocity = calculate_movement(server_player_dict[pp["player_id"]], pp["input_vec"], delta)
-			#server_player_dict[pp["player_id"]].move_and_slide()
-			
 			world_state_dict[pp["player_id"]] = {
 				"position": server_player_dict[pp["player_id"]].position, 
 				"rotation": server_player_dict[pp["player_id"]].rotation,
