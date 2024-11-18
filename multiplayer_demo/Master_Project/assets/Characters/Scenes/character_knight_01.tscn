@@ -1,28 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://brg2vkabpi7w2"]
+[gd_scene load_steps=2 format=3 uid="uid://brg2vkabpi7w2"]
 
 [ext_resource type="PackedScene" uid="uid://b4ijcc4axr62f" path="res://Master_Project/assets/Characters/Character_Knight_01.fbx" id="1_cbi3l"]
-[ext_resource type="Texture2D" uid="uid://vv1o50pcxj45" path="res://Master_Project/assets/Characters/Materials/Characters_Texture_Black.png" id="2_r1duh"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2ban"]
-albedo_texture = ExtResource("2_r1duh")
 
 [node name="Character_Knight_01" instance=ExtResource("1_cbi3l")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="." index="0"]
-bones/3/rotation = Quaternion(0.995186, 0.0980028, 6.93889e-16, -5.82867e-16)
-bones/4/rotation = Quaternion(0.99381, 0.11109, -1.11022e-16, -9.99201e-16)
-bones/8/position = Vector3(-2.52435e-31, 0.127669, 0.122722)
-bones/24/rotation = Quaternion(0.632486, -0.578548, -0.375471, -0.352513)
-bones/44/rotation = Quaternion(-0.705872, -0.0417752, 0.0641594, 0.70419)
+[node name="Skeleton" parent="." index="0"]
+bones/3/rotation = Quaternion(-4.47035e-08, 1.49012e-08, 1.49012e-08, 1)
+bones/4/rotation = Quaternion(8.9407e-08, 0, 0, 1)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/position = Vector3(1.47756e-17, 0.127669, 0.122722)
+bones/14/scale = Vector3(1.00005, 0.999955, 0.999996)
+bones/15/scale = Vector3(1.00013, 0.999917, 0.999958)
+bones/24/rotation = Quaternion(-4.47035e-08, -1.49012e-07, -5.96046e-08, 1)
+bones/29/scale = Vector3(1.00005, 0.999955, 0.999996)
+bones/30/scale = Vector3(1.00012, 0.999917, 0.999958)
+bones/39/rotation = Quaternion(-1.49012e-08, 4.47035e-08, 1, 4.47035e-08)
+bones/41/rotation = Quaternion(1.05367e-07, 0.707107, -0.707107, 6.32203e-08)
+bones/44/rotation = Quaternion(5.96046e-08, 5.96046e-08, 1, 2.98023e-08)
+bones/46/rotation = Quaternion(-1.05367e-07, 0.707107, -0.707107, -2.10734e-08)
 
-[node name="Item_Pouch" parent="Skeleton3D" index="0"]
-transform = Transform3D(1.05988, 0, 0, 0, 1.05859, -0.0522582, 0, 0.0522581, 1.05859, -0.0485317, -0.0129148, -0.0471778)
+[node name="Item_Pouch" parent="Skeleton" index="0"]
+transform = Transform3D(1.05988, 0, 0, 0, 1.05859, -0.0522581, 0, 0.0522581, 1.05859, -0.0485317, -0.0129148, -0.0471778)
 bone_idx = 49
 
-[node name="Item_SwordSheath" parent="Skeleton3D" index="1"]
-transform = Transform3D(0.258133, -0.238648, 0.93617, 0.549586, 0.833217, 0.0608647, -0.794558, 0.498794, 0.346239, 0.25719, 0.764104, -0.0605463)
+[node name="Item_SwordSheath" parent="Skeleton" index="1"]
+transform = Transform3D(0.258133, -0.238648, 0.93617, 0.549586, 0.833217, 0.0608647, -0.794558, 0.498795, 0.346239, 0.25719, 0.764104, -0.0605464)
 bone_idx = 50
-
-[node name="Character_Knight_01" parent="Skeleton3D" index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_f2ban")
