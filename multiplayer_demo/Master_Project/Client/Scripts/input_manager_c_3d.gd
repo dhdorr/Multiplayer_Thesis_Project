@@ -11,6 +11,7 @@ var connection_manager_c: Connection_Manager_Client
 @onready var test_rotation_3d: Node3D = $"../Test_Rotation_3D"
 @onready var camera_3d: Camera3D = $"../Camera_Pivot_3D/Camera3D"
 
+
 var buffer_manager_c: Buffer_Manager_C
 var packet_manager_c: PACKET_MANAGER_C
 #@onready var ghost_manager_c: Ghost_Manager_C = %Ghost_Manager_C
@@ -74,11 +75,12 @@ func _physics_process(delta: float) -> void:
 		var input_vector : Vector2 = Input.get_vector("move_left","move_right","move_up","move_down")
 		var direction : Vector3 = Vector3(input_vector.x, 0.0, input_vector.y)
 		
-		if input_vector == Vector2.ZERO:
-			$"../Player_Skin_3D/Running/AnimationPlayer".play("Take 001")
-		elif $"../Player_Skin_3D/Running/AnimationPlayer".current_animation != "mixamo_com":
-			$"../Player_Skin_3D/Running/AnimationPlayer".play("mixamo_com")
-		
+		# Choose animation to play
+		if player.is_on_floor() and not direction.is_zero_approx():
+			player_skin_3d.run()
+		elif player.is_on_floor():
+			player_skin_3d.idle()
+			
 		calculate_rotation()
 		
 		# -1 represents no action command, otherwise: SettingsMp.ACTION_COMMAND_TYPE
@@ -101,8 +103,6 @@ func _physics_process(delta: float) -> void:
 		if !temp_packet.is_empty():
 			var packet : Dictionary = temp_packet.duplicate()
 			temp_packet.clear()
-			# Spawn in ghost for each peer
-			#ghost_manager_c.spawn_peer_characters(packet)
 			
 			if packet.has(connection_manager_c.player_id):
 				player.position = packet[connection_manager_c.player_id]["position"]
@@ -146,6 +146,7 @@ func calculate_rotation() -> void:
 		# this allows for rotation to be reconciled with the server
 		test_rotation_3d.look_at(world_mouse_position)
 		#print(world_mouse_position)
+
 
 func calculate_movement(delta : float, player_velocity_ref : Vector3, direction : Vector3) -> Vector3:
 	var forward := player.global_basis.z

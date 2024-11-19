@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwnltafjq7bcu"]
+
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/player_skin_3d.gd" id="1_me2dx"]
+[ext_resource type="PackedScene" uid="uid://bgspgptlidcht" path="res://Master_Project/assets/Characters/Scenes/viking_project.tscn" id="3_stvmc"]
+
+[node name="Player_Skin_3D" type="Node3D"]
+script = ExtResource("1_me2dx")
+
+[node name="Viking_Project" parent="." instance=ExtResource("3_stvmc")]

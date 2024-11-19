@@ -29,6 +29,7 @@ func move_ghost(player: Dictionary, p_id: int) -> void:
 	var ghost : PLAYER_GHOST_CLIENT = ghost_dict[p_id]
 	ghost._skin_rotation =  player["skin_rotation"]
 	ghost._target_position = player["position"]
+	ghost._last_input = player["last_input"]
 	update_prev_ghost_pos(p_id, player["position"])
 	
 

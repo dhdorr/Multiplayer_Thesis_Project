@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d10phg2m5csge"]
+[gd_scene load_steps=5 format=3 uid="uid://d10phg2m5csge"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/player_ghost_c_3d.gd" id="1_457wf"]
 [ext_resource type="PackedScene" uid="uid://ddq7sfnhc783" path="res://Master_Project/assets/Characters/Scenes/character_soldier_01.tscn" id="2_esxon"]
+[ext_resource type="PackedScene" uid="uid://m62sn4oekvwu" path="res://Master_Project/assets/Characters/Scenes/warrior_project.tscn" id="3_ibpkf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l7ibu"]
 
@@ -16,3 +17,84 @@ shape = SubResource("CapsuleShape3D_l7ibu")
 unique_name_in_owner = true
 
 [node name="Character_Soldier_01" parent="Ghost_Skin_3D" instance=ExtResource("2_esxon")]
+visible = false
+
+[node name="Warrior_Project" parent="Ghost_Skin_3D" instance=ExtResource("3_ibpkf")]
+
+[node name="Root" parent="Ghost_Skin_3D/Warrior_Project" index="0"]
+transform = Transform3D(0.00983499, -0.00180708, -8.66626e-05, -0.000321542, -0.00127458, -0.00991323, 0.00178035, 0.00975243, -0.00131165, -0.0114485, -0.0808536, -0.109194)
+
+[node name="Skeleton3D" parent="Ghost_Skin_3D/Warrior_Project/Root" index="0"]
+bones/1/rotation = Quaternion(0.99502, 0.0996789, -3.20745e-08, 7.8085e-09)
+bones/2/rotation = Quaternion(0.995186, 0.0980027, -3.19334e-08, -7.13869e-09)
+bones/3/rotation = Quaternion(0.99381, 0.111091, -3.15538e-08, 9.548e-09)
+bones/4/rotation = Quaternion(-4.06651e-09, 2.0776e-08, -0.0417329, 0.999129)
+bones/5/rotation = Quaternion(0.458571, 0.53825, -0.458571, 0.53825)
+bones/6/scale = Vector3(1, 0.71294, 1)
+bones/7/position = Vector3(2.50896e-07, 12.7669, 12.2722)
+bones/8/rotation = Quaternion(0.578547, 0.632487, -0.352513, 0.375472)
+bones/9/position = Vector3(13.1979, 4.03557e-05, 2.5881e-06)
+bones/9/rotation = Quaternion(0.0113282, -0.23686, -0.0338067, 0.970889)
+bones/10/position = Vector3(33.9474, -0.144889, -0.143612)
+bones/10/rotation = Quaternion(0.00168383, -0.0407497, 0.0412521, 0.998316)
+bones/11/position = Vector3(27.1145, 9.37515e-06, -0.0381334)
+bones/11/rotation = Quaternion(3.7657e-10, 0.0358307, -8.40079e-09, 0.999358)
+bones/12/position = Vector3(3.51405, -1.17069, 4.50554)
+bones/12/rotation = Quaternion(0.0254809, -0.276842, -0.0880399, 0.956534)
+bones/13/position = Vector3(6.3702, 6.34962e-06, -4.18172e-06)
+bones/13/rotation = Quaternion(-0.0399423, 0.117841, -0.141637, 0.982068)
+bones/14/position = Vector3(5.66556, 5.84819e-05, 6.47691e-06)
+bones/15/position = Vector3(10.3966, 0.398716, 2.67265)
+bones/15/rotation = Quaternion(0.000280493, -0.0657944, -0.00425381, 0.997824)
+bones/16/position = Vector3(4.09364, 2.29317e-05, 5.46627e-07)
+bones/16/rotation = Quaternion(-0.00115405, 0.0107419, -0.0983311, 0.995095)
+bones/17/position = Vector3(3.79117, 7.40367e-06, 2.33379e-06)
+bones/17/rotation = Quaternion(-0.00691212, 0.0257176, -0.057002, 0.998019)
+bones/19/position = Vector3(9.98254, -0.115924, -3.28334)
+bones/19/rotation = Quaternion(-0.00248643, 0.0438799, -0.0565194, 0.997434)
+bones/20/position = Vector3(4.24882, 2.62791e-05, 2.23223e-06)
+bones/20/rotation = Quaternion(0.00263734, -0.019492, -0.0212696, 0.99958)
+bones/21/position = Vector3(3.51334, -1.80147e-05, 2.41271e-06)
+bones/21/rotation = Quaternion(-0.0181493, 0.0714792, -0.0925112, 0.992977)
+bones/23/rotation = Quaternion(0.632487, -0.578547, -0.375472, -0.352513)
+bones/24/position = Vector3(-13.1979, 0.000637998, 4.24926e-06)
+bones/24/rotation = Quaternion(0.0113283, -0.236858, -0.0338066, 0.97089)
+bones/25/position = Vector3(-33.9475, 0.144754, 0.143464)
+bones/25/rotation = Quaternion(0.00168374, -0.040752, 0.041252, 0.998316)
+bones/26/position = Vector3(-27.1145, 3.47357e-06, 0.0381395)
+bones/26/rotation = Quaternion(4.90838e-10, 0.0358307, 3.54536e-08, 0.999358)
+bones/27/position = Vector3(-3.51401, 1.17099, -4.50554)
+bones/27/rotation = Quaternion(0.0254808, -0.276843, -0.08804, 0.956534)
+bones/28/position = Vector3(-6.37014, -0.000767872, 5.12529e-05)
+bones/28/rotation = Quaternion(-0.039942, 0.117841, -0.141636, 0.982068)
+bones/29/position = Vector3(-5.6655, 4.84714e-06, -2.64233e-05)
+bones/30/position = Vector3(-10.3966, -0.399014, -2.67265)
+bones/30/rotation = Quaternion(0.000280479, -0.0658002, -0.0042538, 0.997824)
+bones/31/position = Vector3(-4.09359, 8.96974e-05, 4.32104e-05)
+bones/31/rotation = Quaternion(-0.00115457, 0.0107474, -0.0983304, 0.995095)
+bones/32/position = Vector3(-3.79122, 0.000331553, -2.42688e-06)
+bones/32/rotation = Quaternion(-0.00691222, 0.0257178, -0.0570023, 0.998019)
+bones/33/position = Vector3(-3.77933, -0.00052965, -1.70352e-05)
+bones/34/position = Vector3(-9.9825, 0.11598, 3.28334)
+bones/34/rotation = Quaternion(-0.00248645, 0.0438802, -0.0565193, 0.997434)
+bones/35/rotation = Quaternion(0.00263729, -0.0194921, -0.021269, 0.99958)
+bones/36/position = Vector3(-3.51332, -2.63491e-05, 5.69916e-07)
+bones/36/rotation = Quaternion(-0.0181492, 0.0714787, -0.0925125, 0.992977)
+bones/37/position = Vector3(-3.0031, 0.000107482, 3.34766e-05)
+bones/40/rotation = Quaternion(-0.0417752, 0.705872, -0.70419, 0.0641593)
+bones/41/rotation = Quaternion(0.644378, -0.0244627, 0.00473781, 0.764301)
+bones/42/rotation = Quaternion(0.85767, -0.507213, -0.0397528, -0.0745437)
+bones/43/rotation = Quaternion(3.62456e-08, -1.94261e-08, 0.270016, 0.962856)
+bones/45/rotation = Quaternion(-0.705872, -0.0417751, 0.0641593, 0.70419)
+bones/46/position = Vector3(-39.9309, -3.46643e-05, 2.35707e-06)
+bones/46/rotation = Quaternion(0.644378, -0.0244627, 0.00473764, 0.764301)
+bones/47/rotation = Quaternion(0.85767, -0.507213, -0.0397527, -0.0745436)
+bones/48/rotation = Quaternion(-5.40756e-08, 1.02326e-07, 0.270016, 0.962856)
+
+[node name="SK_Item_WarriorSholderArmor" parent="Ghost_Skin_3D/Warrior_Project/Root/Skeleton3D" index="0"]
+transform = Transform3D(0.882852, 0.469511, -0.0114633, 0.469472, -0.882927, -0.00609638, -0.0129843, 1.55638e-06, -0.999919, -7.44714, 1.35376, -139.211)
+
+[node name="SK_Item_SwordHolder" parent="Ghost_Skin_3D/Warrior_Project/Root/Skeleton3D" index="1"]
+transform = Transform3D(1, 1.51201e-08, 2.98076e-07, -1.30039e-08, 1, -2.04146e-06, -2.43539e-07, 9.16421e-07, 1, 1.03986e-05, -0.000268459, 0.000549316)
+
+[editable path="Ghost_Skin_3D/Warrior_Project"]

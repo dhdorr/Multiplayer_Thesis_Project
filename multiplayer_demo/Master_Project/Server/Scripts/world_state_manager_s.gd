@@ -66,6 +66,7 @@ func _physics_process(delta: float) -> void:
 				"position": server_player_dict[pp["player_id"]].position, 
 				"rotation": server_player_dict[pp["player_id"]].rotation,
 				"skin_rotation": player_ghost.ghost_skin_3d.rotation,
+				"last_input": pp["input_vec"],
 				"packet_id": pp["packet_id"], 
 				"velocity": server_player_dict[pp["player_id"]].velocity,
 				"server_update_id": update_packet_id,

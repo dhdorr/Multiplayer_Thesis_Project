@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://hep73hu27j3k"]
 
-[ext_resource type="PackedScene" uid="uid://di426bobulgka" path="res://Master_Project/assets/Characters/Scenes/test_running.tscn" id="3_knsia"]
+[ext_resource type="PackedScene" uid="uid://dwnltafjq7bcu" path="res://Master_Project/Client/Scenes/player_skin_3d.tscn" id="2_naf4b"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/input_manager_c_3d.gd" id="3_pcqe2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_snj6a"]
@@ -24,47 +24,7 @@ current = true
 fov = 45.0
 far = 50.0
 
-[node name="Player_Skin_3D" type="Node3D" parent="."]
+[node name="Player_Skin_3D" parent="." instance=ExtResource("2_naf4b")]
 unique_name_in_owner = true
 
-[node name="Running" parent="Player_Skin_3D" instance=ExtResource("3_knsia")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="Root" parent="Player_Skin_3D/Running" index="0"]
-transform = Transform3D(0.983499, 0.00866636, -0.180708, -0.0321544, 0.991323, -0.127458, 0.178035, 0.131165, 0.975243, -0.0114485, -0.0808536, -0.109194)
-
-[node name="Skeleton3D" parent="Player_Skin_3D/Running/Root" index="0"]
-bones/1/rotation = Quaternion(0.989535, 0.141436, -0.0180908, -0.0221066)
-bones/2/rotation = Quaternion(0.997411, 0.0584314, -0.00640025, -0.0414163)
-bones/3/rotation = Quaternion(0.987959, 0.149444, 0.00774653, -0.0392885)
-bones/4/rotation = Quaternion(0.00507335, -0.00837729, -0.037507, 0.999248)
-bones/5/rotation = Quaternion(0.462927, 0.538252, -0.449611, 0.542064)
-bones/8/rotation = Quaternion(0.555543, 0.680164, -0.383906, 0.285246)
-bones/9/rotation = Quaternion(0.303645, -0.148451, -0.429523, 0.83742)
-bones/10/rotation = Quaternion(-0.000740007, -0.805478, -0.00040742, 0.592625)
-bones/11/rotation = Quaternion(-0.267035, -0.221005, 0.0660037, 0.935678)
-bones/24/rotation = Quaternion(0.676406, -0.551593, -0.298026, -0.386524)
-bones/25/rotation = Quaternion(0.169605, -0.365524, -0.401603, 0.8224)
-bones/26/rotation = Quaternion(-0.00057904, -0.767709, -0.000549301, 0.640798)
-bones/27/rotation = Quaternion(-0.0127622, -0.240127, 0.0587312, 0.968879)
-bones/40/rotation = Quaternion(0.0350967, 0.72402, -0.683072, -0.0893094)
-bones/41/rotation = Quaternion(0.598447, -0.331974, 0.241652, 0.687938)
-bones/42/rotation = Quaternion(0.669688, -0.734689, -0.103176, -0.0332296)
-bones/43/rotation = Quaternion(-1.74951e-08, -6.25804e-08, 0.273117, 0.961981)
-bones/45/rotation = Quaternion(-0.594308, 0.213896, -0.161339, 0.758298)
-bones/46/rotation = Quaternion(0.411625, -0.5635, 0.565434, 0.439678)
-bones/47/rotation = Quaternion(0.826479, -0.543773, -0.145276, -0.011758)
-bones/48/rotation = Quaternion(-8.1587e-08, -1.21487e-09, 0.27806, 0.960564)
-
-[node name="SK_Item_WarrioArmor_l" parent="Player_Skin_3D/Running/Root/Skeleton3D" index="0"]
-transform = Transform3D(0.930465, 0.211633, 0.299074, -0.140751, 0.960134, -0.241521, -0.338265, 0.182632, 0.923159, 0.211942, 1.41546, -0.0641874)
-
-[node name="SK_Item_WarriorArmor_r" parent="Player_Skin_3D/Running/Root/Skeleton3D" index="1"]
-transform = Transform3D(0.925249, 0.171091, 0.338588, 0.0674898, -0.952524, 0.296889, 0.373308, -0.251845, -0.892869, 0.220166, 0.0682435, -0.293292)
-
-[node name="AnimationPlayer" parent="Player_Skin_3D/Running" index="1"]
-autoplay = "mixamo_com"
-
 [node name="Test_Rotation_3D" type="Node3D" parent="."]
-
-[editable path="Player_Skin_3D/Running"]

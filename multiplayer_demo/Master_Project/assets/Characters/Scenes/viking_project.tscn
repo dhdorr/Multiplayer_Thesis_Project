@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgspgptlidcht"]
+
+[ext_resource type="PackedScene" uid="uid://cjm2xtpdjhvtr" path="res://Master_Project/assets/Characters/Viking_Project.glb" id="1_o6pm0"]
+
+[node name="Viking_Project" instance=ExtResource("1_o6pm0")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
