@@ -180,4 +180,4 @@ func _on_reconciliation_check_button_toggled(toggled_on: bool) -> void:
 func init_player_position(position: Vector3, rotation: Vector3) -> void:
 	#player.position = SettingsMp.player_initial_position
 	player.position = position
-	player.rotation_degrees = rotation
+	player.rotation = rotation

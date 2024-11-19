@@ -10,6 +10,9 @@ const GRAVITY := 40.0 * Vector3.DOWN
 @onready var connection_manager_s: Connection_Manager_Server = %Connection_Manager_S
 const PLAYER_S = preload("res://Master_Project/Server/Scenes/player_s.tscn")
 const PLAYER_S_3D = preload("res://Master_Project/Server/Scenes/player_s_3d.tscn")
+@onready var world_3d: Node3D = $"../World_3D"
+var spawn_points : Array[Marker3D]
+var used_spawn_points : Array[int]
 
 # this will be refactored to a dictionary of an array for each player
 var player_input_buffer : Array[Vector2]
@@ -44,7 +47,12 @@ func get_input_dict(packet : Dictionary) -> void:
 		#}
 	#player_packets.append(input_dict)
 # -------------------------------------------- #
-	
+
+
+func _ready() -> void:
+	spawn_points.append_array(get_tree().get_nodes_in_group("spawn"))
+
+
 func _physics_process(delta: float) -> void:
 	
 	if count >= SettingsMp.get_server_tick_rate():
@@ -116,10 +124,30 @@ func calculate_movement_3D(delta : float, player_velocity_ref : Vector3, directi
 	return player_velocity_ref
 
 # called from connection manager s
-func init_player_positions_3D(packet: Dictionary) -> void:
+func init_player_positions_3D(player_id: int) -> void:
 	var new_player : CharacterBody3D = PLAYER_S_3D.instantiate()
 	add_child(new_player)
-	server_player_dict[packet["player_id"]] = new_player
-	new_player.position = packet["position"]
-	new_player.rotation_degrees = packet["rotation"]
-	print("global basis z: ", new_player.global_basis.z)
+	
+	var spawn_point_id : int = pick_spawn_point()
+	var spawn_point : Marker3D = spawn_points[spawn_point_id]
+	
+	#new_player.position = packet["position"]
+	#new_player.rotation_degrees = packet["rotation"]
+	new_player.position = spawn_point.position
+	new_player.rotation = spawn_point.rotation
+	
+	server_player_dict[player_id] = new_player
+
+
+func pick_spawn_point() -> int:
+	print(used_spawn_points)
+	var choice : int = 0
+	if used_spawn_points.is_empty():
+		used_spawn_points.append(0)
+		choice = 0
+	else:
+		for i in range(spawn_points.size()):
+			if not used_spawn_points.has(i):
+				used_spawn_points.append(i)
+				choice = i
+	return choice

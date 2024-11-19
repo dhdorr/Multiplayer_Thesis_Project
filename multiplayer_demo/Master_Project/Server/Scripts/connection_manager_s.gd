@@ -64,18 +64,18 @@ func _accept_new_peer_connection(peer : PacketPeerUDP) -> void:
 func _accept_new_peer_connection_3D(peer : PacketPeerUDP) -> void:
 	# confirm connection
 	peers.append(peer)
-	var init_position : Vector3 = Vector3(0.0, 0.0, float(peers.size() - 1) * -5.0)
 	
-	var init_rotation : Vector3 = Vector3.ZERO
-	if peers.size() > 1:
-		init_rotation = Vector3(0.0, 180.0, 0.0)
+	var player_id : int = peers.size()
+	world_state_manager_s.init_player_positions_3D(player_id)
 	
-	var packet_interface := SERVER_PACKET_INTERFACE.player_initialization_response.new(peers.size(), init_position, init_rotation)
+	var init_position : Vector3 = world_state_manager_s.server_player_dict[player_id].position
+	var init_rotation : Vector3 = world_state_manager_s.server_player_dict[player_id].rotation
+	
+	var packet_interface := SERVER_PACKET_INTERFACE.player_initialization_response.new(player_id, init_position, init_rotation)
 	var packet_dict : Dictionary = packet_interface.packet_as_dict()
-	print(packet_dict)
 	var response : Dictionary = { "init": packet_dict }
+	print(response)
 	
-	world_state_manager_s.init_player_positions_3D(packet_dict)
 	%Network_Layer_S.simulate_sending_packet_over_network(peer, response)
 # ----------------------- #
 
