@@ -10,7 +10,9 @@ signal setup_settings_toggle(proc_type: int)
 signal update_client_label
 signal initialize_player_position_on_player(position: Vector3, rotation: Vector3)
 signal update_client_state
+signal start_match_countdown_animation
 # ------------------- #
 
 # Server-side signals #
 signal update_peer_count(count: int)
+# ------------------- #

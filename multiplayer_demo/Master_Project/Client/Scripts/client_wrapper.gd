@@ -4,6 +4,7 @@ enum CLIENT_STATE_TYPES { HOME, CONNECTING_TO_SERVER, WAITING_IN_LOBBY, STARTING
 
 @onready var connection_manager_c: Connection_Manager_Client = %Connection_Manager_C
 @onready var start_screen_menu: Start_Screen_Menu = %Start_Screen_Menu
+@onready var match_countdown_ui: Control = %Match_Countdown_UI
 
 const CHARACTER_CONTROLLER_3D = preload("res://Master_Project/Client/Scenes/character_controller_3d.tscn")
 const WORLD_3D = preload("res://Master_Project/world_3d.tscn")
@@ -12,6 +13,7 @@ var player_init : Dictionary
 var _client_state := CLIENT_STATE_TYPES.HOME
 var _is_game_world_setup := false
 var _is_match_countdown_started := false
+var _countdown_timer : Timer
 
 func _ready() -> void:
 	SignalBusMp.update_client_label.connect(update_label)
@@ -33,8 +35,7 @@ func _process(delta: float) -> void:
 		# give this a UI later
 		if not _is_match_countdown_started:
 			_is_match_countdown_started = true
-			var timer := get_tree().create_timer(3.0)
-			timer.timeout.connect(_start_match)
+			SignalBusMp.start_match_countdown_animation.emit()
 		
 	elif _client_state == CLIENT_STATE_TYPES.PLAYING_GAME:
 		connection_manager_c.listen_for_world_state_packets()
