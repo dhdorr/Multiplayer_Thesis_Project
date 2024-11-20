@@ -33,7 +33,8 @@ func _process(delta: float) -> void:
 		# give this a UI later
 		if not _is_match_countdown_started:
 			_is_match_countdown_started = true
-			var timer := get_tree().create_timer(3.0).timeout.connect(_start_match)
+			var timer := get_tree().create_timer(3.0)
+			timer.timeout.connect(_start_match)
 		
 	elif _client_state == CLIENT_STATE_TYPES.PLAYING_GAME:
 		connection_manager_c.listen_for_world_state_packets()
@@ -54,6 +55,7 @@ func setup_settings_menu(proc_type: int) -> void:
 # on timeout, player will receive controll of their character
 func _start_match() -> void:
 	_set_client_state(CLIENT_STATE_TYPES.PLAYING_GAME)
+	print("game on...")
 
 
 # load in the game world and character controller

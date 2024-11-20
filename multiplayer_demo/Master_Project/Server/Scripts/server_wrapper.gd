@@ -51,6 +51,7 @@ func _update_peer_count(count: int) -> void:
 
 
 func _start_match():
+	print("server is primed for the match...")
 	# change server state to be running the match
 	# tell connection manager to send 'start match' packet to clients
 	# connection_manager.start_matches_on_clients

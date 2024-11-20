@@ -71,7 +71,6 @@ func _receive_client_input_packets() -> void:
 			match typeof(packet):
 				TYPE_DICTIONARY:
 					# pass to world state manager
-					print(packet)
 					world_state_manager_s.get_input_dict(packet)
 
 

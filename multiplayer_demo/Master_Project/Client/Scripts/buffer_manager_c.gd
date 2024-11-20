@@ -42,9 +42,8 @@ func _physics_process(delta: float) -> void:
 		
 
 func start_buffer_on_receipt(recv: Dictionary) -> void:
-	input_manager_c = get_tree().get_nodes_in_group("input_mgr").front()
-	ghost_manager_c = get_tree().get_nodes_in_group("ghost_mgr").front()
-	print("testing: ", get_physics_process_delta_time())
+	input_manager_c = get_tree().get_first_node_in_group("input_mgr")
+	ghost_manager_c = get_tree().get_first_node_in_group("ghost_mgr")
 	buffer_d.append(recv)
 	is_buffer_ready = true
 	waiting_for_first_packet = false
