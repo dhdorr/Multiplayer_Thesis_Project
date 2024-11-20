@@ -13,6 +13,7 @@
 script = ExtResource("1_5mjhx")
 
 [node name="Start_Screen_Menu" parent="." instance=ExtResource("2_bgvgk")]
+unique_name_in_owner = true
 
 [node name="Network_Layer_C" type="Node" parent="."]
 unique_name_in_owner = true
@@ -25,6 +26,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="Ghost_Manager_C" parent="." instance=ExtResource("6_n7uas")]
+unique_name_in_owner = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = 512.0

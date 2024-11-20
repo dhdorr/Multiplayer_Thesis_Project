@@ -9,6 +9,27 @@ var ghost_dict : Dictionary
 var prev_ghost_pos_dict : Dictionary
 
 
+func add_new_ghost(lobby_dict: Dictionary) -> bool:
+	var is_new_ghost_added := false
+	
+	for player_id : int in lobby_dict:
+		if player_id == connection_manager_c.player_id:
+			continue
+		
+		if not ghost_dict.has(player_id):
+			is_new_ghost_added = true
+			var ghost : PLAYER_GHOST_CLIENT = PLAYER_GHOST_C_3D.instantiate()
+			ghost_dict[player_id] = ghost
+			add_child(ghost)
+			ghost.position = lobby_dict[player_id]["position"]
+			ghost._target_position = ghost.position
+			ghost.rotation = lobby_dict[player_id]["rotation"]
+			
+			prev_ghost_pos_dict[player_id] = ghost.position
+			print("ghost position: ", ghost.position)
+	return is_new_ghost_added
+
+
 func spawn_peer_characters_2(world_state: Dictionary) -> void:
 	for p_id : int in world_state:
 		if p_id == connection_manager_c.player_id:
@@ -31,11 +52,11 @@ func move_ghost(player: Dictionary, p_id: int) -> void:
 	ghost._target_position = player["position"]
 	ghost._last_input = player["last_input"]
 	update_prev_ghost_pos(p_id, player["position"])
-	
 
 
 func update_prev_ghost_pos(p_id: int, pos: Vector3) -> void:
 	prev_ghost_pos_dict[p_id] = pos
+
 
 # Ghost manager should have its own input buffer for packets (fed from the
 # buffer manager) to make it easier to interpolate entities independantly

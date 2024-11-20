@@ -11,7 +11,7 @@ var connection_manager_c: Connection_Manager_Client
 @onready var test_rotation_3d: Node3D = $"../Test_Rotation_3D"
 @onready var camera_3d: Camera3D = $"../Camera_Pivot_3D/Camera3D"
 
-
+var client_wrapper : Client_Wrapper
 var buffer_manager_c: Buffer_Manager_C
 var packet_manager_c: PACKET_MANAGER_C
 #@onready var ghost_manager_c: Ghost_Manager_C = %Ghost_Manager_C
@@ -34,11 +34,11 @@ func _init() -> void:
 	set_physics_process(false)
 
 func _ready() -> void:
-	SignalBusMp.initialize_player_position_on_player.connect(init_player_position)
+	#SignalBusMp.initialize_player_position_on_player.connect(init_player_position)
 	packet_manager_c = get_tree().get_first_node_in_group("packet_mgr")
 	
-	var wrapper := get_tree().get_first_node_in_group("client_wrap")
-	var siblings := wrapper.get_children()
+	client_wrapper = get_tree().get_first_node_in_group("client_wrap")
+	var siblings := client_wrapper.get_children()
 	for s in siblings:
 		if s.is_in_group("conn_mgr"):
 			connection_manager_c = s
@@ -70,7 +70,7 @@ func update_player_authoritative_position(packet : Dictionary) -> void:
 func _physics_process(delta: float) -> void:
 	if not is_node_ready():
 		return
-	if connection_manager_c.connected:
+	if client_wrapper.is_ready_to_send_input():
 		# Calculate movement based on input and gravity.
 		var input_vector : Vector2 = Input.get_vector("move_left","move_right","move_up","move_down")
 		var direction : Vector3 = Vector3(input_vector.x, 0.0, input_vector.y)
@@ -93,7 +93,6 @@ func _physics_process(delta: float) -> void:
 			client_prediction(delta, direction, test_rotation_3d.rotation)
 		
 		# Generating serialized input packet and sending it out
-		#generate_input_packet(direction, action_command, player_skin_3d.rotation)
 		generate_input_packet(direction, action_command, test_rotation_3d.rotation)
 		
 		# When the server sends the client a new state (position and velocity)
@@ -177,7 +176,7 @@ func _on_reconciliation_check_button_toggled(toggled_on: bool) -> void:
 	SettingsMp.enable_server_reconciliation = toggled_on
 
 # Use signals to grab position from memory
-func init_player_position(position: Vector3, rotation: Vector3) -> void:
-	#player.position = SettingsMp.player_initial_position
-	player.position = position
-	player.rotation = rotation
+#func init_player_position(position: Vector3, rotation: Vector3) -> void:
+	##player.position = SettingsMp.player_initial_position
+	#player.position = position
+	#player.rotation = rotation
