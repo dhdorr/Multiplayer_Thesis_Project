@@ -20,11 +20,11 @@ func add_new_ghost(lobby_dict: Dictionary) -> bool:
 			is_new_ghost_added = true
 			var ghost : PLAYER_GHOST_CLIENT = PLAYER_GHOST_C_3D.instantiate()
 			ghost_dict[player_id] = ghost
-			add_child(ghost)
+			
 			ghost.position = lobby_dict[player_id]["position"]
 			ghost._target_position = ghost.position
 			ghost.rotation = lobby_dict[player_id]["rotation"]
-			
+			add_child(ghost)
 			prev_ghost_pos_dict[player_id] = ghost.position
 			print("ghost position: ", ghost.position)
 	return is_new_ghost_added

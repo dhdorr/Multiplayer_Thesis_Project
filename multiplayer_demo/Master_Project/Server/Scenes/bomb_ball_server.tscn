@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dddbscqu0pxil"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rb753"]
+albedo_color = Color(0.517184, 0.517184, 0.517184, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y2y8s"]
+
+[node name="Bomb_Ball" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+gravity_scale = 0.0
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+material = SubResource("StandardMaterial3D_rb753")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_y2y8s")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c4tbltb0brf1f"]
+[gd_scene load_steps=9 format=3 uid="uid://c4tbltb0brf1f"]
 
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/network_layer_s.gd" id="1_bxdm2"]
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/server_wrapper.gd" id="1_nu13o"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/packet_manager_s.gd" id="5_fgpr2"]
 [ext_resource type="PackedScene" uid="uid://b8lbxjngmhcbu" path="res://Master_Project/Client/Scenes/Settings_Toggle.tscn" id="6_dlpsl"]
 [ext_resource type="PackedScene" uid="uid://cp4i2qtyy8uoh" path="res://Master_Project/world_3d.tscn" id="8_buoke"]
+[ext_resource type="PackedScene" uid="uid://dddbscqu0pxil" path="res://Master_Project/Server/Scenes/bomb_ball_server.tscn" id="8_y0vpp"]
 
 [node name="Server_Wrapper" type="Node"]
 script = ExtResource("1_nu13o")
@@ -40,3 +41,5 @@ text = "Server"
 [node name="Settings_Toggles" parent="." instance=ExtResource("6_dlpsl")]
 
 [node name="World_3D" parent="." instance=ExtResource("8_buoke")]
+
+[node name="Bomb_Ball" parent="." instance=ExtResource("8_y0vpp")]

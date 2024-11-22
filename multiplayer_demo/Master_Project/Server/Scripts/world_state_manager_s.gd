@@ -126,7 +126,7 @@ func calculate_movement_3D(delta : float, player_velocity_ref : Vector3, directi
 # called from connection manager s
 func init_player_positions_3D(player_id: int) -> void:
 	var new_player : CharacterBody3D = PLAYER_S_3D.instantiate()
-	add_child(new_player)
+	
 	
 	var spawn_point_id : int = pick_spawn_point()
 	var spawn_point : Marker3D = spawn_points[spawn_point_id]
@@ -135,7 +135,7 @@ func init_player_positions_3D(player_id: int) -> void:
 	#new_player.rotation_degrees = packet["rotation"]
 	new_player.position = spawn_point.position
 	new_player.rotation = spawn_point.rotation
-	
+	add_child(new_player)
 	server_player_dict[player_id] = new_player
 
 
