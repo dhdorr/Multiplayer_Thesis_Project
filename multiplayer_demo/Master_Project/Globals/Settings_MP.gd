@@ -3,6 +3,11 @@ extends Node
 enum MP_PROCESS_TYPE { MP_SERVER, MP_CLIENT }
 enum ACTION_COMMAND_TYPE { NONE, JUMP, REFLECT, SHOOT }
 enum GLOBAL_LOBBY_STATUS { OPEN, CLOSED, START_MATCH}
+enum CLIENT_PACKET_TYPES { NONE, CONNECTION_REQUEST, INPUT_PACKET }
+enum SERVER_PACKET_TYPES { NONE, CONNECTION_RESPONSE, LOBBY_UPDATE, WORLD_STATE_UPDATE }
+enum PLAYER_SKIN_ID { NONE, VIKING, WARRIOR, KNIGHT }
+
+var protocol_version : String = "0.0.1"
 
 var enable_client_prediction := true
 var enable_server_reconciliation := true

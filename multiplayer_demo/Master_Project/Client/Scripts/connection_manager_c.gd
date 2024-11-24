@@ -3,6 +3,7 @@ class_name Connection_Manager_Client extends Node
 @onready var buffer_manager_c: Buffer_Manager_C = %Buffer_Manager_C
 #@onready var input_manager_c: Input_Manager_Client
 @onready var ghost_manager_c: Ghost_Manager_C = %Ghost_Manager_C
+@onready var packet_manager_c: PACKET_MANAGER_C = $"../Packet_Manager_C"
 
 var e_client := PacketPeerUDP.new()
 
@@ -24,7 +25,10 @@ func _ready() -> void:
 func _connect_to_server() -> Error:
 	_update_client_state(Client_Wrapper.CLIENT_STATE_TYPES.CONNECTING_TO_SERVER)
 	# Try to contact server
-	var put_packet_error := e_client.put_packet("hello, world!".to_utf8_buffer())
+	# packet manager creates connection string packet with relevant information
+	var packet : Dictionary = packet_manager_c.create_connection_string_packet()
+	#var put_packet_error := e_client.put_packet("hello, world!".to_utf8_buffer())
+	var put_packet_error := e_client.put_var(packet)
 	if put_packet_error != OK:
 		print_debug(put_packet_error)
 		return put_packet_error
@@ -54,8 +58,12 @@ func send_input_3D(packet: Dictionary) -> void:
 func listen_for_connection_packets() -> void:
 	if e_client.get_available_packet_count() > 0:
 		var packet = e_client.get_var()
-		if !connected:
-			_handle_connection_response(packet)
+		var is_valid_packet : bool = packet_manager_c.validate_packet(packet, SettingsMp.SERVER_PACKET_TYPES.CONNECTION_RESPONSE)
+		if !connected and is_valid_packet:
+			var packet_dict : Dictionary = packet
+			_handle_connection_response(packet_dict)
+		else:
+			print("invalid packet: ", packet)
 
 
 func listen_for_lobby_packets() -> void:
@@ -127,28 +135,21 @@ func _handle_world_state_response(packet: Variant) -> void:
 # receive connection response packet from the server and parse it
 # save the server's authoritative initial orientation for the player
 # update the client wrapper's state to waiting for lobby
-func _handle_connection_response(packet: Variant) -> void:
-	match typeof(packet):
-		TYPE_DICTIONARY:
-			if not packet.has("init"):
-				print("received invalid packet: ")
-				print(packet)
-				return
-			
-			print("Connected: %s" % packet)
-			connected = true
-			pending = false
-			
-			# unpack the response packet
-			player_id = packet["init"]["player_id"]
-			var init_position : Vector3 = packet["init"]["position"]
-			var init_rotation: Vector3 = packet["init"]["rotation"]
-			
-			SettingsMp.init_player_orientation_3D(init_position, init_rotation)
-			
-			_update_client_state(Client_Wrapper.CLIENT_STATE_TYPES.WAITING_IN_LOBBY)
-			
-			SignalBusMp.update_client_label.emit(player_id)
+func _handle_connection_response(packet: Dictionary) -> void:
+	print("Connected: %s" % packet)
+	connected = true
+	pending = false
+	
+	# unpack the response packet
+	player_id = packet["player_init_data"]["player_id"]
+	var init_position : Vector3 = packet["player_init_data"]["position"]
+	var init_rotation: Vector3 = packet["player_init_data"]["rotation"]
+	
+	SettingsMp.init_player_orientation_3D(init_position, init_rotation)
+	
+	_update_client_state(Client_Wrapper.CLIENT_STATE_TYPES.WAITING_IN_LOBBY)
+	
+	SignalBusMp.update_client_label.emit(player_id)
 
 
 func _update_client_state(state: int):

@@ -23,15 +23,19 @@ func start_server() -> bool:
 func _check_for_new_client_connections() -> void:
 	if e_server.is_connection_available():
 		var peer : PacketPeerUDP = e_server.take_connection()
-		var packet = peer.get_packet()
+		var packet = peer.get_var()
 		match typeof(packet):
-			TYPE_PACKED_BYTE_ARRAY:
-				var connection_string : String = packet.get_string_from_utf8()
-				if connection_string == "hello, world!":
+			TYPE_DICTIONARY:
+				# need to verify packet here #
+				if packet["version"] != SettingsMp.protocol_version:
+					print("invalid packet version: ", packet["version"])
+					return
+				# -------------------------- #
+				if packet["passcode"] == "hello, world!":
 					_accept_new_peer_connection_3D(peer)
 					
 					print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
-					print("Received data: %s" % [packet.get_string_from_utf8()])
+					print("Received data: %s" % [packet])
 					
 					SignalBusMp.update_peer_count.emit(peers.size())
 					
@@ -49,9 +53,10 @@ func _accept_new_peer_connection_3D(peer : PacketPeerUDP) -> void:
 	var init_position : Vector3 = world_state_manager_s.server_player_dict[player_id].position
 	var init_rotation : Vector3 = world_state_manager_s.server_player_dict[player_id].rotation
 	
-	var packet_interface := SERVER_PACKET_INTERFACE.player_initialization_response.new(player_id, init_position, init_rotation)
-	var packet_dict : Dictionary = packet_interface.packet_as_dict()
-	var response : Dictionary = { "init": packet_dict }
+	#var packet_interface := SERVER_PACKET_INTERFACE.player_initialization_response.new(player_id, init_position, init_rotation)
+	var interface := SERVER_PACKET_INTERFACE.Connection_Response.new(player_id, init_position, init_rotation)
+	var response : Dictionary = interface._to_dictionary()
+	#var response : Dictionary = { "init": packet_dict }
 	print(response)
 	
 	%Network_Layer_S.simulate_sending_packet_over_network(peer, response)

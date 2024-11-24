@@ -15,6 +15,9 @@ var _is_game_world_setup := false
 var _is_match_countdown_started := false
 var _countdown_timer : Timer
 
+var username : String = "John Wick"
+var passcode : String = "hello, world!"
+
 func _ready() -> void:
 	SignalBusMp.update_client_label.connect(update_label)
 	SignalBusMp.setup_settings_toggle.connect(setup_settings_menu)

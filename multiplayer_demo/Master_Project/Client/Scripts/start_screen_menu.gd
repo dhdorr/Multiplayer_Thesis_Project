@@ -16,10 +16,6 @@ func _on_connect_button_pressed() -> void:
 	print("waiting for server connection response...")
 	# ----------------------------- #
 	
-	# Remove Menu
-	#add_sibling(WORLD_3D.instantiate())
-	#add_sibling(CHARACTER_CONTROLLER_3D.instantiate())
-	#queue_free()
 
 
 func _on_quit_button_pressed() -> void:
