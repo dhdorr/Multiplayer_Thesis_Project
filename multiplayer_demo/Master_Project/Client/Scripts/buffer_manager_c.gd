@@ -41,10 +41,17 @@ func _physics_process(delta: float) -> void:
 			consumable_counter += 1
 		
 
-func start_buffer_on_receipt(recv: Dictionary) -> void:
+
+func buffer_world_state_packet(packet : Dictionary) -> void:
+	if waiting_for_first_packet:
+		start_buffer_on_receipt()
+	append_to_buffer_dict(packet)
+
+
+func start_buffer_on_receipt() -> void:
 	input_manager_c = get_tree().get_first_node_in_group("input_mgr")
 	ghost_manager_c = get_tree().get_first_node_in_group("ghost_mgr")
-	buffer_d.append(recv)
+	#buffer_d.append(recv)
 	is_buffer_ready = true
 	waiting_for_first_packet = false
 
@@ -63,9 +70,10 @@ func remove_from_buffer() -> void:
 
 
 func consume_from_queue() -> void:
-	var item : Dictionary = consumable_queue.pop_front()
+	var world_state : Dictionary = consumable_queue.pop_front()
 	
-	if item.has(connection_manager_c.player_id):
-		input_manager_c.update_player_authoritative_position(item)
+	if world_state["player_states"].has(connection_manager_c.player_id):
+		# TODO
+		input_manager_c.update_player_authoritative_position(world_state["player_states"][connection_manager_c.player_id])
 	
-	ghost_manager_c.spawn_peer_characters_2(item)
+	ghost_manager_c.spawn_peer_characters_2(world_state["player_states"])

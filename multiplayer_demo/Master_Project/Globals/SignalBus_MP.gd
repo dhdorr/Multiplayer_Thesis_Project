@@ -11,6 +11,7 @@ signal update_client_label
 signal initialize_player_position_on_player(position: Vector3, rotation: Vector3)
 signal update_client_state
 signal start_match_countdown_animation
+signal player_id_received(id: int)
 # ------------------- #
 
 # Server-side signals #

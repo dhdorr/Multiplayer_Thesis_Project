@@ -53,13 +53,21 @@ class Connection_Request:
 
 class Input_Packet:
 	var _message_id : int = SettingsMp.CLIENT_PACKET_TYPES.INPUT_PACKET
+	var _player_id : int
 	var _input_vector : Vector3
 	var _rotation_vector : Vector3
 	var _action_command : int
 	var _packet_id : int
 	var _client_version : String = SettingsMp.protocol_version
 	
-	func _init(direction : Vector3, rotation : Vector3, action : int, packet_id: int) -> void:
+	func _init(direction : Vector3, rotation : Vector3, action : int, packet_id: int, player_id : int) -> void:
+		_input_vector = direction
+		_rotation_vector = rotation
+		_action_command = action
+		_packet_id = packet_id
+		_player_id = player_id
+	
+	func regenerate_packet(direction : Vector3, rotation : Vector3, action : int, packet_id: int) -> void:
 		_input_vector = direction
 		_rotation_vector = rotation
 		_action_command = action
@@ -72,6 +80,7 @@ class Input_Packet:
 			"rotation" = _rotation_vector,
 			"action" = _action_command,
 			"packet_id" = _packet_id,
+			"player_id" = _player_id,
 			"version" = _client_version,
 		}
 		return my_dict

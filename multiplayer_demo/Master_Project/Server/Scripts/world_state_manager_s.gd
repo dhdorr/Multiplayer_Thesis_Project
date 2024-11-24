@@ -28,25 +28,14 @@ var count := 0
 
 var server_player_dict : Dictionary
 
-func get_input_dict(packet : Dictionary) -> void:
-	var input_dict : Dictionary = { 
-		"player_id": packet["player_id"], 
-		"packet_id": packet["packet_id"], 
-		"input_vec": packet["input_vector"],
-		"skin_rotation": packet["skin_rotation"],
-		}
-	player_packets.append(input_dict)
-
-# this doesn't work :( vvv
-#func get_input_dict_3D(packet : CLIENT_PACKET_INTERFACE) -> void:
+func register_pleyer_input(packet : Dictionary) -> void:
 	#var input_dict : Dictionary = { 
-		#"player_id": packet._player_id, 
-		#"packet_id": packet._packet_id, 
-		#"input_vec": packet._input_vector,
-		#"skin_rotation": packet._skin_rotation,
+		#"player_id": packet["player_id"], 
+		#"packet_id": packet["packet_id"], 
+		#"input_vec": packet["direction"],
+		#"skin_rotation": packet["rotation"],
 		#}
-	#player_packets.append(input_dict)
-# -------------------------------------------- #
+	player_packets.append(packet)
 
 
 func _ready() -> void:
@@ -56,31 +45,41 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	if count >= SettingsMp.get_server_tick_rate():
+		var world_state_update := SERVER_PACKET_INTERFACE.World_State_Update.new(update_packet_id)
+		
 		for pp in player_packets:
-			
 			# Disable if not using 3D #
 			var player_velocity : Vector3 = server_player_dict[pp["player_id"]].velocity
 			var player_basis : Basis = server_player_dict[pp["player_id"]].global_basis
-			var desired_velocity : Vector3 = calculate_movement_3D(delta, player_velocity, pp["input_vec"], player_basis)
+			var desired_velocity : Vector3 = calculate_movement_3D(delta, player_velocity, pp["direction"], player_basis)
 			server_player_dict[pp["player_id"]].velocity = desired_velocity
 			
 			var player_ghost : PLAYER_SKIN_SERVER = server_player_dict[pp["player_id"]]
-			player_ghost.rotate_skin(pp["skin_rotation"])
+			player_ghost.rotate_skin(pp["rotation"])
 			
 			server_player_dict[pp["player_id"]].move_and_slide()
 			# ----------------------- #
 			
-			world_state_dict[pp["player_id"]] = {
-				"position": server_player_dict[pp["player_id"]].position, 
-				"rotation": server_player_dict[pp["player_id"]].rotation,
-				"skin_rotation": player_ghost.ghost_skin_3d.rotation,
-				"last_input": pp["input_vec"],
-				"packet_id": pp["packet_id"], 
-				"velocity": server_player_dict[pp["player_id"]].velocity,
-				"server_update_id": update_packet_id,
-				}
+			world_state_update.add_player_state(
+				pp["player_id"],
+				server_player_dict[pp["player_id"]].position,
+				server_player_dict[pp["player_id"]].rotation,
+				player_ghost.ghost_skin_3d.rotation,
+				server_player_dict[pp["player_id"]].velocity,
+				pp["direction"],
+				pp["packet_id"],
+			)
+			#world_state_dict[pp["player_id"]] = {
+				#"position": server_player_dict[pp["player_id"]].position, 
+				#"rotation": server_player_dict[pp["player_id"]].rotation,
+				#"skin_rotation": player_ghost.ghost_skin_3d.rotation,
+				#"last_input": pp["input_vec"],
+				#"packet_id": pp["packet_id"], 
+				#"velocity": server_player_dict[pp["player_id"]].velocity,
+				#"server_update_id": update_packet_id,
+				#}
 		if player_packets.size() > 0:
-			connection_manager_s.send_world_state_updates_to_clients_2(world_state_dict)
+			connection_manager_s.send_world_state_updates_to_clients_2(world_state_update._to_dictionary())
 			update_packet_id += 1
 			player_packets.clear()
 			

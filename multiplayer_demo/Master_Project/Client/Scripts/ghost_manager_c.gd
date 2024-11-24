@@ -9,10 +9,10 @@ var ghost_dict : Dictionary
 var prev_ghost_pos_dict : Dictionary
 
 
-func add_new_ghost(lobby_dict: Dictionary) -> bool:
+func add_new_ghost(lobby_player_list: Array[Dictionary]) -> bool:
 	var is_new_ghost_added := false
-	
-	for player_id : int in lobby_dict:
+	for lobby_player in lobby_player_list:
+		var player_id : int = lobby_player["player_id"]
 		if player_id == connection_manager_c.player_id:
 			continue
 		
@@ -21,13 +21,29 @@ func add_new_ghost(lobby_dict: Dictionary) -> bool:
 			var ghost : PLAYER_GHOST_CLIENT = PLAYER_GHOST_C_3D.instantiate()
 			ghost_dict[player_id] = ghost
 			
-			ghost.position = lobby_dict[player_id]["position"]
+			ghost.position = lobby_player["position"]
 			ghost._target_position = ghost.position
-			ghost.rotation = lobby_dict[player_id]["rotation"]
+			ghost.rotation = lobby_player["rotation"]
 			add_child(ghost)
 			prev_ghost_pos_dict[player_id] = ghost.position
 			print("ghost position: ", ghost.position)
 	return is_new_ghost_added
+	#for player_id : int in lobby_dict:
+		#if player_id == connection_manager_c.player_id:
+			#continue
+		#
+		#if not ghost_dict.has(player_id):
+			#is_new_ghost_added = true
+			#var ghost : PLAYER_GHOST_CLIENT = PLAYER_GHOST_C_3D.instantiate()
+			#ghost_dict[player_id] = ghost
+			#
+			#ghost.position = lobby_dict[player_id]["position"]
+			#ghost._target_position = ghost.position
+			#ghost.rotation = lobby_dict[player_id]["rotation"]
+			#add_child(ghost)
+			#prev_ghost_pos_dict[player_id] = ghost.position
+			#print("ghost position: ", ghost.position)
+	#return is_new_ghost_added
 
 
 func spawn_peer_characters_2(world_state: Dictionary) -> void:

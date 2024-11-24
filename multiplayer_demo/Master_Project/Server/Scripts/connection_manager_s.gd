@@ -4,6 +4,7 @@ class_name Connection_Manager_Server extends Node
 @onready var e_server := UDPServer.new()
 @export var dest_port : int = 0
 @onready var world_state_manager_s: World_State_Manager = %World_State_Manager_S
+@onready var packet_manager_s: Packet_Manager_S = %Packet_Manager_S
 
 var _server_state : int
 
@@ -68,42 +69,60 @@ func send_world_state_updates_to_clients_2(world_state : Dictionary) -> void:
 		%Network_Layer_S.simulate_sending_update_over_network_2(peer, world_state)
 
 
-func _receive_client_input_packets() -> void:
-	for peer in peers:
-		if peer.get_available_packet_count() > 0:
-			var packet = peer.get_var()
-			
-			match typeof(packet):
-				TYPE_DICTIONARY:
-					# pass to world state manager
-					world_state_manager_s.get_input_dict(packet)
+func _handle_client_input_packet(packet: Dictionary) -> void:
+	world_state_manager_s.register_pleyer_input(packet)
 
 
 func _update_lobby_to_clients() -> void:
-	var lobby_state_dict : Dictionary = { "lobby_state": {} }
-	#var status_dict : Dictionary = { "status": SettingsMp.GLOBAL_LOBBY_STATUS.OPEN }
-	var players_dict : Dictionary = {}
+	var lobby_update := SERVER_PACKET_INTERFACE.Lobby_Update.new(SettingsMp.GLOBAL_LOBBY_STATUS.OPEN)
+	
 	for player_id in world_state_manager_s.server_player_dict.keys():
 		var player : CharacterBody3D = world_state_manager_s.server_player_dict[player_id]
-		var player_orientation_dict : Dictionary = {}
-		player_orientation_dict["position"] = player.position
-		player_orientation_dict["rotation"] = player.rotation
-		players_dict[player_id] = player_orientation_dict
+		lobby_update.add_new_player_to_list(
+			player_id,
+			"needs username - " + str(player_id),
+			player.position,
+			player.rotation,
+			SettingsMp.PLAYER_SKIN_ID.VIKING,
+		)
 	
-	lobby_state_dict["lobby_state"]["status"] = SettingsMp.GLOBAL_LOBBY_STATUS.OPEN
-	lobby_state_dict["lobby_state"]["players"] = players_dict
+	
+	#var lobby_state_dict : Dictionary = { "lobby_state": {} }
+	##var status_dict : Dictionary = { "status": SettingsMp.GLOBAL_LOBBY_STATUS.OPEN }
+	#var players_dict : Dictionary = {}
+	#for player_id in world_state_manager_s.server_player_dict.keys():
+		#var player : CharacterBody3D = world_state_manager_s.server_player_dict[player_id]
+		#var player_orientation_dict : Dictionary = {}
+		#player_orientation_dict["position"] = player.position
+		#player_orientation_dict["rotation"] = player.rotation
+		#players_dict[player_id] = player_orientation_dict
+	#
+	#lobby_state_dict["lobby_state"]["status"] = SettingsMp.GLOBAL_LOBBY_STATUS.OPEN
+	#lobby_state_dict["lobby_state"]["players"] = players_dict
 	
 	print("Server side lobby state:")
-	print(lobby_state_dict)
+	print(lobby_update)
 	
-	send_world_state_updates_to_clients_2(lobby_state_dict)
+	send_world_state_updates_to_clients_2(lobby_update._to_dictionary())
 
-
+# TODO start the match
 func start_match_on_clients() -> void:
-	var lobby_state_dict : Dictionary = { "lobby_state": {} }
-	#var status_dict : Dictionary = { "status": SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH }
-	lobby_state_dict["lobby_state"]["status"] = SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH
-	send_world_state_updates_to_clients_2(lobby_state_dict)
+	var lobby_update := SERVER_PACKET_INTERFACE.Lobby_Update.new(SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH)
+	
+	for player_id in world_state_manager_s.server_player_dict.keys():
+		var player : CharacterBody3D = world_state_manager_s.server_player_dict[player_id]
+		lobby_update.add_new_player_to_list(
+			player_id,
+			"needs username - " + str(player_id),
+			player.position,
+			player.rotation,
+			SettingsMp.PLAYER_SKIN_ID.VIKING,
+		)
+	
+	#var lobby_state_dict : Dictionary = { "lobby_state": {} }
+	##var status_dict : Dictionary = { "status": SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH }
+	#lobby_state_dict["lobby_state"]["status"] = SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH
+	send_world_state_updates_to_clients_2(lobby_update._to_dictionary())
 
 
 func poll_server() -> void:
@@ -113,4 +132,8 @@ func listen_for_new_connections() -> void:
 	_check_for_new_client_connections()
 
 func listen_for_client_input_packets() -> void:
-	_receive_client_input_packets()
+	for peer in peers:
+		if peer.get_available_packet_count() > 0:
+			var packet = peer.get_var()
+			if packet_manager_s.validate_packet(packet, SettingsMp.CLIENT_PACKET_TYPES.INPUT_PACKET):
+				_handle_client_input_packet(packet)

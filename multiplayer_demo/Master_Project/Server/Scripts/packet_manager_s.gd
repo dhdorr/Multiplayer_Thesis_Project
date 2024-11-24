@@ -10,3 +10,21 @@ func generate_world_state_update_packet(pos : Vector2) -> void:
 func send_world_state_update() -> void:
 	
 	connection_manager_s.send_world_state_updates_to_clients_2(packets_dict)
+
+
+func validate_packet(packet : Variant, expected_packet_type : int) -> bool:
+	match typeof(packet):
+		TYPE_DICTIONARY:
+			if not packet.has_all(["version", "message_id"]):
+				print("invalid packet structure: ", packet)
+				return false
+			if packet["version"] != SettingsMp.protocol_version:
+				print("invalid packet version: ", packet)
+				return false
+			if packet["message_id"] != expected_packet_type:
+				print("invalid packet type: ", packet)
+				return false
+			
+			return true
+	
+	return false

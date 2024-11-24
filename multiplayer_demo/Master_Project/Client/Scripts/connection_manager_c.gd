@@ -27,8 +27,8 @@ func _connect_to_server() -> Error:
 	# Try to contact server
 	# packet manager creates connection string packet with relevant information
 	var packet : Dictionary = packet_manager_c.create_connection_string_packet()
-	#var put_packet_error := e_client.put_packet("hello, world!".to_utf8_buffer())
 	var put_packet_error := e_client.put_var(packet)
+	
 	if put_packet_error != OK:
 		print_debug(put_packet_error)
 		return put_packet_error
@@ -63,73 +63,48 @@ func listen_for_connection_packets() -> void:
 			var packet_dict : Dictionary = packet
 			_handle_connection_response(packet_dict)
 		else:
-			print("invalid packet: ", packet)
+			print("invalid connection response packet: ", packet)
 
 
 func listen_for_lobby_packets() -> void:
 	if e_client.get_available_packet_count() > 0:
 		var packet = e_client.get_var()
-		_handle_lobby_packets(packet)
+		if packet_manager_c.validate_packet(packet, SettingsMp.SERVER_PACKET_TYPES.LOBBY_UPDATE):
+			_handle_lobby_packets(packet)
+		else:
+			print("invalid lobby update packet")
 
 
 func listen_for_world_state_packets() -> void:
 	if e_client.get_available_packet_count() > 0:
 		var packet = e_client.get_var()
-		_handle_world_state_response(packet)
+		if packet_manager_c.validate_packet(packet, SettingsMp.SERVER_PACKET_TYPES.WORLD_STATE_UPDATE):
+			_handle_world_state_response(packet)
+		else:
+			print("invalid world state update packet: ", packet)
 
 
-func _handle_lobby_packets(packet: Variant) -> void:
-	match typeof(packet):
-		TYPE_DICTIONARY:
-			# var players_dict : Dictionary = { 1: { "position": Vector3.ZERO, "rotation": Vector3.ZERO }, 2: { "position": Vector3.ZERO, "rotation": Vector3.ZERO } }
-			# var lobby_state_dict : Dictionary = {}
-			# lobby_state_dict["players"] = players_dict
-			# lobby_state_dict["count"] = 2
-			
-			# TODO do something with the packet...
-			# these are lobby packets so maybe load in other player's ghosts
-			# display nameplates or lobby count updates or something
-			
-			# { "lobby_state" : key=String, val=Dictionary
-			#		{ key=String, val=Variant
-			# 			"players": { key=int, val=Dictionary
-			# 				1 : { "position" : 0, "rotation" : 0 },
-			# 				2 : { "position" : 1, "rotation" : 1 },
-			#			},
-			#			"count": 2,
-			#			"status": "closed",
-			#		},
-			# } 
-			
-			if not packet.has("lobby_state"):
-				print("packet does not match lobby interface: ")
-				print(packet)
-				return
-			
-			# this is why I think I need a lobby manager now
-			var lobby_status = packet["lobby_state"]["status"]
-			if lobby_status == SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH:
-				# send a signal to start the countdown to begin the match
-				print("start match")
-				_update_client_state(Client_Wrapper.CLIENT_STATE_TYPES.STARTING_MATCH)
-				return
-			
-			var lobby_players_dict = packet["lobby_state"]["players"]
-			# possibly make a lobby manager instead?
-			var is_new_ghost_added : bool = ghost_manager_c.add_new_ghost(lobby_players_dict)
-			if is_new_ghost_added:
-				# bubble up some signals that updates client lobby ui
-				print("new ghost added")
+func _handle_lobby_packets(packet: Dictionary) -> void:
+	# TODO major todo, need to define lobby interface on server first
+	
+	var lobby_players_list : Array[Dictionary] = packet["list_of_players"]
+	# possibly make a lobby manager instead?
+	var is_new_ghost_added : bool = ghost_manager_c.add_new_ghost(lobby_players_list)
+	if is_new_ghost_added:
+		# bubble up some signals that updates client lobby ui
+		print("new ghost added")
+	
+	# this is why I think I need a lobby manager now
+	var lobby_status = packet["lobby_status"]
+	if lobby_status == SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH:
+		# send a signal to start the countdown to begin the match
+		print("start match")
+		_update_client_state(Client_Wrapper.CLIENT_STATE_TYPES.STARTING_MATCH)
+		return
 
 
-func _handle_world_state_response(packet: Variant) -> void:
-	match typeof(packet):
-		TYPE_DICTIONARY:
-			if buffer_manager_c.waiting_for_first_packet:
-				buffer_manager_c.start_buffer_on_receipt(packet)
-			else:
-				# Process update from the authoritative server
-				buffer_manager_c.append_to_buffer_dict(packet)
+func _handle_world_state_response(packet: Dictionary) -> void:
+	buffer_manager_c.buffer_world_state_packet(packet)
 
 
 # receive connection response packet from the server and parse it
@@ -142,6 +117,8 @@ func _handle_connection_response(packet: Dictionary) -> void:
 	
 	# unpack the response packet
 	player_id = packet["player_init_data"]["player_id"]
+	SignalBusMp.player_id_received.emit(player_id)
+	
 	var init_position : Vector3 = packet["player_init_data"]["position"]
 	var init_rotation: Vector3 = packet["player_init_data"]["rotation"]
 	
