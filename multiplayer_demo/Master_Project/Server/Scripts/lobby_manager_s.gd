@@ -13,6 +13,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if lobby_status == SettingsMp.GLOBAL_LOBBY_STATUS.CLOSED:
+		# this should become, when all players are READY, start match
 		lobby_status = SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH
 		print("tell clients to start match...")
 		SignalBusMp.lobby_start_match.emit()
@@ -50,9 +51,6 @@ func send_out_lobby_update() -> void:
 
 
 class Player:
-	# technically may not need pos or rot
-	var _position : Vector3
-	var _rotation : Vector3
 	var _username : String
 	var _player_id : int
 	var _skin_id : int

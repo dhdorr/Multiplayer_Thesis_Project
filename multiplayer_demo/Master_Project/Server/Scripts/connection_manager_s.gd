@@ -41,8 +41,6 @@ func _check_for_new_client_connections() -> void:
 			
 			SignalBusMp.update_peer_count.emit(peers.size())
 			
-			
-			#_update_lobby_to_clients()
 
 
 # create and init the new player, then respond to that player

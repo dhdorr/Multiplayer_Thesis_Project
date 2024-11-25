@@ -46,12 +46,6 @@ func _update_peer_count(count: int) -> void:
 	lobby_manager_s.send_out_lobby_update()
 	
 	_peer_count = count
-	#print("Players in the lobby: ", _peer_count)
-	#
-	#if _peer_count >= MAX_LOBBY_SIZE:
-		#print("Lobby is full - Starting Match!")
-		#_set_server_state(SERVER_STATE_TYPES.STARTING_MATCH)
-		#SignalBusMp.update_peer_count.disconnect(_update_peer_count)
 
 
 func _start_match():
