@@ -6,6 +6,7 @@ const MAX_LOBBY_SIZE : int = 2
 
 @onready var connection_manager_s: Connection_Manager_Server = %Connection_Manager_S
 @onready var world_state_manager_s: World_State_Manager = %World_State_Manager_S
+@onready var lobby_manager_s: LOBBY_MANAGER_S = %Lobby_Manager_S
 
 var _server_state := SERVER_STATE_TYPES.OFF
 var _peer_count : int = 0 
@@ -14,6 +15,7 @@ var _is_match_countdown_started := false
 func _ready() -> void:
 	SignalBusMp.setup_settings_toggle.connect(setup_settings_menu)
 	SignalBusMp.update_peer_count.connect(_update_peer_count)
+	SignalBusMp.lobby_start_match.connect(_set_server_state.bind(SERVER_STATE_TYPES.STARTING_MATCH))
 	
 	_start_server()
 
@@ -41,13 +43,15 @@ func setup_settings_menu(proc_type: int) -> void:
 
 # Called from signal update_peer_count
 func _update_peer_count(count: int) -> void:
-	_peer_count = count
-	print("Players in the lobby: ", _peer_count)
+	lobby_manager_s.send_out_lobby_update()
 	
-	if _peer_count >= MAX_LOBBY_SIZE:
-		print("Lobby is full - Starting Match!")
-		_set_server_state(SERVER_STATE_TYPES.STARTING_MATCH)
-		SignalBusMp.update_peer_count.disconnect(_update_peer_count)
+	_peer_count = count
+	#print("Players in the lobby: ", _peer_count)
+	#
+	#if _peer_count >= MAX_LOBBY_SIZE:
+		#print("Lobby is full - Starting Match!")
+		#_set_server_state(SERVER_STATE_TYPES.STARTING_MATCH)
+		#SignalBusMp.update_peer_count.disconnect(_update_peer_count)
 
 
 func _start_match():

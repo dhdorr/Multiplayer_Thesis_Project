@@ -5,6 +5,7 @@ class_name Connection_Manager_Server extends Node
 @export var dest_port : int = 0
 @onready var world_state_manager_s: World_State_Manager = %World_State_Manager_S
 @onready var packet_manager_s: Packet_Manager_S = %Packet_Manager_S
+@onready var lobby_manager_s: LOBBY_MANAGER_S = %Lobby_Manager_S
 
 var _server_state : int
 
@@ -24,42 +25,38 @@ func start_server() -> bool:
 func _check_for_new_client_connections() -> void:
 	if e_server.is_connection_available():
 		var peer : PacketPeerUDP = e_server.take_connection()
+		
 		var packet = peer.get_var()
-		match typeof(packet):
-			TYPE_DICTIONARY:
-				# need to verify packet here #
-				if packet["version"] != SettingsMp.protocol_version:
-					print("invalid packet version: ", packet["version"])
-					return
-				# -------------------------- #
-				if packet["passcode"] == "hello, world!":
-					_accept_new_peer_connection_3D(peer)
-					
-					print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
-					print("Received data: %s" % [packet])
-					
-					SignalBusMp.update_peer_count.emit(peers.size())
-					
-					_update_lobby_to_clients()
+		
+		if packet_manager_s.validate_packet(packet, SettingsMp.CLIENT_PACKET_TYPES.CONNECTION_REQUEST, "hello, world!"):
+			# confirm connection
+			peers.append(peer)
+			# add new player to the lobby and update the whole lobby
+			var player_id : int = lobby_manager_s.add_new_player_to_lobby(packet["username"], packet["skin_id"])
+			
+			_accept_new_peer_connection_3D(peer, player_id)
+			
+			print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
+			print("Received data: %s" % [packet])
+			
+			SignalBusMp.update_peer_count.emit(peers.size())
+			
+			
+			#_update_lobby_to_clients()
 
 
-# Disable if not using 3D #
-func _accept_new_peer_connection_3D(peer : PacketPeerUDP) -> void:
-	# confirm connection
-	peers.append(peer)
-	
-	var player_id : int = peers.size()
-	world_state_manager_s.init_player_positions_3D(player_id)
+# create and init the new player, then respond to that player
+func _accept_new_peer_connection_3D(peer : PacketPeerUDP, player_id : int) -> void:
+	var player_orientation : Array[Vector3] = world_state_manager_s.init_player_positions_3D(player_id)
 	
 	var init_position : Vector3 = world_state_manager_s.server_player_dict[player_id].position
 	var init_rotation : Vector3 = world_state_manager_s.server_player_dict[player_id].rotation
 	
-	#var packet_interface := SERVER_PACKET_INTERFACE.player_initialization_response.new(player_id, init_position, init_rotation)
 	var interface := SERVER_PACKET_INTERFACE.Connection_Response.new(player_id, init_position, init_rotation)
 	var response : Dictionary = interface._to_dictionary()
-	#var response : Dictionary = { "init": packet_dict }
 	print(response)
 	
+	# let client know they are connected
 	%Network_Layer_S.simulate_sending_packet_over_network(peer, response)
 # ----------------------- #
 
@@ -73,37 +70,11 @@ func _handle_client_input_packet(packet: Dictionary) -> void:
 	world_state_manager_s.register_pleyer_input(packet)
 
 
-func _update_lobby_to_clients() -> void:
-	var lobby_update := SERVER_PACKET_INTERFACE.Lobby_Update.new(SettingsMp.GLOBAL_LOBBY_STATUS.OPEN)
-	
-	for player_id in world_state_manager_s.server_player_dict.keys():
-		var player : CharacterBody3D = world_state_manager_s.server_player_dict[player_id]
-		lobby_update.add_new_player_to_list(
-			player_id,
-			"needs username - " + str(player_id),
-			player.position,
-			player.rotation,
-			SettingsMp.PLAYER_SKIN_ID.VIKING,
-		)
-	
-	
-	#var lobby_state_dict : Dictionary = { "lobby_state": {} }
-	##var status_dict : Dictionary = { "status": SettingsMp.GLOBAL_LOBBY_STATUS.OPEN }
-	#var players_dict : Dictionary = {}
-	#for player_id in world_state_manager_s.server_player_dict.keys():
-		#var player : CharacterBody3D = world_state_manager_s.server_player_dict[player_id]
-		#var player_orientation_dict : Dictionary = {}
-		#player_orientation_dict["position"] = player.position
-		#player_orientation_dict["rotation"] = player.rotation
-		#players_dict[player_id] = player_orientation_dict
-	#
-	#lobby_state_dict["lobby_state"]["status"] = SettingsMp.GLOBAL_LOBBY_STATUS.OPEN
-	#lobby_state_dict["lobby_state"]["players"] = players_dict
-	
+func update_lobby_to_clients(lobby_update : Dictionary) -> void:
 	print("Server side lobby state:")
 	print(lobby_update)
 	
-	send_world_state_updates_to_clients_2(lobby_update._to_dictionary())
+	send_world_state_updates_to_clients_2(lobby_update)
 
 # TODO start the match
 func start_match_on_clients() -> void:
@@ -114,14 +85,10 @@ func start_match_on_clients() -> void:
 		lobby_update.add_new_player_to_list(
 			player_id,
 			"needs username - " + str(player_id),
+			SettingsMp.PLAYER_SKIN_ID.VIKING,
 			player.position,
 			player.rotation,
-			SettingsMp.PLAYER_SKIN_ID.VIKING,
 		)
-	
-	#var lobby_state_dict : Dictionary = { "lobby_state": {} }
-	##var status_dict : Dictionary = { "status": SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH }
-	#lobby_state_dict["lobby_state"]["status"] = SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH
 	send_world_state_updates_to_clients_2(lobby_update._to_dictionary())
 
 

@@ -16,4 +16,5 @@ signal player_id_received(id: int)
 
 # Server-side signals #
 signal update_peer_count(count: int)
+signal lobby_start_match
 # ------------------- #

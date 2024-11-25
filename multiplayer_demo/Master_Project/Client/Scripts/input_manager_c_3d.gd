@@ -174,9 +174,3 @@ func _on_prediction_check_button_toggled(toggled_on: bool) -> void:
 
 func _on_reconciliation_check_button_toggled(toggled_on: bool) -> void:
 	SettingsMp.enable_server_reconciliation = toggled_on
-
-# Use signals to grab position from memory
-#func init_player_position(position: Vector3, rotation: Vector3) -> void:
-	##player.position = SettingsMp.player_initial_position
-	#player.position = position
-	#player.rotation = rotation

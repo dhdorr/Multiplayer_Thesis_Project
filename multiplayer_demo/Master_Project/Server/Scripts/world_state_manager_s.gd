@@ -96,9 +96,9 @@ func calculate_movement(player: CharacterBody2D, dir : Vector2, delta : float) -
 
 func init_player_positions(packet: Dictionary) -> void:
 	var new_player : CharacterBody2D = PLAYER_S.instantiate()
-	add_child(new_player)
-	server_player_dict[packet["player_id"]] = new_player
 	new_player.position = packet["position"]
+	server_player_dict[packet["player_id"]] = new_player
+	add_child(new_player)
 
 
 # Disable if not using 3D scenes #
@@ -123,7 +123,7 @@ func calculate_movement_3D(delta : float, player_velocity_ref : Vector3, directi
 	return player_velocity_ref
 
 # called from connection manager s
-func init_player_positions_3D(player_id: int) -> void:
+func init_player_positions_3D(player_id: int) -> Array[Vector3]:
 	var new_player : CharacterBody3D = PLAYER_S_3D.instantiate()
 	
 	
@@ -136,6 +136,7 @@ func init_player_positions_3D(player_id: int) -> void:
 	new_player.rotation = spawn_point.rotation
 	add_child(new_player)
 	server_player_dict[player_id] = new_player
+	return [spawn_point.position, spawn_point.rotation]
 
 
 func pick_spawn_point() -> int:

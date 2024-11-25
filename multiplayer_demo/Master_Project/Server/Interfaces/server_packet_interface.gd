@@ -1,22 +1,5 @@
 class_name SERVER_PACKET_INTERFACE extends Node
 
-class player_initialization_response:
-	var _position	: Vector3
-	var _player_id	: int
-	var _rotation	: Vector3
-	
-	func _init(player_id: int, position: Vector3, rotation: Vector3) -> void:
-		_player_id = player_id
-		_position = position
-		_rotation = rotation
-	
-	func packet_as_dict() -> Dictionary:
-		return {
-			"player_id": _player_id,
-			"position": _position,
-			"rotation": _rotation,
-		}
-
 
 class World_State_Update:
 	# may become an array[dictionary], but would require changes in buffer manager on the cliet
@@ -78,7 +61,7 @@ class Lobby_Update:
 	func _init(status : int) -> void:
 		_lobby_status = status
 	
-	func add_new_player_to_list(player_id : int, username : String, position : Vector3, rotation : Vector3, skin_id : int) -> void:
+	func add_new_player_to_list(player_id : int, username : String, skin_id : int, position : Vector3, rotation : Vector3) -> void:
 		var new_player : Dictionary = {
 			"player_id" = player_id,
 			"username" = username,
