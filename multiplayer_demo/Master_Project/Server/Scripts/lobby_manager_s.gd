@@ -22,7 +22,6 @@ func _process(delta: float) -> void:
 		if _all_players_ready:
 			# this should become, when all players are READY, start match
 			lobby_status = SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH
-			print("tell clients to start match...")
 			SignalBusMp.lobby_start_match.emit()
 
 
@@ -32,7 +31,6 @@ func add_new_player_to_lobby(username : String, skin_id : int) -> int:
 	
 	var player := LOBBY_MANAGER_S.Player.new(username, player_id, skin_id, false)
 	var player_dict : Dictionary = player._to_dictionary()
-	print(player_dict)
 	
 	_lobby_player_list.append(player_dict)
 	_update_lobby_status()
@@ -43,15 +41,12 @@ func add_new_player_to_lobby(username : String, skin_id : int) -> int:
 func _update_lobby_status() -> void:
 	if _lobby_player_list.size() == MAX_LOBBY_SIZE:
 		lobby_status = SettingsMp.GLOBAL_LOBBY_STATUS.CLOSED
-	print("Lobby Status: ", lobby_status)
 
 
 func update_lobby_player_status(player_id : int, is_ready : bool):
 	for player in _lobby_player_list:
 		if player["player_id"] == player_id:
 			player["is_ready"] = is_ready
-			print("someone readied up...")
-			print(_lobby_player_list)
 	
 	send_out_lobby_update()
 

@@ -25,7 +25,6 @@ func _create_new_nameplates(player : Dictionary) -> void:
 	var should_create_nameplate : bool = true
 	for existing_player in lobby_player_list:
 		if player["player_id"] == existing_player["player_id"]:
-			print("Player already exists in the lobby: ", player)
 			should_create_nameplate = false
 			break
 	if should_create_nameplate:
@@ -40,11 +39,8 @@ func _create_new_nameplates(player : Dictionary) -> void:
 
 
 func _update_existing_nameplates(player : Dictionary) -> void:
-	print("updating player: ", player["player_id"])
 	for existing_nameplate : PLAYER_NAMEPLATE in nameplates:
-		#print("nameplate owned by: ", existing_nameplate.owning_player_id)
 		if existing_nameplate.owning_player_id == player["player_id"]:
-			print("nameplate owned by: ", existing_nameplate.owning_player_id)
 			var is_owner := false
 			if player["player_id"] == connection_manager_c.player_id:
 				is_owner = true

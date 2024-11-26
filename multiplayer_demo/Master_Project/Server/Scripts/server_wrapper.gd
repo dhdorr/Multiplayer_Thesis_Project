@@ -50,7 +50,6 @@ func _update_peer_count(count: int) -> void:
 
 
 func _start_match():
-	print("server is primed for the match...")
 	_set_server_state(SERVER_STATE_TYPES.RUNNING_MATCH)
 	lobby_manager_s.send_out_lobby_update()
 

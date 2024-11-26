@@ -37,7 +37,6 @@ func _process(delta: float) -> void:
 	elif _client_state == CLIENT_STATE_TYPES.WAITING_IN_LOBBY:
 		if not _is_lobby_setup:
 			_is_lobby_setup = true
-			print("display the lobby ui for ready up")
 			var _lobby_ui := LOBBY_UI.instantiate()
 			add_child(_lobby_ui)
 		
@@ -78,7 +77,6 @@ func setup_settings_menu(proc_type: int) -> void:
 # on timeout, player will receive controll of their character
 func _start_match() -> void:
 	_set_client_state(CLIENT_STATE_TYPES.PLAYING_GAME)
-	print("game on...")
 
 
 # load in the game world and character controller
@@ -102,7 +100,6 @@ func is_ready_to_send_input() -> bool:
 
 
 func _send_out_ready_up(is_ready : bool) -> void:
-	print("should send out ready up")
 	connection_manager_c.send_ready_up_to_server(is_ready)
 
 

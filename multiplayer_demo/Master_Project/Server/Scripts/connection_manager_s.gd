@@ -52,7 +52,6 @@ func _accept_new_peer_connection_3D(peer : PacketPeerUDP, player_id : int) -> vo
 	
 	var interface := SERVER_PACKET_INTERFACE.Connection_Response.new(player_id, init_position, init_rotation)
 	var response : Dictionary = interface._to_dictionary()
-	print(response)
 	
 	# let client know they are connected
 	%Network_Layer_S.simulate_sending_packet_over_network(peer, response)

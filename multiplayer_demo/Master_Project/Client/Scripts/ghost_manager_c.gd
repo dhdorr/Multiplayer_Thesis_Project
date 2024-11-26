@@ -24,7 +24,13 @@ func add_new_ghost(lobby_player_list: Array[Dictionary]) -> bool:
 			ghost.position = lobby_player["position"]
 			ghost._target_position = ghost.position
 			ghost.rotation = lobby_player["rotation"]
+			
 			add_child(ghost)
+			
+			ghost.nameplate.text = lobby_player["username"]
+			print("recieved name: ", lobby_player["username"])
+			print("...")
+			print(lobby_player)
 			prev_ghost_pos_dict[player_id] = ghost.position
 			print("ghost position: ", ghost.position)
 	return is_new_ghost_added

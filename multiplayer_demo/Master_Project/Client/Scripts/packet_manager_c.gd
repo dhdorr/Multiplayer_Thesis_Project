@@ -26,8 +26,8 @@ func _ready() -> void:
 
 func create_connection_string_packet() -> Dictionary:
 	var interface := CLIENT_PACKET_INTERFACE.Connection_Request.new( 
-		client_wrapper.username, 
-		client_wrapper.passcode, 
+		SettingsMp.client_username, 
+		SettingsMp.client_passcode, 
 		SettingsMp.PLAYER_SKIN_ID.VIKING
 		)
 	var my_dict : Dictionary = interface._to_dictionary()

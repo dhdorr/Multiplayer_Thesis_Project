@@ -4,11 +4,13 @@ class_name PLAYER_GHOST_CLIENT extends CharacterBody3D
 @onready var ghost_skin_3d: Node3D = %Ghost_Skin_3D
 @onready var warrior_project: Node3D = $Ghost_Skin_3D/Warrior_Project
 @onready var animation_player: AnimationPlayer = $Ghost_Skin_3D/Warrior_Project/AnimationPlayer
+@onready var nameplate: Label3D = $Nameplate
 
 var _target_position := self.position
 var _prev_target_position := Vector3.ZERO
 var _skin_rotation : Vector3
 var _last_input := Vector3.ZERO
+
 
 func _physics_process(delta: float) -> void:
 	if _last_input == Vector3.ZERO:

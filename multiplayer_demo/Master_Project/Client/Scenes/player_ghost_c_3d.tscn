@@ -18,10 +18,10 @@ unique_name_in_owner = true
 [node name="Warrior_Project" parent="Ghost_Skin_3D" instance=ExtResource("3_ibpkf")]
 
 [node name="SK_Item_WarriorSholderArmor" parent="Ghost_Skin_3D/Warrior_Project/Root/Skeleton3D" index="0"]
-transform = Transform3D(0.882852, 0.469511, -0.0114634, 0.469472, -0.882927, -0.00609633, -0.0129842, 1.42227e-06, -0.999919, -7.44715, 1.35376, -139.211)
+transform = Transform3D(0.998631, -0.0318966, 0.0414668, -0.0494566, -0.833999, 0.549548, 0.0170536, -0.550845, -0.834437, -2.73623, 12.9726, -135.939)
 
 [node name="SK_Item_SwordHolder" parent="Ghost_Skin_3D/Warrior_Project/Root/Skeleton3D" index="1"]
-transform = Transform3D(1, 1.51201e-08, 2.98076e-07, -1.30038e-08, 1, -2.43634e-06, -2.43539e-07, 1.31875e-06, 1, 1.03986e-05, -0.000322342, 0.000549316)
+transform = Transform3D(0.916371, 0.355676, -0.183737, -0.400086, 0.797611, -0.451387, -0.0139969, 0.487146, 0.873212, -21.9716, -53.9247, -15.1418)
 
 [node name="Nameplate" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 0)

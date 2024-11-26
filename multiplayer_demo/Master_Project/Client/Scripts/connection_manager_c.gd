@@ -16,14 +16,19 @@ var player_id : int = 0
 #var packet_interface := CLIENT_PACKET_INTERFACE.new()
 
 
-func _ready() -> void:
-	var my_id : int = randi_range(0,10)
-	e_client.bind(5000+my_id, "127.0.0.1")
-	e_client.connect_to_host("127.0.0.1", 12345)
+#func _ready() -> void:
+	#var my_id : int = randi_range(0,10)
+	#e_client.bind(5000+my_id, "127.0.0.1")
+	#e_client.connect_to_host("127.0.0.1", 12345)
 	
 	
 func _connect_to_server() -> Error:
 	_update_client_state(Client_Wrapper.CLIENT_STATE_TYPES.CONNECTING_TO_SERVER)
+	
+	var my_id : int = randi_range(0,10)
+	e_client.bind(5000+my_id, SettingsMp.server_ip_address)
+	e_client.connect_to_host(SettingsMp.server_ip_address, 12345)
+	
 	# Try to contact server
 	# packet manager creates connection string packet with relevant information
 	var packet : Dictionary = packet_manager_c.create_connection_string_packet()
@@ -49,7 +54,6 @@ func send_input_3D(packet: Dictionary) -> void:
 func send_ready_up_to_server(is_ready : bool) -> void:
 	var interface := CLIENT_PACKET_INTERFACE.Lobby_Ready_Up.new(is_ready, player_id)
 	send_input_3D(interface._to_dictionary())
-	print("is sending ready packet...")
 
 
 func listen_for_connection_packets() -> void:
@@ -88,15 +92,13 @@ func _handle_lobby_packets(packet: Dictionary) -> void:
 	
 	# possibly make a lobby manager instead?
 	var is_new_ghost_added : bool = ghost_manager_c.add_new_ghost(lobby_players_list)
-	if is_new_ghost_added:
+	#if is_new_ghost_added:
 		# bubble up some signals that updates client lobby ui
-		print("new ghost added")
 	
 	# this is why I think I need a lobby manager now
 	var lobby_status = packet["lobby_status"]
 	if lobby_status == SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH:
 		# send a signal to start the countdown to begin the match
-		print("start match")
 		_update_client_state(Client_Wrapper.CLIENT_STATE_TYPES.STARTING_MATCH)
 		return
 

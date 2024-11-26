@@ -100,7 +100,7 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 320.0
-color = Color(0.201527, 0.201527, 0.201527, 1)
+color = Color(0.2, 0.2, 0.2, 0.0588235)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

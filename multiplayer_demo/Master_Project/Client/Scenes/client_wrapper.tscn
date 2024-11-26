@@ -29,6 +29,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = 512.0
 offset_top = 64.0
 offset_right = 628.0
