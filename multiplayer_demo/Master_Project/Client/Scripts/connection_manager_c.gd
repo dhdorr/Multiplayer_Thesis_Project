@@ -46,13 +46,10 @@ func send_input_3D(packet: Dictionary) -> void:
 	%Network_Layer_C.simulate_sending_input_over_network_3D(e_client, packet)
 
 
-#func _physics_process(delta: float) -> void:
-	#if e_client.get_available_packet_count() > 0:
-		#var packet = e_client.get_var()
-		#if !connected:
-			#_handle_connection_response(packet)
-		#else:
-			#_handle_world_state_response(packet)
+func send_ready_up_to_server(is_ready : bool) -> void:
+	var interface := CLIENT_PACKET_INTERFACE.Lobby_Ready_Up.new(is_ready, player_id)
+	send_input_3D(interface._to_dictionary())
+	print("is sending ready packet...")
 
 
 func listen_for_connection_packets() -> void:
@@ -85,9 +82,10 @@ func listen_for_world_state_packets() -> void:
 
 
 func _handle_lobby_packets(packet: Dictionary) -> void:
-	# TODO major todo, need to define lobby interface on server first
-	
 	var lobby_players_list : Array[Dictionary] = packet["list_of_players"]
+	# goes to lobby ui
+	SignalBusMp.update_client_lobby.emit(lobby_players_list.duplicate())
+	
 	# possibly make a lobby manager instead?
 	var is_new_ghost_added : bool = ghost_manager_c.add_new_ghost(lobby_players_list)
 	if is_new_ghost_added:

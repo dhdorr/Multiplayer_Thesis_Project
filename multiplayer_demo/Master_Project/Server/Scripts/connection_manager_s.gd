@@ -58,6 +58,19 @@ func _accept_new_peer_connection_3D(peer : PacketPeerUDP, player_id : int) -> vo
 	%Network_Layer_S.simulate_sending_packet_over_network(peer, response)
 # ----------------------- #
 
+
+func receive_client_ready_up() -> void:
+	for peer in peers:
+		if peer.get_available_packet_count() > 0:
+			var packet = peer.get_var()
+			if packet_manager_s.validate_packet(packet, SettingsMp.CLIENT_PACKET_TYPES.LOBBY_READY_UP):
+				if not packet.has("is_ready"):
+					print("no ready status provided >:(")
+					print(packet)
+					return
+				lobby_manager_s.update_lobby_player_status(packet["player_id"], packet["is_ready"])
+
+
 func send_world_state_updates_to_clients_2(world_state : Dictionary) -> void:
 	for peer in peers:
 		#peer.join_multicast_group("asdf", "d")
@@ -74,27 +87,15 @@ func update_lobby_to_clients(lobby_update : Dictionary) -> void:
 	
 	send_world_state_updates_to_clients_2(lobby_update)
 
-# TODO start the match
-func start_match_on_clients() -> void:
-	var lobby_update := SERVER_PACKET_INTERFACE.Lobby_Update.new(SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH)
-	
-	for player_id in world_state_manager_s.server_player_dict.keys():
-		var player : CharacterBody3D = world_state_manager_s.server_player_dict[player_id]
-		lobby_update.add_new_player_to_list(
-			player_id,
-			"needs username - " + str(player_id),
-			SettingsMp.PLAYER_SKIN_ID.VIKING,
-			player.position,
-			player.rotation,
-		)
-	send_world_state_updates_to_clients_2(lobby_update._to_dictionary())
-
 
 func poll_server() -> void:
 	e_server.poll()
 
 func listen_for_new_connections() -> void:
 	_check_for_new_client_connections()
+
+func listen_for_client_ready_ups() -> void:
+	receive_client_ready_up()
 
 func listen_for_client_input_packets() -> void:
 	for peer in peers:

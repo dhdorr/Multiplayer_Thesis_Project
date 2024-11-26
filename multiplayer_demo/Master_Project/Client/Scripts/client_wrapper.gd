@@ -4,14 +4,17 @@ enum CLIENT_STATE_TYPES { HOME, CONNECTING_TO_SERVER, WAITING_IN_LOBBY, STARTING
 
 @onready var connection_manager_c: Connection_Manager_Client = %Connection_Manager_C
 @onready var start_screen_menu: Start_Screen_Menu = %Start_Screen_Menu
-@onready var match_countdown_ui: Control = %Match_Countdown_UI
+#@onready var match_countdown_ui: Control = %Match_Countdown_UI
 
+const LOBBY_UI = preload("res://Master_Project/Client/Scenes/lobby_ui.tscn")
 const CHARACTER_CONTROLLER_3D = preload("res://Master_Project/Client/Scenes/character_controller_3d.tscn")
 const WORLD_3D = preload("res://Master_Project/world_3d.tscn")
+const MATCH_COUNTDOWN_UI = preload("res://Master_Project/Client/Scenes/match_countdown_ui.tscn")
 
 var player_init : Dictionary
 var _client_state := CLIENT_STATE_TYPES.HOME
 var _is_game_world_setup := false
+var _is_lobby_setup := false
 var _is_match_countdown_started := false
 var _countdown_timer : Timer
 
@@ -22,6 +25,7 @@ func _ready() -> void:
 	SignalBusMp.update_client_label.connect(update_label)
 	SignalBusMp.setup_settings_toggle.connect(setup_settings_menu)
 	SignalBusMp.update_client_state.connect(_set_client_state)
+	SignalBusMp.client_ready_up.connect(_send_out_ready_up)
 
 
 func _process(delta: float) -> void:
@@ -29,19 +33,34 @@ func _process(delta: float) -> void:
 		return
 	elif _client_state == CLIENT_STATE_TYPES.CONNECTING_TO_SERVER:
 		connection_manager_c.listen_for_connection_packets()
+	
 	elif _client_state == CLIENT_STATE_TYPES.WAITING_IN_LOBBY:
+		if not _is_lobby_setup:
+			_is_lobby_setup = true
+			print("display the lobby ui for ready up")
+			var _lobby_ui := LOBBY_UI.instantiate()
+			add_child(_lobby_ui)
+		
 		if not _is_game_world_setup:
 			setup_game_world()
+		
+		# listen for incomming lobby updates & send out ready up updates
 		connection_manager_c.listen_for_lobby_packets()
+		
 	elif _client_state == CLIENT_STATE_TYPES.STARTING_MATCH:
 		# start a timer before giving the player control over their character
 		# give this a UI later
 		if not _is_match_countdown_started:
+			for l_ui in get_tree().get_nodes_in_group("lobby"):
+				l_ui.queue_free()
+			var countdown := MATCH_COUNTDOWN_UI.instantiate()
+			add_child(countdown)
 			_is_match_countdown_started = true
 			SignalBusMp.start_match_countdown_animation.emit()
 		
 	elif _client_state == CLIENT_STATE_TYPES.PLAYING_GAME:
 		connection_manager_c.listen_for_world_state_packets()
+	
 	else:
 		print("state error - invalid state: ", _client_state)
 		get_tree().quit()
@@ -80,6 +99,11 @@ func setup_game_world() -> void:
 func is_ready_to_send_input() -> bool:
 	var client_ready : bool = _client_state == CLIENT_STATE_TYPES.PLAYING_GAME and connection_manager_c.connected
 	return client_ready
+
+
+func _send_out_ready_up(is_ready : bool) -> void:
+	print("should send out ready up")
+	connection_manager_c.send_ready_up_to_server(is_ready)
 
 
 # TODO add in client side states, like how the server wrapper does it.

@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 	
 	if _server_state == SERVER_STATE_TYPES.WAITING_FOR_PLAYERS:
 		connection_manager_s.listen_for_new_connections()
+		connection_manager_s.listen_for_client_ready_ups()
 	elif _server_state == SERVER_STATE_TYPES.STARTING_MATCH:
 		if not _is_match_countdown_started:
 			_is_match_countdown_started = true
@@ -50,11 +51,8 @@ func _update_peer_count(count: int) -> void:
 
 func _start_match():
 	print("server is primed for the match...")
-	# change server state to be running the match
-	# tell connection manager to send 'start match' packet to clients
-	# connection_manager.start_matches_on_clients
 	_set_server_state(SERVER_STATE_TYPES.RUNNING_MATCH)
-	connection_manager_s.start_match_on_clients()
+	lobby_manager_s.send_out_lobby_update()
 
 
 func _start_server():

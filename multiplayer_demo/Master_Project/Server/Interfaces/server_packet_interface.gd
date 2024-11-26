@@ -61,13 +61,14 @@ class Lobby_Update:
 	func _init(status : int) -> void:
 		_lobby_status = status
 	
-	func add_new_player_to_list(player_id : int, username : String, skin_id : int, position : Vector3, rotation : Vector3) -> void:
+	func add_new_player_to_list(player_id : int, username : String, skin_id : int, position : Vector3, rotation : Vector3, is_ready : bool) -> void:
 		var new_player : Dictionary = {
 			"player_id" = player_id,
 			"username" = username,
 			"position" = position,
 			"rotation" = rotation,
 			"skin_id" = skin_id,
+			"is_ready" = is_ready,
 		}
 		_list_of_players.append(new_player)
 	
