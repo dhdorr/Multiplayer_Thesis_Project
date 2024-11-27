@@ -20,3 +20,11 @@ func move_the_ball() -> void:
 
 func _reflect_the_ball(foreward_vector : Vector3) -> void:
 	self.linear_velocity = -1 * foreward_vector.normalized() * temp_speed
+
+
+func forward_simulate(frame_count : int) -> void:
+	for f in frame_count:
+		var dir : Vector3 = self.linear_velocity.normalized()
+		var collision := move_and_collide(dir * temp_speed * get_physics_process_delta_time())
+		if collision:
+			self.linear_velocity = dir.bounce(collision.get_normal())

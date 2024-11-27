@@ -12,6 +12,7 @@ var protocol_version : String = "0.0.1"
 var enable_client_prediction := true
 var enable_server_reconciliation := true
 var enable_client_entity_interpolation := true
+var enable_client_dead_reckoning := true
 
 var server_tick_rate : int = 10
 
