@@ -1,4 +1,5 @@
 extends Node3D
+class_name PLAYER_SKIN
 
 @onready var viking_project: Node3D = $Viking_Project
 @onready var animation_player: AnimationPlayer = $Viking_Project/AnimationPlayer

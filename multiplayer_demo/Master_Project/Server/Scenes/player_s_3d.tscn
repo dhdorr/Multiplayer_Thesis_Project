@@ -1,9 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://g2fdnkg2usxx"]
+[gd_scene load_steps=5 format=3 uid="uid://g2fdnkg2usxx"]
 
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/player_s_3d.gd" id="1_do8up"]
 [ext_resource type="PackedScene" uid="uid://ddq7sfnhc783" path="res://Master_Project/assets/Characters/Scenes/character_soldier_01.tscn" id="1_rlkq1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l7ibu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ei15v"]
+size = Vector3(3, 1, 3)
 
 [node name="Player_S_3D" type="CharacterBody3D"]
 script = ExtResource("1_do8up")
@@ -16,3 +19,12 @@ shape = SubResource("CapsuleShape3D_l7ibu")
 unique_name_in_owner = true
 
 [node name="Character_Soldier_01" parent="Ghost_Skin_3D" instance=ExtResource("1_rlkq1")]
+
+[node name="Reflect_Area3D" type="Area3D" parent="Ghost_Skin_3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ghost_Skin_3D/Reflect_Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+shape = SubResource("BoxShape3D_ei15v")

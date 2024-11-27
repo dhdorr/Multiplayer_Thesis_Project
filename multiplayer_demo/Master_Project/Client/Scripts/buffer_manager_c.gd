@@ -77,3 +77,4 @@ func consume_from_queue() -> void:
 		input_manager_c.update_player_authoritative_position(world_state["player_states"][connection_manager_c.player_id])
 	
 	ghost_manager_c.spawn_peer_characters_2(world_state["player_states"])
+	ghost_manager_c.move_ball(world_state["bomb_ball_state"])

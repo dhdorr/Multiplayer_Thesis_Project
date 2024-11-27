@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 	if lobby_status == SettingsMp.GLOBAL_LOBBY_STATUS.CLOSED:
 		var all_players_ready = true
 		for player in _lobby_player_list:
+			#print("checking if is ready...", player)
 			if player["is_ready"] == false:
 				all_players_ready = false
 		_all_players_ready = all_players_ready

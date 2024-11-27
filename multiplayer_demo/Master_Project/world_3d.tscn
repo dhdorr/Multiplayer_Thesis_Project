@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cp4i2qtyy8uoh"]
+[gd_scene load_steps=5 format=3 uid="uid://cp4i2qtyy8uoh"]
+
+[ext_resource type="PackedScene" uid="uid://dddbscqu0pxil" path="res://Master_Project/Server/Scenes/bomb_ball_server.tscn" id="1_mvsct"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qeem"]
 albedo_color = Color(0.290081, 0.471387, 0.302647, 1)
@@ -19,6 +21,10 @@ fog_height_density = 0.8
 adjustment_enabled = true
 adjustment_contrast = 1.2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83pp5"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.215686)
+
 [node name="World_3D" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
@@ -31,8 +37,8 @@ material = SubResource("StandardMaterial3D_0qeem")
 transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Camera_Pivot_3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 0, 0)
-fov = 42.0
+transform = Transform3D(-4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.2222e-08, -20, 5, 0)
+fov = 45.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5.16382, 10.0542)
@@ -43,10 +49,6 @@ directional_shadow_max_distance = 42.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k3578")
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, 0, 0.137793, 5.29177)
-text = "^ Forward Z ^"
 
 [node name="Spawn_Points" type="Node" parent="."]
 
@@ -77,3 +79,39 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0,
 [node name="Label3D4" type="Label3D" parent="Spawn_Points/Spawn_Point_4"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.01, 0)
 text = "V"
+
+[node name="Bomb_Ball" parent="." instance=ExtResource("1_mvsct")]
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 1, 0)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(2, 2, 20)
+material = SubResource("StandardMaterial3D_83pp5")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, -11)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(2, 2, 20)
+material = SubResource("StandardMaterial3D_83pp5")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 11, 1, 0)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(2, 2, 20)
+material = SubResource("StandardMaterial3D_83pp5")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 11)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(2, 2, 20)
+material = SubResource("StandardMaterial3D_83pp5")

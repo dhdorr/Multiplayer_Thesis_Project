@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	elif _server_state == SERVER_STATE_TYPES.STARTING_MATCH:
 		if not _is_match_countdown_started:
 			_is_match_countdown_started = true
-			var timer := get_tree().create_timer(1.5).timeout.connect(_start_match)
+			var timer := get_tree().create_timer(1.0).timeout.connect(_start_match)
 		
 	elif _server_state == SERVER_STATE_TYPES.RUNNING_MATCH:
 		connection_manager_s.listen_for_client_input_packets()

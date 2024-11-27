@@ -52,6 +52,7 @@ func send_input_3D(packet: Dictionary) -> void:
 
 
 func send_ready_up_to_server(is_ready : bool) -> void:
+	print("user: %s , is ready? %s" % [SettingsMp.client_username, is_ready])
 	var interface := CLIENT_PACKET_INTERFACE.Lobby_Ready_Up.new(is_ready, player_id)
 	send_input_3D(interface._to_dictionary())
 

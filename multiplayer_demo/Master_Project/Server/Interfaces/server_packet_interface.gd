@@ -4,6 +4,7 @@ class_name SERVER_PACKET_INTERFACE extends Node
 class World_State_Update:
 	# may become an array[dictionary], but would require changes in buffer manager on the cliet
 	var _player_states : Dictionary
+	var _bomb_ball_state : Dictionary
 	var _message_id : int = SettingsMp.SERVER_PACKET_TYPES.WORLD_STATE_UPDATE
 	var _server_version : String = SettingsMp.protocol_version
 	var _server_update_id : int
@@ -11,20 +12,29 @@ class World_State_Update:
 	func _init(update_id : int) -> void:
 		_server_update_id = update_id
 	
-	func add_player_state(player_id : int, position : Vector3, rotation : Vector3, skin_rotation : Vector3, velocity : Vector3, last_input : Vector3, last_received_packet_id : int) -> void:
+	func add_player_state(player_id : int, position : Vector3, rotation : Vector3, skin_rotation : Vector3, velocity : Vector3, last_input : Vector3, last_received_packet_id : int, action : int) -> void:
 		_player_states[player_id] = {
 			"position" = position,
 			"rotation" = rotation,
 			"skin_rotation" = skin_rotation,
 			"velocity" = velocity,
+			"action_command" = action,
 			"last_input" = last_input,
 			"last_received_packet_id" = last_received_packet_id,
+		}
+	
+	func add_bomb_ball_state(position : Vector3, rotation : Vector3, velocity : Vector3) -> void:
+		_bomb_ball_state = {
+			"position" = position,
+			"rotation" = rotation,
+			"velocity" = velocity,
 		}
 	
 	func _to_dictionary() -> Dictionary:
 		var my_dict : Dictionary = {
 			"message_id" = _message_id,
 			"player_states" = _player_states,
+			"bomb_ball_state" = _bomb_ball_state,
 			"server_update_id" = _server_update_id,
 			"version" = _server_version,
 		}

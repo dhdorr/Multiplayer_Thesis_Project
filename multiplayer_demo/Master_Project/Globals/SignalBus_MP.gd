@@ -19,4 +19,5 @@ signal client_ready_up(is_ready : bool)
 # Server-side signals #
 signal update_peer_count(count: int)
 signal lobby_start_match
+signal player_activated_reflection
 # ------------------- #

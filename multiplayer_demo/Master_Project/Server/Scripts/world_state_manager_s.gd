@@ -14,6 +14,8 @@ const PLAYER_S_3D = preload("res://Master_Project/Server/Scenes/player_s_3d.tscn
 var spawn_points : Array[Marker3D]
 var used_spawn_points : Array[int]
 
+var bomb_ball_ref : Bomb_Ball_Server
+
 # this will be refactored to a dictionary of an array for each player
 var player_input_buffer : Array[Vector2]
 var last_input : Vector2 = Vector2.ZERO
@@ -28,27 +30,21 @@ var count := 0
 
 var server_player_dict : Dictionary
 
-func register_pleyer_input(packet : Dictionary) -> void:
-	#var input_dict : Dictionary = { 
-		#"player_id": packet["player_id"], 
-		#"packet_id": packet["packet_id"], 
-		#"input_vec": packet["direction"],
-		#"skin_rotation": packet["rotation"],
-		#}
+func register_player_input(packet : Dictionary) -> void:
 	player_packets.append(packet)
 
 
 func _ready() -> void:
 	spawn_points.append_array(get_tree().get_nodes_in_group("spawn"))
+	bomb_ball_ref = get_tree().get_first_node_in_group("ball")
 
 
 func _physics_process(delta: float) -> void:
-	
 	if count >= SettingsMp.get_server_tick_rate():
 		var world_state_update := SERVER_PACKET_INTERFACE.World_State_Update.new(update_packet_id)
 		
 		for pp in player_packets:
-			# Disable if not using 3D #
+			# unpack player packets, apply movement and actions
 			var player_velocity : Vector3 = server_player_dict[pp["player_id"]].velocity
 			var player_basis : Basis = server_player_dict[pp["player_id"]].global_basis
 			var desired_velocity : Vector3 = calculate_movement_3D(delta, player_velocity, pp["direction"], player_basis)
@@ -57,9 +53,14 @@ func _physics_process(delta: float) -> void:
 			var player_ghost : PLAYER_SKIN_SERVER = server_player_dict[pp["player_id"]]
 			player_ghost.rotate_skin(pp["rotation"])
 			
-			server_player_dict[pp["player_id"]].move_and_slide()
-			# ----------------------- #
+			if pp["action_command"] == SettingsMp.ACTION_COMMAND_TYPE.REFLECT:
+				player_ghost.activate_reflection()
+				# emit signal to be handled on bomb_ball
+				
 			
+			server_player_dict[pp["player_id"]].move_and_slide()
+			
+			# build world state response one player at a time
 			world_state_update.add_player_state(
 				pp["player_id"],
 				server_player_dict[pp["player_id"]].position,
@@ -68,16 +69,12 @@ func _physics_process(delta: float) -> void:
 				server_player_dict[pp["player_id"]].velocity,
 				pp["direction"],
 				pp["packet_id"],
+				pp["action_command"]
 			)
-			#world_state_dict[pp["player_id"]] = {
-				#"position": server_player_dict[pp["player_id"]].position, 
-				#"rotation": server_player_dict[pp["player_id"]].rotation,
-				#"skin_rotation": player_ghost.ghost_skin_3d.rotation,
-				#"last_input": pp["input_vec"],
-				#"packet_id": pp["packet_id"], 
-				#"velocity": server_player_dict[pp["player_id"]].velocity,
-				#"server_update_id": update_packet_id,
-				#}
+		
+		# Add bomb ball state to packet
+		world_state_update.add_bomb_ball_state(bomb_ball_ref.position, bomb_ball_ref.rotation, bomb_ball_ref.linear_velocity)
+		
 		if player_packets.size() > 0:
 			connection_manager_s.send_world_state_updates_to_clients_2(world_state_update._to_dictionary())
 			update_packet_id += 1

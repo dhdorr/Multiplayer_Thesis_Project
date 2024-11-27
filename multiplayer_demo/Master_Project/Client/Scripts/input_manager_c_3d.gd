@@ -84,7 +84,9 @@ func _physics_process(delta: float) -> void:
 		calculate_rotation()
 		
 		# -1 represents no action command, otherwise: SettingsMp.ACTION_COMMAND_TYPE
-		var action_command : int = -1
+		var action_command := SettingsMp.ACTION_COMMAND_TYPE.NONE
+		if Input.is_action_just_pressed("fire_projectile"):
+			action_command = SettingsMp.ACTION_COMMAND_TYPE.REFLECT
 		
 		# Predict player movement immediately as input comes in
 		# this movement will be overwritten by the server's response

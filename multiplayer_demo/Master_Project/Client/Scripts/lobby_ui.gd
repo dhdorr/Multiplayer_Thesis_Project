@@ -22,6 +22,7 @@ func _update_lobby_ui(player_list : Array[Dictionary]) -> void:
 
 
 func _create_new_nameplates(player : Dictionary) -> void:
+	
 	var should_create_nameplate : bool = true
 	for existing_player in lobby_player_list:
 		if player["player_id"] == existing_player["player_id"]:

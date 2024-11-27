@@ -71,7 +71,7 @@ class Input_Packet:
 			"message_id" = _message_id,
 			"direction" = _input_vector,
 			"rotation" = _rotation_vector,
-			"action" = _action_command,
+			"action_command" = _action_command,
 			"packet_id" = _packet_id,
 			"player_id" = _player_id,
 			"version" = _client_version,

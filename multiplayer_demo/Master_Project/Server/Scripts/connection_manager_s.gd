@@ -77,7 +77,7 @@ func send_world_state_updates_to_clients_2(world_state : Dictionary) -> void:
 
 
 func _handle_client_input_packet(packet: Dictionary) -> void:
-	world_state_manager_s.register_pleyer_input(packet)
+	world_state_manager_s.register_player_input(packet)
 
 
 func update_lobby_to_clients(lobby_update : Dictionary) -> void:
