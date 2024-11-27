@@ -83,9 +83,10 @@ func update_prev_ghost_pos(p_id: int, pos: Vector3) -> void:
 func move_ball(bomb_ball_state : Dictionary) -> void:
 	if bomb_ball_ref_client == null:
 		bomb_ball_ref_client = get_tree().get_first_node_in_group("ball")
-	
+	# gotta design a way to 
 	bomb_ball_ref_client.position = bomb_ball_state["position"]
 	bomb_ball_ref_client.rotation = bomb_ball_state["rotation"]
+	bomb_ball_ref_client.temp_speed = 12
 	bomb_ball_ref_client.linear_velocity = bomb_ball_state["velocity"]
 # Ghost manager should have its own input buffer for packets (fed from the
 # buffer manager) to make it easier to interpolate entities independantly

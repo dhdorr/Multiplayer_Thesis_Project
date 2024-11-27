@@ -3,33 +3,46 @@
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/player_lobby_nameplate.gd" id="1_0xkr0"]
 
 [node name="MarginContainer" type="MarginContainer"]
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
 script = ExtResource("1_0xkr0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Background_ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="username_label" type="Label" parent="HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="username_label" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Player 1"
 
-[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="ready_lable" type="Label" parent="HBoxContainer"]
+[node name="ready_label" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Ready? "
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
+[node name="Ready_ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 color = Color(0.194349, 0.194349, 0.194349, 1)
 
-[node name="CheckBox" type="CheckBox" parent="HBoxContainer"]
+[node name="Ready_CheckBox" type="CheckBox" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[connection signal="toggled" from="HBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/Ready_CheckBox" to="." method="_on_check_box_toggled"]
