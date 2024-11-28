@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cp4i2qtyy8uoh"]
+[gd_scene load_steps=5 format=3 uid="uid://cp4i2qtyy8uoh"]
 
 [ext_resource type="PackedScene" uid="uid://dddbscqu0pxil" path="res://Master_Project/Server/Scenes/bomb_ball_server.tscn" id="1_mvsct"]
+[ext_resource type="Material" uid="uid://bvmf7f14bbpuk" path="res://Master_Project/assets/Materials/new_standard_material_3d.tres" id="2_u0ipl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qeem"]
 albedo_color = Color(0.290081, 0.471387, 0.302647, 1)
@@ -21,14 +22,6 @@ fog_height_density = 0.8
 adjustment_enabled = true
 adjustment_contrast = 1.2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83pp5"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.215686)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xf6ti"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.215686)
-
 [node name="World_3D" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
@@ -38,11 +31,11 @@ size = Vector3(20, 8, 20)
 material = SubResource("StandardMaterial3D_0qeem")
 
 [node name="Camera_Pivot_3D" type="Node3D" parent="."]
-transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Camera_Pivot_3D"]
-transform = Transform3D(-4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.2222e-08, -20, 5, 0)
-fov = 45.0
+transform = Transform3D(-4.37114e-08, 0.34202, -0.939693, 0, 0.939693, 0.34202, 1, 1.49502e-08, -4.10753e-08, -20, 5, 0)
+fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5.16382, 10.0542)
@@ -94,7 +87,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 size = Vector3(2, 2, 20)
-material = SubResource("StandardMaterial3D_83pp5")
+material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, -11)
@@ -102,7 +95,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 size = Vector3(2, 2, 20)
-material = SubResource("StandardMaterial3D_83pp5")
+material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 11, 1, 0)
@@ -110,7 +103,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 size = Vector3(2, 2, 20)
-material = SubResource("StandardMaterial3D_83pp5")
+material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 11)
@@ -118,7 +111,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 size = Vector3(2, 2, 20)
-material = SubResource("StandardMaterial3D_83pp5")
+material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 10, 0, 10)
@@ -126,7 +119,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 size = Vector3(4, 4, 4)
-material = SubResource("StandardMaterial3D_xf6ti")
+material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 10, 0, -10)
@@ -134,7 +127,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 size = Vector3(4, 4, 4)
-material = SubResource("StandardMaterial3D_xf6ti")
+material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, 0, -10)
@@ -142,7 +135,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 size = Vector3(4, 4, 4)
-material = SubResource("StandardMaterial3D_xf6ti")
+material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, 0, 10)
@@ -150,7 +143,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 size = Vector3(4, 4, 4)
-material = SubResource("StandardMaterial3D_xf6ti")
+material = ExtResource("2_u0ipl")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0)
@@ -158,6 +151,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 radius = 3.0
+material = ExtResource("2_u0ipl")
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 0)
@@ -165,6 +159,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 radius = 3.0
+material = ExtResource("2_u0ipl")
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 12)
@@ -172,6 +167,7 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 radius = 3.0
+material = ExtResource("2_u0ipl")
 
 [node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -12)
@@ -179,3 +175,4 @@ use_collision = true
 collision_layer = 3
 collision_mask = 3
 radius = 3.0
+material = ExtResource("2_u0ipl")
