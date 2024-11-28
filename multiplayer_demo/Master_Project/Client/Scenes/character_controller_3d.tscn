@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://hep73hu27j3k"]
+[gd_scene load_steps=6 format=3 uid="uid://hep73hu27j3k"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/player_character_controller_3d.gd" id="1_5vbbi"]
 [ext_resource type="PackedScene" uid="uid://dwnltafjq7bcu" path="res://Master_Project/Client/Scenes/player_skin_3d.tscn" id="2_naf4b"]
+[ext_resource type="PackedScene" uid="uid://bc7op77skw5kl" path="res://Master_Project/Server/Scenes/reflect_area_3d.tscn" id="2_vdrnr"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/input_manager_c_3d.gd" id="3_pcqe2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_snj6a"]
@@ -30,6 +31,8 @@ far = 50.0
 unique_name_in_owner = true
 
 [node name="Test_Rotation_3D" type="Node3D" parent="."]
+
+[node name="Reflect_Area3D" parent="Test_Rotation_3D" instance=ExtResource("2_vdrnr")]
 
 [node name="Nameplate" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 0)

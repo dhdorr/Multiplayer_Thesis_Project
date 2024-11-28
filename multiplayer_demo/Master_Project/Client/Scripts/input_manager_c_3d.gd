@@ -6,7 +6,7 @@ class_name Input_Manager_Client_3D extends Node
 @export_range(1.0, 50.0, 0.1) var steering_factor := 20.0
 
 var connection_manager_c: Connection_Manager_Client
-@onready var player: CharacterBody3D = $".."
+@onready var player: PLAYER_CHARACTER = $".."
 @onready var player_skin_3d: Node3D = %Player_Skin_3D
 @onready var test_rotation_3d: Node3D = $"../Test_Rotation_3D"
 @onready var camera_3d: Camera3D = $"../Camera_Pivot_3D/Camera3D"
@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
 		# this movement will be overwritten by the server's response
 		# during the reconciliation step
 		if SettingsMp.enable_client_prediction:
-			client_prediction(delta, direction, test_rotation_3d.rotation)
+			client_prediction(delta, direction, test_rotation_3d.rotation, action_command)
 		
 		# Generating serialized input packet and sending it out
 		generate_input_packet(direction, action_command, test_rotation_3d.rotation)
@@ -116,7 +116,9 @@ func _physics_process(delta: float) -> void:
 		#current_packet += 1
 
 
-func client_prediction(delta: float, direction : Vector3, skin_rotation: Vector3) -> void:
+func client_prediction(delta: float, direction : Vector3, skin_rotation: Vector3, action_command : int) -> void:
+	#if action_command == SettingsMp.ACTION_COMMAND_TYPE.REFLECT:
+		#player.activate_reflection()
 	player_skin_3d.rotation = skin_rotation
 	var desired_velocity : Vector3 = calculate_movement(delta, player.velocity, direction)
 	player.velocity = desired_velocity
@@ -131,7 +133,7 @@ func generate_input_packet(direction : Vector3, action_command: int, skin_rotati
 func server_reconciliation(delta : float) -> void:
 	# Rewrite using packet manager #
 	for i in range(packet_manager_c._last_confirmed_packet_id + 1, packet_manager_c._packet_history.size()):
-		client_prediction(delta, packet_manager_c._packet_history[i]["direction"],packet_manager_c._packet_history[i]["rotation"])
+		client_prediction(delta, packet_manager_c._packet_history[i]["direction"],packet_manager_c._packet_history[i]["rotation"], SettingsMp.ACTION_COMMAND_TYPE.NONE)
 	# ---------------------------- #
 
 

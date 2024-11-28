@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dddbscqu0pxil"]
+[gd_scene load_steps=5 format=3 uid="uid://dddbscqu0pxil"]
 
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/bomb_ball_server.gd" id="1_2gwlm"]
 
@@ -7,6 +7,9 @@ albedo_color = Color(0.517184, 0.517184, 0.517184, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_y2y8s"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_btinf"]
+radius = 0.333
+
 [node name="Bomb_Ball" type="RigidBody3D" groups=["ball"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
@@ -14,7 +17,7 @@ collision_mask = 2
 axis_lock_linear_y = true
 gravity_scale = 0.0
 contact_monitor = true
-max_contacts_reported = 1
+max_contacts_reported = 2
 script = ExtResource("1_2gwlm")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
@@ -22,5 +25,12 @@ material = SubResource("StandardMaterial3D_rb753")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_y2y8s")
+
+[node name="Hitbox_Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox_Area3D"]
+shape = SubResource("SphereShape3D_btinf")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

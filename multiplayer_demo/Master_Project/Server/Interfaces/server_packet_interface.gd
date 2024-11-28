@@ -23,11 +23,12 @@ class World_State_Update:
 			"last_received_packet_id" = last_received_packet_id,
 		}
 	
-	func add_bomb_ball_state(position : Vector3, rotation : Vector3, velocity : Vector3) -> void:
+	func add_bomb_ball_state(position : Vector3, rotation : Vector3, velocity : Vector3, speed : int) -> void:
 		_bomb_ball_state = {
 			"position" = position,
 			"rotation" = rotation,
 			"velocity" = velocity,
+			"speed" = speed,
 		}
 	
 	func _to_dictionary() -> Dictionary:

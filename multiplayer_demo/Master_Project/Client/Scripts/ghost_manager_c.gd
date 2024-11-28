@@ -86,10 +86,10 @@ func move_ball(bomb_ball_state : Dictionary) -> void:
 	# gotta design a way to predict ball motion so player isn't hundreds of ms behind
 	bomb_ball_ref_client.position = bomb_ball_state["position"]
 	bomb_ball_ref_client.rotation = bomb_ball_state["rotation"]
-	#bomb_ball_ref_client.temp_speed = 12
+	bomb_ball_ref_client.temp_speed = bomb_ball_state["speed"]
 	bomb_ball_ref_client.linear_velocity = bomb_ball_state["velocity"]
 	if SettingsMp.enable_client_dead_reckoning:
-		bomb_ball_ref_client.forward_simulate(SettingsMp.server_tick_rate - 1)
+		bomb_ball_ref_client.forward_simulate(SettingsMp.server_tick_rate)
 	
 # Ghost manager should have its own input buffer for packets (fed from the
 # buffer manager) to make it easier to interpolate entities independantly

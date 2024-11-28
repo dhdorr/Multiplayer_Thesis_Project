@@ -32,3 +32,5 @@ func init_player_orientation_3D(position : Vector3, rotation : Vector3):
 var client_username : String = "John Wick"
 var client_passcode : String = "hello, world!"
 var server_ip_address : String = "127.0.0.1"
+
+var ball_influenced_by_player := false

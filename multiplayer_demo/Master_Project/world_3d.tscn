@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cp4i2qtyy8uoh"]
+[gd_scene load_steps=6 format=3 uid="uid://cp4i2qtyy8uoh"]
 
 [ext_resource type="PackedScene" uid="uid://dddbscqu0pxil" path="res://Master_Project/Server/Scenes/bomb_ball_server.tscn" id="1_mvsct"]
 
@@ -22,6 +22,10 @@ adjustment_enabled = true
 adjustment_contrast = 1.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83pp5"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.215686)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xf6ti"]
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.215686)
 
@@ -115,3 +119,63 @@ collision_layer = 3
 collision_mask = 3
 size = Vector3(2, 2, 20)
 material = SubResource("StandardMaterial3D_83pp5")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 10, 0, 10)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(4, 4, 4)
+material = SubResource("StandardMaterial3D_xf6ti")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 10, 0, -10)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(4, 4, 4)
+material = SubResource("StandardMaterial3D_xf6ti")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, 0, -10)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(4, 4, 4)
+material = SubResource("StandardMaterial3D_xf6ti")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, 0, 10)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(4, 4, 4)
+material = SubResource("StandardMaterial3D_xf6ti")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+radius = 3.0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 0)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+radius = 3.0
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 12)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+radius = 3.0
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -12)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+radius = 3.0

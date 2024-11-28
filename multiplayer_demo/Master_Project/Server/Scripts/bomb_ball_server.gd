@@ -14,12 +14,14 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		self.linear_velocity = dir.bounce(collision.get_normal())
 
+
 func move_the_ball() -> void:
 	pass
 
 
 func _reflect_the_ball(foreward_vector : Vector3) -> void:
 	self.linear_velocity = -1 * foreward_vector.normalized() * temp_speed
+	temp_speed += 2
 
 
 func forward_simulate(frame_count : int) -> void:
