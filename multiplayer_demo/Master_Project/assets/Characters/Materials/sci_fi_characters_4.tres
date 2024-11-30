@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b8xq2pvewgrsb"]
+
+[ext_resource type="Texture2D" uid="uid://dyvjndmnyxij8" path="res://Master_Project/assets/Characters/Materials/texture_images/PolygonScifi_04_A.png" id="1_bwupr"]
+
+[resource]
+albedo_texture = ExtResource("1_bwupr")

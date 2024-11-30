@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cp4i2qtyy8uoh"]
+[gd_scene load_steps=6 format=3 uid="uid://cp4i2qtyy8uoh"]
 
 [ext_resource type="PackedScene" uid="uid://dddbscqu0pxil" path="res://Master_Project/Server/Scenes/bomb_ball_server.tscn" id="1_mvsct"]
 [ext_resource type="Material" uid="uid://bvmf7f14bbpuk" path="res://Master_Project/assets/Materials/new_standard_material_3d.tres" id="2_u0ipl"]
+[ext_resource type="PackedScene" uid="uid://cx2ymkhya7d7a" path="res://Master_Project/assets/Maps/test_bg.tscn" id="3_ffdqk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qeem"]
 albedo_color = Color(0.290081, 0.471387, 0.302647, 1)
@@ -176,3 +177,6 @@ collision_layer = 3
 collision_mask = 3
 radius = 3.0
 material = ExtResource("2_u0ipl")
+
+[node name="test_bg" parent="." instance=ExtResource("3_ffdqk")]
+transform = Transform3D(-2.18557e-06, 0, -50, 0, 50, 0, 50, 0, -2.18557e-06, 11.0672, 1.86283, -0.213694)

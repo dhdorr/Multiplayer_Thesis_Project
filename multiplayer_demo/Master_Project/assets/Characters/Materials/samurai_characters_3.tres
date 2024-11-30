@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://0ib5l3y1v7w0"]
+
+[ext_resource type="Texture2D" uid="uid://bn41dukuyrgdm" path="res://Master_Project/assets/Characters/Materials/texture_images/Samurai_Characters_Texture_03.png" id="1_6argk"]
+
+[resource]
+albedo_texture = ExtResource("1_6argk")
