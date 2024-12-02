@@ -14,6 +14,9 @@ signal start_match_countdown_animation
 signal player_id_received(id: int)
 signal update_client_lobby(player_list : Array[Dictionary])
 signal client_ready_up(is_ready : bool)
+signal swap_skin(skin_name : String)
+signal open_start_screen
+signal open_skin_selection
 # ------------------- #
 
 # Server-side signals #

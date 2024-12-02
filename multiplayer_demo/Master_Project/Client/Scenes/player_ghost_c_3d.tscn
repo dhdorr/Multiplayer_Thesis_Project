@@ -16,6 +16,7 @@ shape = SubResource("CapsuleShape3D_l7ibu")
 unique_name_in_owner = true
 
 [node name="Warrior_Project" parent="Ghost_Skin_3D" instance=ExtResource("3_ibpkf")]
+visible = false
 
 [node name="SK_Item_WarriorSholderArmor" parent="Ghost_Skin_3D/Warrior_Project/Root/Skeleton3D" index="0"]
 transform = Transform3D(0.998631, -0.0318966, 0.0414668, -0.0494566, -0.833999, 0.549548, 0.0170536, -0.550845, -0.834437, -2.73623, 12.9726, -135.939)

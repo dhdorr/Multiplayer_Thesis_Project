@@ -1,0 +1,110 @@
+[gd_scene load_steps=3 format=3 uid="uid://blv8dfoov7upo"]
+
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/skin_selection_ui.gd" id="1_cj5gu"]
+
+[sub_resource type="Environment" id="Environment_je1ia"]
+background_mode = 1
+background_color = Color(0.190297, 0.205347, 0.239175, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.597175, 0.597176, 0.597175, 1)
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.346685, 0.439926, 0.488755, 1)
+fog_density = 0.0
+fog_sky_affect = 0.5
+fog_height = -1.0
+fog_height_density = 0.8
+adjustment_enabled = true
+adjustment_contrast = 1.2
+
+[node name="Skin_Selection_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cj5gu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.209808, 0.221588, 0.264307, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -71.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="Go_Back_Button" type="Button" parent="HBoxContainer/Control/MarginContainer"]
+layout_mode = 2
+text = "Go Back"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/VBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(800, 512)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
+fov = 40.0
+
+[node name="Marker3D" type="Marker3D" parent="HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport/Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5.16382, 10.0542)
+light_color = Color(0.949985, 0.971666, 0.906864, 1)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 42.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport/Node3D"]
+environment = SubResource("Environment_je1ia")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -3)
+size = Vector3(10, 2, 10)
+
+[connection signal="pressed" from="HBoxContainer/Control/MarginContainer/Go_Back_Button" to="." method="_on_go_back_button_pressed"]

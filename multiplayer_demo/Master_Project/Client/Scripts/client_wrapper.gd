@@ -3,13 +3,15 @@ class_name Client_Wrapper extends Node
 enum CLIENT_STATE_TYPES { HOME, CONNECTING_TO_SERVER, WAITING_IN_LOBBY, STARTING_MATCH, PLAYING_GAME }
 
 @onready var connection_manager_c: Connection_Manager_Client = %Connection_Manager_C
-@onready var start_screen_menu: Start_Screen_Menu = %Start_Screen_Menu
+@onready var start_screen_menu: Start_Screen_Menu
 #@onready var match_countdown_ui: Control = %Match_Countdown_UI
 
 const LOBBY_UI = preload("res://Master_Project/Client/Scenes/lobby_ui.tscn")
 const CHARACTER_CONTROLLER_3D = preload("res://Master_Project/Client/Scenes/character_controller_3d.tscn")
 const WORLD_3D = preload("res://Master_Project/world_3d.tscn")
 const MATCH_COUNTDOWN_UI = preload("res://Master_Project/Client/Scenes/match_countdown_ui.tscn")
+const START_SCREEN_MENU = preload("res://Master_Project/Client/Scenes/start_screen_menu.tscn")
+const SKIN_SELECTION_UI = preload("res://Master_Project/Client/Scenes/skin_selection_ui.tscn")
 
 var player_init : Dictionary
 var _client_state := CLIENT_STATE_TYPES.HOME
@@ -26,6 +28,12 @@ func _ready() -> void:
 	SignalBusMp.setup_settings_toggle.connect(setup_settings_menu)
 	SignalBusMp.update_client_state.connect(_set_client_state)
 	SignalBusMp.client_ready_up.connect(_send_out_ready_up)
+	SignalBusMp.open_start_screen.connect(func() -> void:
+		add_child(START_SCREEN_MENU.instantiate())
+		)
+	SignalBusMp.open_skin_selection.connect(func() -> void:
+		add_child(SKIN_SELECTION_UI.instantiate())
+		)
 
 
 func _process(delta: float) -> void:
@@ -85,7 +93,8 @@ func setup_game_world() -> void:
 	_is_game_world_setup = true
 	
 	# remove home screen
-	start_screen_menu.queue_free()
+	$Start_Screen_Menu.queue_free()
+	#start_screen_menu.queue_free()
 	
 	var world_scene := WORLD_3D.instantiate()
 	add_child(world_scene)

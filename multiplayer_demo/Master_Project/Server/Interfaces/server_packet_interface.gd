@@ -13,6 +13,10 @@ class World_State_Update:
 		_server_update_id = update_id
 	
 	func add_player_state(player_id : int, position : Vector3, rotation : Vector3, skin_rotation : Vector3, velocity : Vector3, last_input : Vector3, last_received_packet_id : int, action : int) -> void:
+		if _player_states.has(player_id):
+			if _player_states[player_id].has("action_command"):
+				if _player_states[player_id]["action_command"] == SettingsMp.ACTION_COMMAND_TYPE.REFLECT:
+					action = SettingsMp.ACTION_COMMAND_TYPE.REFLECT
 		_player_states[player_id] = {
 			"position" = position,
 			"rotation" = rotation,
@@ -22,6 +26,7 @@ class World_State_Update:
 			"last_input" = last_input,
 			"last_received_packet_id" = last_received_packet_id,
 		}
+	
 	
 	func add_bomb_ball_state(position : Vector3, rotation : Vector3, velocity : Vector3, speed : int) -> void:
 		_bomb_ball_state = {

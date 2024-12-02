@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://v1kfhkowk1jl"]
+[gd_scene load_steps=3 format=3 uid="uid://v1kfhkowk1jl"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/start_screen_menu.gd" id="1_krmsr"]
+
+[sub_resource type="Environment" id="Environment_deyrl"]
+background_mode = 1
+background_color = Color(0.190297, 0.205347, 0.239175, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.597175, 0.597176, 0.597175, 1)
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.346685, 0.439926, 0.488755, 1)
+fog_density = 0.0
+fog_sky_affect = 0.5
+fog_height = -1.0
+fog_height_density = 0.8
+adjustment_enabled = true
+adjustment_contrast = 1.2
 
 [node name="Start_Screen_Menu" type="Control"]
 layout_mode = 3
@@ -44,6 +59,32 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(100, 100)
+render_target_update_mode = 4
+
+[node name="Headshot3D" type="Node3D" parent="VBoxContainer/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="VBoxContainer/SubViewportContainer/SubViewport/Headshot3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2)
+fov = 20.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="VBoxContainer/SubViewportContainer/SubViewport/Headshot3D"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5.16382, 10.0542)
+light_color = Color(0.949985, 0.971666, 0.906864, 1)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 42.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="VBoxContainer/SubViewportContainer/SubViewport/Headshot3D"]
+environment = SubResource("Environment_deyrl")
+
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
@@ -52,7 +93,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
-text = "Username "
+text = "Username     "
 
 [node name="Username_TextBox" type="LineEdit" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
@@ -60,17 +101,37 @@ size_flags_horizontal = 3
 placeholder_text = "John Wick"
 max_length = 20
 
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Skin_Button" type="Button" parent="VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "Choose Skin"
+
+[node name="Skin_TextBox" type="LineEdit" parent="VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Cyborg Ninja"
+max_length = 20
+editable = false
+
 [node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4"]
+visible = false
 layout_mode = 2
 text = "Passcode   "
 
 [node name="Passcode_TextBox" type="LineEdit" parent="VBoxContainer/HBoxContainer4"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "optional"
@@ -101,5 +162,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"
 
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer3/Username_TextBox" to="." method="_on_username_text_box_text_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer5/Skin_Button" to="." method="_on_skin_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Connect_Button" to="." method="_on_connect_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/Quit_Button" to="." method="_on_quit_button_pressed"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://urq3eu76iwlo"]
+
+[ext_resource type="Script" path="res://Master_Project/Client/Scripts/skin_button_margin_container.gd" id="1_tt75n"]
+
+[node name="Skin_Button_MarginContainer" type="MarginContainer"]
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_tt75n")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Skin Name"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

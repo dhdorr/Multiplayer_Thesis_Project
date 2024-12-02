@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bejjxbh3s1ikj"]
 
-[ext_resource type="Texture2D" uid="uid://cbyvy1mc261ei" path="res://Master_Project/assets/Characters/Wizard_Idle_Only_Polygon_Fantasy_Characters_Texture_03_A.png" id="1_brwi0"]
+[ext_resource type="Texture2D" uid="uid://43iji8cgl85b" path="res://Master_Project/assets/Characters/Materials/texture_images/Polygon_Fantasy_Characters_Texture_03_A.png" id="1_brwi0"]
 
 [resource]
 albedo_texture = ExtResource("1_brwi0")

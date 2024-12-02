@@ -3,6 +3,7 @@ class_name Ghost_Manager_C extends Node
 @onready var connection_manager_c: Connection_Manager_Client = %Connection_Manager_C
 
 const PLAYER_GHOST_C_3D = preload("res://Master_Project/Client/Scenes/player_ghost_c_3d.tscn")
+const SKINS_PATH = "res://Master_Project/assets/Characters/Scenes/"
 
 var ghost_dict : Dictionary
 
@@ -26,6 +27,9 @@ func add_new_ghost(lobby_player_list: Array[Dictionary]) -> bool:
 			ghost.rotation = lobby_player["rotation"]
 			
 			add_child(ghost)
+			
+			ghost.set_skin(lobby_player["skin_id"])
+			
 			
 			ghost.nameplate.text = lobby_player["username"]
 			print("recieved name: ", lobby_player["username"])
@@ -73,6 +77,10 @@ func move_ghost(player: Dictionary, p_id: int) -> void:
 	ghost._skin_rotation =  player["skin_rotation"]
 	ghost._target_position = player["position"]
 	ghost._last_input = player["last_input"]
+	ghost._last_action = player["action_command"]
+	#print(player["action_command"])
+	#if player["action_command"] == SettingsMp.ACTION_COMMAND_TYPE.REFLECT:
+		#ghost.do_flip()
 	update_prev_ghost_pos(p_id, player["position"])
 
 
