@@ -8,7 +8,7 @@ albedo_color = Color(0.517184, 0.517184, 0.517184, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_y2y8s"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_btinf"]
-radius = 0.333
+radius = 0.25
 
 [node name="Bomb_Ball" type="RigidBody3D" groups=["ball"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

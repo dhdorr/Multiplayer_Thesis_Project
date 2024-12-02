@@ -3,7 +3,9 @@ class_name Start_Screen_Menu extends Control
 @onready var connection_manager_c: Connection_Manager_Client
 @onready var username_text_box: LineEdit = $VBoxContainer/HBoxContainer3/Username_TextBox
 @onready var passcode_text_box: LineEdit = $VBoxContainer/HBoxContainer4/Passcode_TextBox
-@onready var server_ip_text_box: LineEdit = $VBoxContainer/HBoxContainer/Server_IP_TextBox
+#@onready var server_ip_text_box: LineEdit = $VBoxContainer/HBoxContainer/Server_IP_TextBox
+@onready var server_ip_text_box: LineEdit = $VBoxContainer/MarginContainer2/HBoxContainer/Server_IP_TextBox
+
 const SKIN_SELECTION_UI = preload("res://Master_Project/Client/Scenes/skin_selection_ui.tscn")
 @onready var headshot_3d: Node3D = %Headshot3D
 const SKINS_PATH = "res://Master_Project/assets/Characters/Scenes/"

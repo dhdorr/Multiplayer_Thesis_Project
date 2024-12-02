@@ -137,32 +137,46 @@ size_flags_horizontal = 3
 placeholder_text = "optional"
 max_length = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Connect_Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Connect_Button" type="Button" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 text = "Connect to Server"
 
-[node name="Server_IP_TextBox" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="Server_IP_TextBox" type="LineEdit" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "127.0.0.1"
+editable = false
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
+size_flags_vertical = 8
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Quit_Button" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="Quit_Button" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"
 
 [connection signal="text_changed" from="VBoxContainer/HBoxContainer3/Username_TextBox" to="." method="_on_username_text_box_text_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer5/Skin_Button" to="." method="_on_skin_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Connect_Button" to="." method="_on_connect_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Quit_Button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer2/HBoxContainer/Connect_Button" to="." method="_on_connect_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer2/Quit_Button" to="." method="_on_quit_button_pressed"]
