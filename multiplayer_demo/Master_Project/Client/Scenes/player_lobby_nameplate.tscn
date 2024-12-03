@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ba0agbnxpk36"]
+[gd_scene load_steps=3 format=3 uid="uid://ba0agbnxpk36"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/player_lobby_nameplate.gd" id="1_0xkr0"]
+[ext_resource type="AudioStream" uid="uid://btc3xesrjokxq" path="res://Master_Project/assets/Audio/Gun Combo A.wav" id="2_kyggk"]
 
 [node name="MarginContainer" type="MarginContainer"]
 theme_override_constants/margin_left = 10
@@ -44,5 +45,8 @@ color = Color(0.194349, 0.194349, 0.194349, 1)
 [node name="Ready_CheckBox" type="CheckBox" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MarginContainer"]
+stream = ExtResource("2_kyggk")
 
 [connection signal="toggled" from="MarginContainer/HBoxContainer/Ready_CheckBox" to="." method="_on_check_box_toggled"]

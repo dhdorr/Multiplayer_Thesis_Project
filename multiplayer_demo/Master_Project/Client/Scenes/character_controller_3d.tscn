@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://hep73hu27j3k"]
+[gd_scene load_steps=10 format=3 uid="uid://hep73hu27j3k"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/player_character_controller_3d.gd" id="1_5vbbi"]
 [ext_resource type="PackedScene" uid="uid://dwnltafjq7bcu" path="res://Master_Project/Client/Scenes/player_skin_3d.tscn" id="2_naf4b"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/input_manager_c_3d.gd" id="3_pcqe2"]
 [ext_resource type="Material" uid="uid://bde85pxt8tbp1" path="res://Master_Project/assets/Characters/Materials/sci_fi_characters_1.tres" id="4_quae5"]
+[ext_resource type="AudioStream" uid="uid://cngojntyjgumf" path="res://Master_Project/assets/Audio/Punch Combo Break.wav" id="5_umxdm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_snj6a"]
 radius = 0.33
@@ -63,3 +64,6 @@ randomness = 0.42
 process_material = SubResource("ParticleProcessMaterial_rrphy")
 draw_pass_1 = SubResource("BoxMesh_4dut3")
 draw_skin = SubResource("Skin_bvvlv")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_umxdm")

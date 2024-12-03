@@ -30,6 +30,8 @@ const GRAVITY := 40.0 * Vector3.DOWN
 
 var handle_mouse_input := true
 
+var player_is_dead := false
+
 func _init() -> void:
 	set_physics_process(false)
 
@@ -62,8 +64,11 @@ func _notification(what):
 
 func update_player_authoritative_position(player_packet : Dictionary) -> void:
 	# getting the most recent player update, cuz why not?
-	if player_packet["is_dead"]:
+	if player_packet["is_dead"] and not player_is_dead:
+		player_is_dead = true
 		set_physics_process(false)
+		$"../AudioStreamPlayer".stream = load("res://Master_Project/assets/Audio/Punch Combo Break.wav")
+		$"../AudioStreamPlayer".play()
 		$"../GPUParticles3D".emitting = true
 		%Player_Skin_3D.visible = false
 	if player_packet["last_received_packet_id"] != packet_manager_c._last_confirmed_packet_id:
@@ -95,6 +100,9 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("fire_projectile"):
 			action_command = SettingsMp.ACTION_COMMAND_TYPE.REFLECT
 			player_skin_3d.reflect()
+			$"../AudioStreamPlayer".stream = load("res://Master_Project/assets/Audio/Magic Crit A.wav")
+			get_tree().create_timer(0.2).timeout.connect(func()->void:$"../AudioStreamPlayer".play())
+			
 		
 		# Predict player movement immediately as input comes in
 		# this movement will be overwritten by the server's response

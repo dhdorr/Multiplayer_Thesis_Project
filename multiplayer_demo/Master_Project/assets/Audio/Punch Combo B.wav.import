@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c0d2e10eo71j6"
+path="res://.godot/imported/Punch Combo B.wav-895303d60c79c02b7a3b4c60c0b50b52.sample"
+
+[deps]
+
+source_file="res://Master_Project/assets/Audio/Punch Combo B.wav"
+dest_files=["res://.godot/imported/Punch Combo B.wav-895303d60c79c02b7a3b4c60c0b50b52.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

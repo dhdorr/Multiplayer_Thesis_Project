@@ -40,4 +40,5 @@ func set_ready_state(is_ready : bool, belongs_to_this_client : bool) -> void:
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	if not ready_check_box.disabled:
+		$MarginContainer/AudioStreamPlayer.play()
 		SignalBusMp.client_ready_up.emit(toggled_on)

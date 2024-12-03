@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://8v0lehae6inx"]
+[gd_scene load_steps=9 format=3 uid="uid://8v0lehae6inx"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/match_countdown_ui.gd" id="1_6sbc1"]
+[ext_resource type="AudioStream" uid="uid://vybxuf1bxjsm" path="res://Master_Project/assets/Audio/Punch Combo A.wav" id="2_e61i3"]
+[ext_resource type="AudioStream" uid="uid://c0d2e10eo71j6" path="res://Master_Project/assets/Audio/Punch Combo B.wav" id="3_c3vvl"]
+[ext_resource type="AudioStream" uid="uid://4ksnxxqs6scx" path="res://Master_Project/assets/Audio/Punch Combo C.wav" id="4_x2hod"]
+[ext_resource type="AudioStream" uid="uid://4lyjoe5e0uhv" path="res://Master_Project/assets/Audio/Combo Complete A.wav" id="5_hdut7"]
 
 [sub_resource type="Animation" id="Animation_n4xa1"]
 length = 0.001
@@ -39,6 +43,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_e61i3")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_fch0w"]
@@ -79,6 +107,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_e61i3"), ExtResource("3_c3vvl"), ExtResource("4_x2hod"), ExtResource("5_hdut7")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_80fes"]
@@ -137,5 +189,8 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "3"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_e61i3")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
