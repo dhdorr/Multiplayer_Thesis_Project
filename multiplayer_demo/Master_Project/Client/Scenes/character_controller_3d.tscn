@@ -1,12 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://hep73hu27j3k"]
+[gd_scene load_steps=9 format=3 uid="uid://hep73hu27j3k"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/player_character_controller_3d.gd" id="1_5vbbi"]
 [ext_resource type="PackedScene" uid="uid://dwnltafjq7bcu" path="res://Master_Project/Client/Scenes/player_skin_3d.tscn" id="2_naf4b"]
-[ext_resource type="PackedScene" uid="uid://bc7op77skw5kl" path="res://Master_Project/Server/Scenes/reflect_area_3d.tscn" id="2_vdrnr"]
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/input_manager_c_3d.gd" id="3_pcqe2"]
+[ext_resource type="Material" uid="uid://bde85pxt8tbp1" path="res://Master_Project/assets/Characters/Materials/sci_fi_characters_1.tres" id="4_quae5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_snj6a"]
 radius = 0.33
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rrphy"]
+emission_shape_scale = Vector3(2, 2, 2)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -90.7
+angle_max = 60.7
+gravity = Vector3(0, 6.4, 0)
+radial_accel_min = 10.71
+radial_accel_max = 21.65
+
+[sub_resource type="BoxMesh" id="BoxMesh_4dut3"]
+material = ExtResource("4_quae5")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="Skin" id="Skin_bvvlv"]
 
 [node name="CharacterController3D" type="CharacterBody3D"]
 script = ExtResource("1_5vbbi")
@@ -32,9 +48,18 @@ unique_name_in_owner = true
 
 [node name="Test_Rotation_3D" type="Node3D" parent="."]
 
-[node name="Reflect_Area3D" parent="Test_Rotation_3D" instance=ExtResource("2_vdrnr")]
-
 [node name="Nameplate" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 0)
 billboard = 1
 text = "Player"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 24
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.75
+randomness = 0.42
+process_material = SubResource("ParticleProcessMaterial_rrphy")
+draw_pass_1 = SubResource("BoxMesh_4dut3")
+draw_skin = SubResource("Skin_bvvlv")

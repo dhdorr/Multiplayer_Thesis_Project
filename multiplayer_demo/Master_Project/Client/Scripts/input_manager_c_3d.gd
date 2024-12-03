@@ -62,6 +62,10 @@ func _notification(what):
 
 func update_player_authoritative_position(player_packet : Dictionary) -> void:
 	# getting the most recent player update, cuz why not?
+	if player_packet["is_dead"]:
+		set_physics_process(false)
+		$"../GPUParticles3D".emitting = true
+		%Player_Skin_3D.visible = false
 	if player_packet["last_received_packet_id"] != packet_manager_c._last_confirmed_packet_id:
 		packet_manager_c.register_confirmed_packet(player_packet["last_received_packet_id"])
 		#packet_manager_c._last_confirmed_packet_id = packet[connection_manager_c.player_id]["packet_id"]

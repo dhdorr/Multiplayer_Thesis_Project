@@ -12,7 +12,7 @@ class World_State_Update:
 	func _init(update_id : int) -> void:
 		_server_update_id = update_id
 	
-	func add_player_state(player_id : int, position : Vector3, rotation : Vector3, skin_rotation : Vector3, velocity : Vector3, last_input : Vector3, last_received_packet_id : int, action : int) -> void:
+	func add_player_state(player_id : int, position : Vector3, rotation : Vector3, skin_rotation : Vector3, velocity : Vector3, last_input : Vector3, last_received_packet_id : int, action : int, is_dead : bool) -> void:
 		if _player_states.has(player_id):
 			if _player_states[player_id].has("action_command"):
 				if _player_states[player_id]["action_command"] == SettingsMp.ACTION_COMMAND_TYPE.REFLECT:
@@ -24,6 +24,7 @@ class World_State_Update:
 			"velocity" = velocity,
 			"action_command" = action,
 			"last_input" = last_input,
+			"is_dead" = is_dead,
 			"last_received_packet_id" = last_received_packet_id,
 		}
 	

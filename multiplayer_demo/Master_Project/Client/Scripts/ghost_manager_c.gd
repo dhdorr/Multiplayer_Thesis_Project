@@ -70,6 +70,8 @@ func spawn_peer_characters_2(world_state: Dictionary) -> void:
 			ghost.rotation = world_state[p_id]["rotation"]
 		
 		move_ghost(world_state[p_id], p_id)
+		if world_state[p_id]["is_dead"]:
+			ghost_dict[p_id].activate_death()
 
 # Entity interpolation
 func move_ghost(player: Dictionary, p_id: int) -> void:
@@ -97,7 +99,7 @@ func move_ball(bomb_ball_state : Dictionary) -> void:
 	bomb_ball_ref_client.temp_speed = bomb_ball_state["speed"]
 	bomb_ball_ref_client.linear_velocity = bomb_ball_state["velocity"]
 	if SettingsMp.enable_client_dead_reckoning:
-		bomb_ball_ref_client.forward_simulate(SettingsMp.server_tick_rate)
+		bomb_ball_ref_client.forward_simulate(SettingsMp.server_tick_rate - 1)
 	
 # Ghost manager should have its own input buffer for packets (fed from the
 # buffer manager) to make it easier to interpolate entities independantly

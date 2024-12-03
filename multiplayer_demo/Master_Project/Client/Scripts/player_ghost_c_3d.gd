@@ -15,6 +15,7 @@ var _skin_rotation : Vector3
 var _last_input := Vector3.ZERO
 var _last_action := SettingsMp.ACTION_COMMAND_TYPE.NONE
 var _is_reflecting := false
+var _is_dead := false
 
 
 func _physics_process(delta: float) -> void:
@@ -58,6 +59,18 @@ func move_ghost(delta: float) -> void:
 		self.position = self.position.move_toward(_target_position, SettingsMp.get_server_tick_rate() * delta)
 	else:
 		self.position = _target_position
+
+
+func activate_death() -> void:
+	if not _is_dead:
+		ghost_skin_3d.visible = false
+		_is_dead = true
+		print("this ghost is dead")
+		$GPUParticles3D.emitting = true
+		#get_tree().create_timer(0.5).timeout.connect(func()->void:
+			#$GPUParticles3D.emitting = false
+			#)
+
 
 
 func set_skin(skin_id : int) -> void:

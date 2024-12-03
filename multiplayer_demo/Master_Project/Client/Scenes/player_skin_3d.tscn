@@ -1,57 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwnltafjq7bcu"]
+[gd_scene load_steps=2 format=3 uid="uid://dwnltafjq7bcu"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/player_skin_3d.gd" id="1_me2dx"]
-[ext_resource type="PackedScene" uid="uid://kdw8xcc3bojh" path="res://Master_Project/assets/Characters/Scenes/druid_1.tscn" id="3_1ybr5"]
-[ext_resource type="PackedScene" uid="uid://bgspgptlidcht" path="res://Master_Project/assets/Characters/Scenes/viking_project.tscn" id="3_stvmc"]
 
 [node name="Player_Skin_3D" type="Node3D"]
 script = ExtResource("1_me2dx")
-
-[node name="Viking_Project" parent="." instance=ExtResource("3_stvmc")]
-visible = false
-
-[node name="Druid_1" parent="." instance=ExtResource("3_1ybr5")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-visible = false
-
-[node name="Skeleton3D" parent="Druid_1/Root" index="0"]
-bones/2/rotation = Quaternion(0.995186, 0.0980024, -3.19485e-08, -7.25422e-09)
-bones/10/position = Vector3(33.9474, -0.144862, -0.143596)
-bones/10/rotation = Quaternion(0.00168382, -0.0407499, 0.0412522, 0.998316)
-bones/12/position = Vector3(3.51405, -1.1707, 4.50554)
-bones/12/rotation = Quaternion(0.0254809, -0.276842, -0.08804, 0.956534)
-bones/16/position = Vector3(4.09363, 1.55452e-05, 4.60442e-07)
-bones/16/rotation = Quaternion(-0.00115392, 0.0107422, -0.098331, 0.995095)
-bones/17/position = Vector3(3.7912, 2.24736e-05, 5.38091e-06)
-bones/17/rotation = Quaternion(-0.00691212, 0.0257178, -0.0570026, 0.998019)
-bones/18/position = Vector3(3.77978, 2.94329e-05, 7.28995e-06)
-bones/19/position = Vector3(9.98252, -0.115922, -3.28334)
-bones/19/rotation = Quaternion(-0.00248639, 0.0438801, -0.0565195, 0.997434)
-bones/20/position = Vector3(4.24881, -7.65226e-07, 5.36883e-06)
-bones/20/rotation = Quaternion(0.00263729, -0.0194919, -0.0212696, 0.99958)
-bones/21/position = Vector3(3.51333, 4.10029e-06, 4.21087e-06)
-bones/21/rotation = Quaternion(-0.0181492, 0.0714795, -0.0925104, 0.992977)
-bones/22/position = Vector3(3.00323, 7.43099e-06, 5.75702e-06)
-bones/23/rotation = Quaternion(0.632488, -0.578546, -0.375472, -0.352512)
-bones/25/position = Vector3(-33.9475, 0.144731, 0.143447)
-bones/25/rotation = Quaternion(0.00168373, -0.0407522, 0.0412521, 0.998316)
-bones/27/rotation = Quaternion(0.0254808, -0.276842, -0.0880401, 0.956534)
-bones/28/position = Vector3(-6.37014, -0.000769829, 3.73079e-05)
-bones/28/rotation = Quaternion(-0.0399419, 0.117841, -0.141636, 0.982068)
-bones/29/position = Vector3(-5.66551, -1.40066e-05, -3.49701e-05)
-bones/31/position = Vector3(-4.09359, 9.6721e-05, 3.71145e-05)
-bones/31/rotation = Quaternion(-0.00115444, 0.0107468, -0.0983305, 0.995095)
-bones/33/position = Vector3(-3.77933, -0.000563821, -2.20799e-05)
-bones/34/position = Vector3(-9.9825, 0.115979, 3.28334)
-bones/34/rotation = Quaternion(-0.0024864, 0.0438801, -0.0565194, 0.997434)
-bones/35/position = Vector3(-4.24882, 1.22771e-05, -5.60685e-06)
-bones/35/rotation = Quaternion(0.00263727, -0.0194919, -0.021269, 0.99958)
-bones/37/position = Vector3(-3.00311, 8.34261e-05, 3.14327e-05)
-bones/40/rotation = Quaternion(0.85767, -0.507213, -0.0397528, -0.0745436)
-bones/45/rotation = Quaternion(0.85767, -0.507213, -0.0397526, -0.0745436)
-bones/53/position = Vector3(159.925, 0.000135897, 5.63711e-06)
-bones/53/rotation = Quaternion(1, -8.44255e-23, 7.54979e-08, -1.48532e-08)
-
-[connection signal="animation_finished" from="Druid_1/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-
-[editable path="Druid_1"]

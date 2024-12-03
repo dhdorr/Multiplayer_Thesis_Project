@@ -7,6 +7,15 @@ class_name PLAYER_SKIN_SERVER extends CharacterBody3D
 
 
 var is_action_on_cooldown : bool = false
+var is_reflecting : bool = false
+var is_dead : bool = false
+
+func _physics_process(delta: float) -> void:
+	if is_reflecting:
+		if reflect_area_3d.get_overlapping_bodies().size() > 0:
+			#print("we touchin balls!")
+			SignalBusMp.player_activated_reflection.emit(reflect_area_3d.global_basis.z)
+			is_reflecting = false
 
 
 func rotate_skin(skin_rotation: Vector3) -> void:
@@ -18,7 +27,13 @@ func activate_reflection() -> void:
 	if not is_action_on_cooldown:
 		#print("reflect activated!")
 		is_action_on_cooldown = true
-		get_tree().create_timer(0.5).timeout.connect(func() -> void: is_action_on_cooldown = false)
+		is_reflecting = true
+		get_tree().create_timer(1.0).timeout.connect(func() -> void:
+			is_action_on_cooldown = false
+			)
+		get_tree().create_timer(0.33).timeout.connect(func() -> void:
+			is_reflecting = false
+			)
 		if reflect_area_3d.get_overlapping_bodies().size() > 0:
 			#print("we touchin balls!")
 			SignalBusMp.player_activated_reflection.emit(reflect_area_3d.global_basis.z)
@@ -26,3 +41,5 @@ func activate_reflection() -> void:
 
 func _on_hurtbox_area_3d_area_entered(area: Area3D) -> void:
 	print("you are dead!")
+	is_dead = true
+	hurtbox_area_3d.area_entered.disconnect(_on_hurtbox_area_3d_area_entered)

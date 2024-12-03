@@ -44,6 +44,8 @@ func _physics_process(delta: float) -> void:
 		var world_state_update := SERVER_PACKET_INTERFACE.World_State_Update.new(update_packet_id)
 		
 		for pp in player_packets:
+			if server_player_dict[pp["player_id"]].is_dead:
+				server_player_dict[pp["player_id"]]
 			# unpack player packets, apply movement and actions
 			var player_velocity : Vector3 = server_player_dict[pp["player_id"]].velocity
 			var player_basis : Basis = server_player_dict[pp["player_id"]].global_basis
@@ -69,7 +71,8 @@ func _physics_process(delta: float) -> void:
 				server_player_dict[pp["player_id"]].velocity,
 				pp["direction"],
 				pp["packet_id"],
-				pp["action_command"]
+				pp["action_command"],
+				server_player_dict[pp["player_id"]].is_dead
 			)
 		
 		# Add bomb ball state to packet

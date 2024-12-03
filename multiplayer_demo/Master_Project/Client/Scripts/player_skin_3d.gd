@@ -3,7 +3,6 @@ class_name PLAYER_SKIN
 
 #@onready var viking_project: Node3D = $Viking_Project
 #@onready var animation_player: AnimationPlayer = $Viking_Project/AnimationPlayer
-@onready var druid_1: Node3D = $Druid_1
 @onready var animation_player: AnimationPlayer
 
 const SKINS_PATH = "res://Master_Project/assets/Characters/Scenes/"
