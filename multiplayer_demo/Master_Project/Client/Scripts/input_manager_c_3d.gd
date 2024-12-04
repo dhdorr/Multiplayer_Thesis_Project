@@ -78,6 +78,8 @@ func update_player_authoritative_position(player_packet : Dictionary) -> void:
 		$"../AudioStreamPlayer".play()
 		$"../GPUParticles3D".emitting = true
 		%Player_Skin_3D.visible = false
+		$"../Control/Lives_Count_Label".text = str(0)
+		$"../AnimationPlayer".play("eliminated")
 	if player_packet["last_received_packet_id"] != packet_manager_c._last_confirmed_packet_id:
 		packet_manager_c.register_confirmed_packet(player_packet["last_received_packet_id"])
 		#packet_manager_c._last_confirmed_packet_id = packet[connection_manager_c.player_id]["packet_id"]

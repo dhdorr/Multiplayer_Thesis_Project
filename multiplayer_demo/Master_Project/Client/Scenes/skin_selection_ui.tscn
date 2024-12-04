@@ -32,8 +32,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Control" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer/Control"]
 layout_mode = 1
@@ -46,12 +46,13 @@ color = Color(0.209808, 0.221588, 0.264307, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Control"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.0246914
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Control"]
 layout_mode = 1
@@ -71,16 +72,63 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 text = "Go Back"
 
+[node name="Control_old" type="Control" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Control_old"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.557491
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.209808, 0.221588, 0.264307, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Control_old"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.557491
+anchor_bottom = 1.0
+offset_top = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Control_old"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 0.557491
+anchor_bottom = 1.0
+offset_top = -71.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="Go_Back_Button" type="Button" parent="HBoxContainer/Control_old/MarginContainer"]
+layout_mode = 2
+text = "Go Back"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
+size_flags_vertical = 3
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/VBoxContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(800, 512)
+size = Vector2i(748, 648)
 render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport"]
@@ -110,12 +158,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -184.0
 offset_top = 64.0
-offset_right = 185.0
+offset_right = 369.0
 offset_bottom = 131.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 48
 text = "Select Your Skin"
 
 [connection signal="pressed" from="HBoxContainer/Control/MarginContainer/Go_Back_Button" to="." method="_on_go_back_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Control_old/MarginContainer/Go_Back_Button" to="." method="_on_go_back_button_pressed"]
