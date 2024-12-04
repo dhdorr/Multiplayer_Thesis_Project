@@ -32,9 +32,9 @@ func _check_for_new_client_connections() -> void:
 			# confirm connection
 			peers.append(peer)
 			
-			var store_me : Dictionary = { "player_ip" = peer.get_packet_ip(), "player_port" = peer.get_packet_port(), "username" = packet["username"] }
+			#var store_me : Dictionary = { "player_ip" = peer.get_packet_ip(), "player_port" = peer.get_packet_port(), "username" = packet["username"] }
 			
-			var real_player_id : int = $"../Database_Manager".create_new_player(store_me)
+			var real_player_id : int = $"../Database_Manager".create_new_player(peer.get_packet_ip(), peer.get_packet_port(), packet["username"])
 			
 			# add new player to the lobby and update the whole lobby
 			lobby_manager_s.add_new_player_to_lobby(packet["username"], packet["skin_id"], real_player_id)
@@ -42,7 +42,7 @@ func _check_for_new_client_connections() -> void:
 			_accept_new_peer_connection_3D(peer, real_player_id)
 			#var store_me : Dictionary = { "player_ip" = peer.get_packet_ip(), "player_port" = peer.get_packet_port(), "username" = packet["username"] }
 			#var real_player_id : int = $"../Database_Manager".create_new_player(store_me)
-			$"../Database_Manager".add_player_to_match(curr_match_id, real_player_id)
+			$"../Database_Manager".add_player_to_match(curr_match_id, real_player_id, packet["skin_id"])
 			print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
 			print("Received data: %s" % [packet])
 			

@@ -2,9 +2,7 @@ extends Node
 
 var database : SQLite
 
-# how to insert dates
-#INSERT INTO datetime_text (d1, d2)
-#VALUES(datetime('now'),datetime('now', 'localtime'));
+const SKINS_PATH = "res://Master_Project/assets/Characters/Scenes/"
 
 func _ready() -> void:
 	database = SQLite.new()
@@ -16,7 +14,7 @@ func _ready() -> void:
 	
 	var query_string : String = "CREATE TABLE IF NOT EXISTS players (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		player_id INTEGER UNIQUE,
+		player_id INTEGER UNIQUE NOT NULL,
 		player_ip TEXT NOT NULL,
 		player_port INTEGER NOT NULL,
 		username TEXT NOT NULL
@@ -29,14 +27,25 @@ func _ready() -> void:
 		);"
 	database.query(query_string_matches)
 	
+	var query_string_skins : String = "CREATE TABLE IF NOT EXISTS skins (
+		skin_id INTEGER PRIMARY KEY AUTOINCREMENT,
+		skin_name TEXT NOT NULL,
+		path TEXT NOT NULL UNIQUE,
+		enabled INTEGER NOT NULL
+	);"
+	database.query(query_string_skins)
+	
 	var query_string_match_players : String = "CREATE TABLE IF NOT EXISTS match_players (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		match_id INTEGER NOT NULL,
 		player_id INTEGER NOT NULL,
+		skin_id INTEGER NOT NULL,
 		FOREIGN KEY (player_id)
 			REFERENCES players (player_id),
 		FOREIGN KEY (match_id)
-			REFERENCES matches (match_id)
+			REFERENCES matches (match_id),
+		FOREIGN KEY (skin_id)
+			REFERENCES skins (skin_id)
 		);"
 	database.query(query_string_match_players)
 	
@@ -67,6 +76,8 @@ func _ready() -> void:
 			REFERENCES matches (match_id)
 		);"
 	database.query(query_string_2)
+	
+	refresh_skins_table()
 
 
 func write_client_packet_to_table(packet : Dictionary) -> void:
@@ -94,14 +105,14 @@ func write_server_world_update_to_table(packet : Dictionary) -> void:
 	database.insert_row("server_world_update_packets", data)
 
 
-func create_new_player(player : Dictionary) -> int:
+func create_new_player(player_ip : String, player_port : int, username : String) -> int:
 	var query_string : String = "INSERT INTO players (player_id, player_ip, player_port, username)
 		VALUES (
-			(SELECT player_id FROM players ORDER BY id DESC LIMIT 1) + 1,
+			IFNULL((SELECT player_id FROM players ORDER BY id DESC LIMIT 1)+1, 1000),
 			'%s', '%s', '%s'
 		);
 		SELECT player_id FROM players ORDER BY id DESC LIMIT 1;"
-	var query_string_formatted : String = query_string % [ str(player["player_ip"]), str(player["player_port"]), str(player["username"]) ]
+	var query_string_formatted : String = query_string % [ player_ip, str(player_port), username ]
 	database.query(query_string_formatted)
 	var player_id : int = database.query_result[0]["player_id"]
 	return player_id
@@ -111,14 +122,28 @@ func create_new_match() -> int:
 	var query_string : String = "INSERT INTO matches (date_played) VALUES (datetime('now'));
 	SELECT match_id FROM matches ORDER BY match_id DESC LIMIT 1;"
 	database.query(query_string)
-	print(database.query_result)
 	var match_id : int = database.query_result[0]["match_id"]
 	return match_id
 
 
-func add_player_to_match(match_id : int, player_id : int) -> void:
+func add_player_to_match(match_id : int, player_id : int, skin_id : int) -> void:
 	var data : Dictionary = {
 		"match_id" = match_id,
 		"player_id" = player_id,
+		"skin_id" = skin_id,
 	}
 	database.insert_row("match_players", data)
+
+
+func refresh_skins_table() -> void:
+	var data : Dictionary = { "skin_name" : "", "path" : "", "enabled" : "TRUE" }
+	var directory := DirAccess.open(SKINS_PATH)
+	var file_paths = directory.get_files() as Array
+	file_paths = file_paths.filter(func(file_name : String):
+		return file_name.ends_with("_1.tscn")
+		)
+	for path : String in file_paths:
+		var truncated_name : String = path.split("_1.tscn")[0]
+		data["skin_name"] = truncated_name
+		data["path"] = SKINS_PATH + path
+		database.insert_row("skins", data)
