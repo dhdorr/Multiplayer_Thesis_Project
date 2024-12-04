@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://27epkxidj0a2"]
+
+[ext_resource type="PackedScene" uid="uid://b5ug4n8yvh21j" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/SM_Env_Tile_Dirt_01.fbx" id="1_o3usl"]
+
+[node name="SM_Env_Tile_Dirt_01" instance=ExtResource("1_o3usl")]

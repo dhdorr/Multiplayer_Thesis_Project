@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnx78fw7hc8vn"]
+
+[ext_resource type="PackedScene" uid="uid://dsairchd25rbw" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/SM_Bld_Castle_Roof_Spire_01.fbx" id="1_5ud2h"]
+[ext_resource type="Material" uid="uid://d1fhdtb2qtmuq" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/spire_top_red.tres" id="2_7u7y5"]
+
+[node name="SM_Bld_Castle_Roof_Spire_01" instance=ExtResource("1_5ud2h")]
+
+[node name="SM_Bld_Castle_Roof_Spire_01" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_7u7y5")

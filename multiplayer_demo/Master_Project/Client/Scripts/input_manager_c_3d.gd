@@ -11,6 +11,12 @@ var connection_manager_c: Connection_Manager_Client
 @onready var test_rotation_3d: Node3D = $"../Test_Rotation_3D"
 @onready var camera_3d: Camera3D = $"../Camera_Pivot_3D/Camera3D"
 
+@onready var footstep_sfx := [load("res://Master_Project/assets/Audio/Bare Step Grass Medium A.wav"),
+load("res://Master_Project/assets/Audio/Bare Step Grass Medium B.wav"),
+load("res://Master_Project/assets/Audio/Bare Step Grass Medium C.wav"),
+load("res://Master_Project/assets/Audio/Bare Step Grass Medium D.wav"),
+load("res://Master_Project/assets/Audio/Bare Step Grass Medium E.wav")]
+
 var client_wrapper : Client_Wrapper
 var buffer_manager_c: Buffer_Manager_C
 var packet_manager_c: PACKET_MANAGER_C
@@ -31,6 +37,7 @@ const GRAVITY := 40.0 * Vector3.DOWN
 var handle_mouse_input := true
 
 var player_is_dead := false
+var step_sfx_playing := false
 
 func _init() -> void:
 	set_physics_process(false)
@@ -90,6 +97,12 @@ func _physics_process(delta: float) -> void:
 		# Choose animation to play
 		if player.is_on_floor() and not direction.is_zero_approx():
 			player_skin_3d.run()
+			if not step_sfx_playing:
+				var temp_run :AudioStreamWAV= footstep_sfx.pick_random()
+				$"../AudioStreamPlayer".stream = temp_run
+				$"../AudioStreamPlayer".play()
+				step_sfx_playing = true
+				get_tree().create_timer(0.33).timeout.connect(_on_step_audio_finished)
 		elif player.is_on_floor():
 			player_skin_3d.idle()
 			
@@ -194,3 +207,7 @@ func _on_prediction_check_button_toggled(toggled_on: bool) -> void:
 
 func _on_reconciliation_check_button_toggled(toggled_on: bool) -> void:
 	SettingsMp.enable_server_reconciliation = toggled_on
+
+
+func _on_step_audio_finished() -> void:
+	step_sfx_playing = false

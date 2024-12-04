@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://doojk46vhjkft"]
+
+[ext_resource type="PackedScene" uid="uid://ch866mppfp5p8" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/SM_Env_GroundMound_01.fbx" id="1_hd5xp"]
+
+[node name="SM_Env_GroundMound_01" instance=ExtResource("1_hd5xp")]

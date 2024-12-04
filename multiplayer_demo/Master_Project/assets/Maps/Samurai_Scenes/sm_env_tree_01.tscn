@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvg7ykqvsjoic"]
+
+[ext_resource type="PackedScene" uid="uid://noopqie7eleh" path="res://Master_Project/assets/Maps/Samurai_Scenes/SM_Env_Tree_01.fbx" id="1_ivq1u"]
+
+[node name="SM_Env_Tree_01" instance=ExtResource("1_ivq1u")]

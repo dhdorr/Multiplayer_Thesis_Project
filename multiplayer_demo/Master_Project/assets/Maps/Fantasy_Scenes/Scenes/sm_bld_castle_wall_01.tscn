@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://csvohtb3kmor0"]
+
+[ext_resource type="PackedScene" uid="uid://by4e13e8c26bj" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/SM_Bld_Castle_Wall_01.fbx" id="1_faj5n"]
+
+[node name="SM_Bld_Castle_Wall_01" instance=ExtResource("1_faj5n")]

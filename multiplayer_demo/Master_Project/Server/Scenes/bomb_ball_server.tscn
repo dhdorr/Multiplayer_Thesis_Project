@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dddbscqu0pxil"]
+[gd_scene load_steps=6 format=3 uid="uid://dddbscqu0pxil"]
 
 [ext_resource type="Script" path="res://Master_Project/Server/Scripts/bomb_ball_server.gd" id="1_2gwlm"]
+[ext_resource type="AudioStream" uid="uid://bpipkjax805av" path="res://Master_Project/assets/Audio/Combo Level B1.wav" id="2_cj48v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rb753"]
-albedo_color = Color(0.517184, 0.517184, 0.517184, 1)
+albedo_color = Color(0.840634, 0.171204, 0.294027, 1)
+metallic = 0.6
+metallic_specular = 0.2
+roughness = 0.7
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_y2y8s"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_btinf"]
-radius = 0.25
 
 [node name="Bomb_Ball" type="RigidBody3D" groups=["ball"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -21,6 +24,7 @@ max_contacts_reported = 2
 script = ExtResource("1_2gwlm")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 material = SubResource("StandardMaterial3D_rb753")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -33,4 +37,9 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox_Area3D"]
 shape = SubResource("SphereShape3D_btinf")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_cj48v")
+volume_db = -15.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

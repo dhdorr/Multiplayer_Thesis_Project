@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://beyd245yxjekd"
+path="res://.godot/imported/Bare Step Grass Medium C.wav-6087ac8030163018641a78f69d492854.sample"
+
+[deps]
+
+source_file="res://Master_Project/assets/Audio/Bare Step Grass Medium C.wav"
+dest_files=["res://.godot/imported/Bare Step Grass Medium C.wav-6087ac8030163018641a78f69d492854.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

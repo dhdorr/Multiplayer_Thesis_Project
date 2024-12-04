@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx2ff0knlmgrd"]
+
+[ext_resource type="PackedScene" uid="uid://du43e1b7hqg6j" path="res://Master_Project/assets/Maps/Samurai_Scenes/SM_Env_Archway_01.fbx" id="1_c28u8"]
+
+[node name="SM_Env_Archway_01" instance=ExtResource("1_c28u8")]

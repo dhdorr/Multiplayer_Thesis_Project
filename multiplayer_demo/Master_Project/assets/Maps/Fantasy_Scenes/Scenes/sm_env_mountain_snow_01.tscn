@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://boc5tameeyfut"]
+
+[ext_resource type="PackedScene" uid="uid://i5i880n1qauy" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/SM_Env_MountainSnow_01.fbx" id="1_xnq3e"]
+
+[node name="SM_Env_MountainSnow_01" instance=ExtResource("1_xnq3e")]

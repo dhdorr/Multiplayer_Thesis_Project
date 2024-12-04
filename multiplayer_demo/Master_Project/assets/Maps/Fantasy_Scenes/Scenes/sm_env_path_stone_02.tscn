@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://blgthdvdh13ha"]
+
+[ext_resource type="PackedScene" uid="uid://m6qgrbv7u72r" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/SM_Env_Path_Stone_02.fbx" id="1_lmnjx"]
+
+[node name="SM_Env_Path_Stone_02" instance=ExtResource("1_lmnjx")]

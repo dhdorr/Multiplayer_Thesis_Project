@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d10phg2m5csge"]
+[gd_scene load_steps=9 format=3 uid="uid://d10phg2m5csge"]
 
 [ext_resource type="Script" path="res://Master_Project/Client/Scripts/player_ghost_c_3d.gd" id="1_457wf"]
 [ext_resource type="PackedScene" uid="uid://m62sn4oekvwu" path="res://Master_Project/assets/Characters/Scenes/warrior_project.tscn" id="3_ibpkf"]
 [ext_resource type="Material" uid="uid://bde85pxt8tbp1" path="res://Master_Project/assets/Characters/Materials/sci_fi_characters_1.tres" id="3_yho8b"]
+[ext_resource type="AudioStream" uid="uid://cngojntyjgumf" path="res://Master_Project/assets/Audio/Punch Combo Break.wav" id="4_leekn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l7ibu"]
 
@@ -56,5 +57,10 @@ randomness = 0.42
 process_material = SubResource("ParticleProcessMaterial_p0wu3")
 draw_pass_1 = SubResource("BoxMesh_ptavy")
 draw_skin = SubResource("Skin_3fb6q")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_leekn")
 
 [editable path="Ghost_Skin_3D/Warrior_Project"]

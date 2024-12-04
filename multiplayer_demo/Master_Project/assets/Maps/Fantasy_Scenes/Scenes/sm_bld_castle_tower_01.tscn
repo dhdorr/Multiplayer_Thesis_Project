@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0r3plwejx5nj"]
+
+[ext_resource type="PackedScene" uid="uid://ci4x4hx37jrpv" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/SM_Bld_Castle_Tower_01.fbx" id="1_hsnfy"]
+
+[node name="SM_Bld_Castle_Tower_01" instance=ExtResource("1_hsnfy")]

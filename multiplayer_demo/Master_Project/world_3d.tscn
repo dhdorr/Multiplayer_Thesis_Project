@@ -1,8 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://cp4i2qtyy8uoh"]
+[gd_scene load_steps=26 format=3 uid="uid://cp4i2qtyy8uoh"]
 
 [ext_resource type="PackedScene" uid="uid://dddbscqu0pxil" path="res://Master_Project/Server/Scenes/bomb_ball_server.tscn" id="1_mvsct"]
 [ext_resource type="Material" uid="uid://bvmf7f14bbpuk" path="res://Master_Project/assets/Materials/new_standard_material_3d.tres" id="2_u0ipl"]
-[ext_resource type="PackedScene" uid="uid://cx2ymkhya7d7a" path="res://Master_Project/assets/Maps/test_bg.tscn" id="3_ffdqk"]
+[ext_resource type="Material" uid="uid://1xpyhjmhf0yw" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/spire_top_blue.tres" id="10_bgcgf"]
+[ext_resource type="PackedScene" uid="uid://d0r3plwejx5nj" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_bld_castle_tower_01.tscn" id="10_w6lva"]
+[ext_resource type="PackedScene" uid="uid://ir5ysg4rcxh1" path="res://Master_Project/assets/Maps/Samurai_Scenes/sm_env_fuji_01.tscn" id="11_81u02"]
+[ext_resource type="PackedScene" uid="uid://cedrtrkqw2uu8" path="res://Master_Project/assets/Maps/Samurai_Scenes/sm_env_cloud_01.tscn" id="11_vmdwp"]
+[ext_resource type="PackedScene" uid="uid://dnx78fw7hc8vn" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_bld_castle_roof_spire_01.tscn" id="12_6blea"]
+[ext_resource type="PackedScene" uid="uid://csvohtb3kmor0" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_bld_castle_wall_01.tscn" id="12_x7tcp"]
+[ext_resource type="PackedScene" uid="uid://cx2ff0knlmgrd" path="res://Master_Project/assets/Maps/Samurai_Scenes/sm_env_archway_01.tscn" id="13_4s78g"]
+[ext_resource type="PackedScene" uid="uid://doojk46vhjkft" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_env_ground_mound_01.tscn" id="13_nhcct"]
+[ext_resource type="PackedScene" uid="uid://bwxsyighk1uen" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_bld_castle_tower_wall_top_01.tscn" id="13_s38uj"]
+[ext_resource type="PackedScene" uid="uid://27epkxidj0a2" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_env_tile_dirt_01.tscn" id="14_24m7u"]
+[ext_resource type="PackedScene" uid="uid://bvg7ykqvsjoic" path="res://Master_Project/assets/Maps/Samurai_Scenes/sm_env_tree_01.tscn" id="14_tnrmf"]
+[ext_resource type="PackedScene" uid="uid://d2352uyu6bkn3" path="res://Master_Project/assets/Maps/Adventure_Scenes/sm_prop_fence_stick_01.tscn" id="15_e2nav"]
+[ext_resource type="PackedScene" uid="uid://cnlbvfkjxgkds" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_env_tree_twisted_02.tscn" id="15_okrv2"]
+[ext_resource type="PackedScene" uid="uid://dhy6vysucq12a" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_bld_village_well_01.tscn" id="16_eqylf"]
+[ext_resource type="PackedScene" uid="uid://dt27oyr4468c8" path="res://Master_Project/assets/Maps/Samurai_Scenes/sm_env_ground_mound_05.tscn" id="17_5f2e0"]
+[ext_resource type="PackedScene" uid="uid://bpbx78mlawdk0" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_env_path_stone_01.tscn" id="17_j2hyg"]
+[ext_resource type="PackedScene" uid="uid://ba3i0s3wp12js" path="res://Master_Project/assets/Maps/Samurai_Scenes/sm_env_snow_hill_cascade_01.tscn" id="18_28tvc"]
+[ext_resource type="PackedScene" uid="uid://dl5tbawe8kwwn" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_env_path_stone_03.tscn" id="18_e2hws"]
+[ext_resource type="PackedScene" uid="uid://c2u33qwaqkwmg" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_env_mountain_grass_01.tscn" id="19_3mt7t"]
+[ext_resource type="PackedScene" uid="uid://dm207q4e828x1" path="res://Master_Project/assets/Maps/Samurai_Scenes/sm_env_hill_cascade_01.tscn" id="19_yhuhy"]
+[ext_resource type="PackedScene" uid="uid://boc5tameeyfut" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/sm_env_mountain_snow_01.tscn" id="20_iesq5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qeem"]
 albedo_color = Color(0.290081, 0.471387, 0.302647, 1)
@@ -15,10 +35,11 @@ ambient_light_source = 2
 ambient_light_color = Color(0.597175, 0.597176, 0.597175, 1)
 tonemap_mode = 2
 fog_enabled = true
-fog_light_color = Color(0.346685, 0.439926, 0.488755, 1)
+fog_light_color = Color(0.835465, 0.879215, 0.885957, 1)
+fog_light_energy = 0.25
 fog_density = 0.0
 fog_sky_affect = 0.5
-fog_height = -1.0
+fog_height = -0.25
 fog_height_density = 0.8
 adjustment_enabled = true
 adjustment_contrast = 1.2
@@ -36,7 +57,7 @@ transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 
 
 [node name="Camera3D" type="Camera3D" parent="Camera_Pivot_3D"]
 transform = Transform3D(-4.37114e-08, 0.34202, -0.939693, 0, 0.939693, 0.34202, 1, 1.49502e-08, -4.10753e-08, -20, 5, 0)
-fov = 60.0
+fov = 69.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5.16382, 10.0542)
@@ -51,28 +72,28 @@ environment = SubResource("Environment_k3578")
 [node name="Spawn_Points" type="Node" parent="."]
 
 [node name="Spawn_Point_1" type="Marker3D" parent="Spawn_Points" groups=["spawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="Label3D" type="Label3D" parent="Spawn_Points/Spawn_Point_1"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.01, 0)
 text = "V"
 
 [node name="Spawn_Point_2" type="Marker3D" parent="Spawn_Points" groups=["spawn"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -8)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -6)
 
 [node name="Label3D2" type="Label3D" parent="Spawn_Points/Spawn_Point_2"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.01, 0)
 text = "V"
 
 [node name="Spawn_Point_3" type="Marker3D" parent="Spawn_Points" groups=["spawn"]]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0, 0)
 
 [node name="Label3D3" type="Label3D" parent="Spawn_Points/Spawn_Point_3"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.01, 0)
 text = "V"
 
 [node name="Spawn_Point_4" type="Marker3D" parent="Spawn_Points" groups=["spawn"]]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 0)
 
 [node name="Label3D4" type="Label3D" parent="Spawn_Points/Spawn_Point_4"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.01, 0)
@@ -84,6 +105,7 @@ text = "V"
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 1, 0)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -92,6 +114,7 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, -11)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -100,6 +123,7 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 11, 1, 0)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -108,6 +132,7 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 11)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -116,6 +141,7 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 10, 0, 10)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -124,6 +150,7 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 10, 0, -10)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -132,6 +159,7 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, 0, -10)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -140,6 +168,7 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, 0, 10)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -148,6 +177,7 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -156,6 +186,7 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 0)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -164,6 +195,7 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 12)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -172,11 +204,203 @@ material = ExtResource("2_u0ipl")
 
 [node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -12)
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
 radius = 3.0
 material = ExtResource("2_u0ipl")
 
-[node name="test_bg" parent="." instance=ExtResource("3_ffdqk")]
-transform = Transform3D(-2.18557e-06, 0, -50, 0, 50, 0, 50, 0, -2.18557e-06, 11.0672, 1.86283, -0.213694)
+[node name="Fantasy_Walls" type="Node" parent="."]
+
+[node name="SM_Bld_Castle_Tower_01" parent="Fantasy_Walls" instance=ExtResource("10_w6lva")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, 0, 0)
+
+[node name="SM_Bld_Castle_Tower_02" parent="Fantasy_Walls" instance=ExtResource("10_w6lva")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -9, 0, -9)
+
+[node name="SM_Bld_Castle_Roof_Spire_01" parent="Fantasy_Walls/SM_Bld_Castle_Tower_02" instance=ExtResource("12_6blea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="SM_Bld_Castle_Tower_03" parent="Fantasy_Walls" instance=ExtResource("10_w6lva")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -9, 0, 9)
+
+[node name="SM_Bld_Castle_Roof_Spire_02" parent="Fantasy_Walls/SM_Bld_Castle_Tower_03" instance=ExtResource("12_6blea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="SM_Bld_Castle_Wall_01" parent="Fantasy_Walls" instance=ExtResource("12_x7tcp")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, -4, 5)
+
+[node name="SM_Bld_Castle_Tower_Wall_Top_01" parent="Fantasy_Walls/SM_Bld_Castle_Wall_01" instance=ExtResource("13_s38uj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="SM_Bld_Castle_Wall_05" parent="Fantasy_Walls" instance=ExtResource("12_x7tcp")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, -4, 0)
+
+[node name="SM_Bld_Castle_Tower_Wall_Top_01" parent="Fantasy_Walls/SM_Bld_Castle_Wall_05" instance=ExtResource("13_s38uj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="SM_Bld_Castle_Wall_03" parent="Fantasy_Walls" instance=ExtResource("12_x7tcp")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -10, -4, 9)
+
+[node name="SM_Bld_Castle_Tower_Wall_Top_01" parent="Fantasy_Walls/SM_Bld_Castle_Wall_03" instance=ExtResource("13_s38uj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="SM_Bld_Castle_Wall_02" parent="Fantasy_Walls" instance=ExtResource("12_x7tcp")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, -4, -5)
+
+[node name="SM_Bld_Castle_Tower_Wall_Top_01" parent="Fantasy_Walls/SM_Bld_Castle_Wall_02" instance=ExtResource("13_s38uj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="SM_Bld_Castle_Wall_04" parent="Fantasy_Walls" instance=ExtResource("12_x7tcp")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, -4, -9)
+
+[node name="SM_Bld_Castle_Tower_Wall_Top_01" parent="Fantasy_Walls/SM_Bld_Castle_Wall_04" instance=ExtResource("13_s38uj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="SM_Env_GroundMound_01" parent="Fantasy_Walls" instance=ExtResource("13_nhcct")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -26, -1.39921, 0)
+
+[node name="SM_Env_Tile_Dirt_01" parent="Fantasy_Walls" instance=ExtResource("14_24m7u")]
+transform = Transform3D(2.98112, 0.317198, 0.111036, -0.320523, 2.98153, 0.0881033, -0.101037, -0.099412, 2.99665, -24.7137, 0.78675, 4.3155)
+
+[node name="SM_Env_Tree_Twisted_02" parent="Fantasy_Walls" instance=ExtResource("15_okrv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0326, 0.0852759, -7.14858)
+
+[node name="SM_Env_Tree_Twisted_03" parent="Fantasy_Walls" instance=ExtResource("15_okrv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.7839, 0.342773, 3.31791)
+
+[node name="Fantasy_Walls2" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="SM_Bld_Castle_Tower_01" parent="Fantasy_Walls2" instance=ExtResource("10_w6lva")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, 0, 0)
+
+[node name="SM_Bld_Castle_Tower_02" parent="Fantasy_Walls2" instance=ExtResource("10_w6lva")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -9, 0, -9)
+
+[node name="SM_Bld_Castle_Roof_Spire_01" parent="Fantasy_Walls2/SM_Bld_Castle_Tower_02" instance=ExtResource("12_6blea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="SM_Bld_Castle_Roof_Spire_01" parent="Fantasy_Walls2/SM_Bld_Castle_Tower_02/SM_Bld_Castle_Roof_Spire_01" index="0"]
+surface_material_override/0 = ExtResource("10_bgcgf")
+
+[node name="SM_Bld_Castle_Tower_03" parent="Fantasy_Walls2" instance=ExtResource("10_w6lva")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -9, 0, 9)
+
+[node name="SM_Bld_Castle_Roof_Spire_02" parent="Fantasy_Walls2/SM_Bld_Castle_Tower_03" instance=ExtResource("12_6blea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="SM_Bld_Castle_Roof_Spire_01" parent="Fantasy_Walls2/SM_Bld_Castle_Tower_03/SM_Bld_Castle_Roof_Spire_02" index="0"]
+surface_material_override/0 = ExtResource("10_bgcgf")
+
+[node name="SM_Bld_Castle_Wall_01" parent="Fantasy_Walls2" instance=ExtResource("12_x7tcp")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, -4, 5)
+
+[node name="SM_Bld_Castle_Tower_Wall_Top_01" parent="Fantasy_Walls2/SM_Bld_Castle_Wall_01" instance=ExtResource("13_s38uj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="SM_Bld_Castle_Wall_05" parent="Fantasy_Walls2" instance=ExtResource("12_x7tcp")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, -4, 0)
+
+[node name="SM_Bld_Castle_Tower_Wall_Top_01" parent="Fantasy_Walls2/SM_Bld_Castle_Wall_05" instance=ExtResource("13_s38uj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="SM_Bld_Castle_Wall_03" parent="Fantasy_Walls2" instance=ExtResource("12_x7tcp")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -10, -4, 9)
+
+[node name="SM_Bld_Castle_Tower_Wall_Top_01" parent="Fantasy_Walls2/SM_Bld_Castle_Wall_03" instance=ExtResource("13_s38uj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="SM_Bld_Castle_Wall_02" parent="Fantasy_Walls2" instance=ExtResource("12_x7tcp")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, -4, -5)
+
+[node name="SM_Bld_Castle_Tower_Wall_Top_01" parent="Fantasy_Walls2/SM_Bld_Castle_Wall_02" instance=ExtResource("13_s38uj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="SM_Bld_Castle_Wall_04" parent="Fantasy_Walls2" instance=ExtResource("12_x7tcp")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -10, -4, -9)
+
+[node name="SM_Bld_Castle_Tower_Wall_Top_01" parent="Fantasy_Walls2/SM_Bld_Castle_Wall_04" instance=ExtResource("13_s38uj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="SM_Env_GroundMound_01" parent="Fantasy_Walls2" instance=ExtResource("13_nhcct")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -26, -1.39921, 0)
+
+[node name="SM_Env_Tile_Dirt_01" parent="Fantasy_Walls2" instance=ExtResource("14_24m7u")]
+transform = Transform3D(2.98112, 0.317198, 0.111036, -0.320523, 2.98153, 0.0881033, -0.101037, -0.099412, 2.99665, -24.7137, 0.78675, 4.3155)
+
+[node name="Samurai_Walls" type="Node" parent="."]
+
+[node name="SM_Env_Cloud_01" parent="Samurai_Walls" instance=ExtResource("11_vmdwp")]
+transform = Transform3D(-2.07055, 0, 7.72741, 0, 8, 0, -7.72741, 0, -2.07055, 16.5968, 4.01851, 1)
+
+[node name="SM_Env_Fuji_01" parent="Samurai_Walls" instance=ExtResource("11_81u02")]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 25, -1, 0)
+
+[node name="SM_Env_Archway_01" parent="Samurai_Walls" instance=ExtResource("13_4s78g")]
+transform = Transform3D(25, 0, -43.3013, 0, 50, 0, 43.3013, 0, 25, 15.2782, 0.622734, -3.29572)
+
+[node name="SM_Env_Tree_01" parent="Samurai_Walls" instance=ExtResource("14_tnrmf")]
+transform = Transform3D(20.7055, 0, -77.2741, 0, 80, 0, 77.2741, 0, 20.7055, 15, 0.546154, 5.55915)
+
+[node name="Adventure_Walls" type="Node3D" parent="."]
+
+[node name="SM_Prop_Fence_Stick_01" parent="Adventure_Walls" instance=ExtResource("15_e2nav")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, -10)
+
+[node name="SM_Prop_Fence_Stick_02" parent="Adventure_Walls" instance=ExtResource("15_e2nav")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8, 0, -10)
+
+[node name="SM_Bld_Village_Well_01" parent="Adventure_Walls" instance=ExtResource("16_eqylf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -0.446009, -11.9726)
+
+[node name="SM_Env_GroundMound_05" parent="Adventure_Walls" instance=ExtResource("17_5f2e0")]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, -2.32839, -29)
+
+[node name="SM_Env_Snow_Hill_Cascade_01" parent="Adventure_Walls" instance=ExtResource("18_28tvc")]
+transform = Transform3D(84.8528, 0, -84.8528, 0, 120, 0, 84.8528, 0, 84.8528, 9, -1, -35.7306)
+
+[node name="SM_Env_Hill_Cascade_01" parent="Adventure_Walls" instance=ExtResource("19_yhuhy")]
+transform = Transform3D(-60, 0, -103.923, 0, 120, 0, 103.923, 0, -60, 28, -3, 13.8903)
+
+[node name="Adventure_Walls2" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="SM_Prop_Fence_Stick_01" parent="Adventure_Walls2" instance=ExtResource("15_e2nav")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, -10)
+
+[node name="SM_Prop_Fence_Stick_02" parent="Adventure_Walls2" instance=ExtResource("15_e2nav")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8, 0, -10)
+
+[node name="SM_Bld_Village_Well_01" parent="Adventure_Walls2" instance=ExtResource("16_eqylf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -0.446009, -11.9726)
+
+[node name="SM_Env_GroundMound_06" parent="Adventure_Walls2" instance=ExtResource("17_5f2e0")]
+transform = Transform3D(-200, 0, 1.74846e-05, 0, 200, 0, -1.74846e-05, 0, -200, 2.71011e-06, -2.47361, -31)
+
+[node name="SM_Env_MountainGrass_01" parent="Adventure_Walls2" instance=ExtResource("19_3mt7t")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 43.3601, -5.88146, -51.4702)
+
+[node name="SM_Env_MountainSnow_01" parent="Adventure_Walls2" instance=ExtResource("20_iesq5")]
+transform = Transform3D(1.41421, 0, -1.41421, 0, 2, 0, 1.41421, 0, 1.41421, 50.3359, -4, 48.8136)
+
+[node name="Ground_Decor" type="Node" parent="."]
+
+[node name="SM_Env_Path_Stone_01" parent="Ground_Decor" instance=ExtResource("17_j2hyg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 1.5)
+
+[node name="SM_Env_Path_Stone_03" parent="Ground_Decor" instance=ExtResource("18_e2hws")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.04045, 0, -5.7502)
+
+[node name="SM_Env_Path_Stone_04" parent="Ground_Decor" instance=ExtResource("18_e2hws")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95955, 0, -6.7502)
+
+[node name="SM_Env_Path_Stone_05" parent="Ground_Decor" instance=ExtResource("18_e2hws")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95955, 0, 9.2498)
+
+[node name="SM_Env_Path_Stone_06" parent="Ground_Decor" instance=ExtResource("18_e2hws")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.04045, 0, 9.2498)
+
+[editable path="Fantasy_Walls2/SM_Bld_Castle_Tower_02/SM_Bld_Castle_Roof_Spire_01"]
+[editable path="Fantasy_Walls2/SM_Bld_Castle_Tower_03/SM_Bld_Castle_Roof_Spire_02"]

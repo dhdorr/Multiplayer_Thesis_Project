@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd2f1ii8cmsnd"]
+
+[ext_resource type="PackedScene" uid="uid://c183q6t8wbrke" path="res://Master_Project/assets/Maps/Fantasy_Scenes/prefab_castle_1.glb" id="1_tklnh"]
+
+[node name="prefab_castle_1" instance=ExtResource("1_tklnh")]

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba3i0s3wp12js"]
+
+[ext_resource type="PackedScene" uid="uid://dancevgqosn8r" path="res://Master_Project/assets/Maps/Samurai_Scenes/SM_Env_Snow_Hill_Cascade_01.fbx" id="1_3o5nc"]
+
+[node name="SM_Env_Snow_Hill_Cascade_01" instance=ExtResource("1_3o5nc")]

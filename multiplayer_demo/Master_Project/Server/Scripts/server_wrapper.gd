@@ -52,6 +52,9 @@ func _update_peer_count(count: int) -> void:
 func _start_match():
 	_set_server_state(SERVER_STATE_TYPES.RUNNING_MATCH)
 	lobby_manager_s.send_out_lobby_update()
+	var vec_arr := [Vector3(1,0,1), Vector3(-1,0,1), Vector3(1,0,-1), Vector3(-1,0,-1)]
+	var random_dir : Vector3 = vec_arr.pick_random()
+	world_state_manager_s.bomb_ball_ref.move_the_ball(random_dir)
 
 
 func _start_server():

@@ -67,6 +67,7 @@ func activate_death() -> void:
 		_is_dead = true
 		print("this ghost is dead")
 		$GPUParticles3D.emitting = true
+		$AudioStreamPlayer3D.play()
 		#get_tree().create_timer(0.5).timeout.connect(func()->void:
 			#$GPUParticles3D.emitting = false
 			#)

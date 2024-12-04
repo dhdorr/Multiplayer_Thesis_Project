@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnlbvfkjxgkds"]
+
+[ext_resource type="PackedScene" uid="uid://cbfvdj582wxbk" path="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/SM_Env_Tree_Twisted_02.fbx" id="1_r0qqs"]
+
+[node name="SM_Env_Tree_Twisted_02" instance=ExtResource("1_r0qqs")]
