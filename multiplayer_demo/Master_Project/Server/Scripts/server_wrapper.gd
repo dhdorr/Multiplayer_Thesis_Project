@@ -12,6 +12,9 @@ var _server_state := SERVER_STATE_TYPES.OFF
 var _peer_count : int = 0 
 var _is_match_countdown_started := false
 
+var _new_match_created := false
+var current_match_id : int
+
 func _ready() -> void:
 	SignalBusMp.setup_settings_toggle.connect(setup_settings_menu)
 	SignalBusMp.update_peer_count.connect(_update_peer_count)
@@ -27,6 +30,10 @@ func _process(delta: float) -> void:
 	connection_manager_s.poll_server()
 	
 	if _server_state == SERVER_STATE_TYPES.WAITING_FOR_PLAYERS:
+		if not _new_match_created:
+			_new_match_created = true
+			connection_manager_s.curr_match_id = $Database_Manager.create_new_match()
+		
 		connection_manager_s.listen_for_new_connections()
 		connection_manager_s.listen_for_client_ready_ups()
 	elif _server_state == SERVER_STATE_TYPES.STARTING_MATCH:

@@ -26,9 +26,9 @@ func _process(delta: float) -> void:
 			SignalBusMp.lobby_start_match.emit()
 
 
-func add_new_player_to_lobby(username : String, skin_id : int) -> int:
+func add_new_player_to_lobby(username : String, skin_id : int, player_id : int) -> void:
 	# generate player id
-	var player_id : int = randi_range(1, 255)
+	#var player_id : int = randi_range(1, 255)
 	
 	var player := LOBBY_MANAGER_S.Player.new(username, player_id, skin_id, false)
 	var player_dict : Dictionary = player._to_dictionary()
@@ -36,7 +36,7 @@ func add_new_player_to_lobby(username : String, skin_id : int) -> int:
 	_lobby_player_list.append(player_dict)
 	_update_lobby_status()
 	
-	return player_id
+	#return player_id
 
 
 func _update_lobby_status() -> void:

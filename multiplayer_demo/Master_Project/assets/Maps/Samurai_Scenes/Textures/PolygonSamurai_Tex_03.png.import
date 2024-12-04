@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b31f5b7qhgaw"
-path="res://.godot/imported/PolygonSamurai_Tex_03.png-b26a4aec5cf46f1b5afd8d3dfbf83c86.ctex"
+path="res://.godot/imported/PolygonSamurai_Tex_03.png-a34c9c3a645a756721f6a371dd5a5ead.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Master_Project/assets/Maps/Samurai_Scenes/Textures/PolygonSamurai_Tex_03.png"
-dest_files=["res://.godot/imported/PolygonSamurai_Tex_03.png-b26a4aec5cf46f1b5afd8d3dfbf83c86.ctex"]
+source_file="res://Master_Project/assets/Maps/Samurai_Scenes/textures/PolygonSamurai_Tex_03.png"
+dest_files=["res://.godot/imported/PolygonSamurai_Tex_03.png-a34c9c3a645a756721f6a371dd5a5ead.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctrlhax3iribe"
-path="res://.godot/imported/PolygonSamurai_Emmision_Night.png-f53805c648721ea2c66cc7a922e20b7e.ctex"
+path="res://.godot/imported/PolygonSamurai_Emmision_Night.png-0dea54eff3502028dc5f6e3ef03c753b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Master_Project/assets/Maps/Samurai_Scenes/Textures/PolygonSamurai_Emmision_Night.png"
-dest_files=["res://.godot/imported/PolygonSamurai_Emmision_Night.png-f53805c648721ea2c66cc7a922e20b7e.ctex"]
+source_file="res://Master_Project/assets/Maps/Samurai_Scenes/textures/PolygonSamurai_Emmision_Night.png"
+dest_files=["res://.godot/imported/PolygonSamurai_Emmision_Night.png-0dea54eff3502028dc5f6e3ef03c753b.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 extends Node
 
-var network_latency_ms := 50.0
+var network_latency_ms := 150.0
 
 
 func simulate_sending_input_over_network(client: PacketPeerUDP, content: Dictionary) -> void:

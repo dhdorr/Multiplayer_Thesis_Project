@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://clb0pv2ygtwiv"
-path="res://.godot/imported/Characters_Texture_01.png-74d2ad91bfca1ae310c076c74448e9fa.ctex"
+path="res://.godot/imported/Characters_Texture_01.png-6851cc9e7fd88d5fe222e0385c6fab07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Master_Project/assets/Maps/Samurai_Scenes/Textures/Characters_Texture_01.png"
-dest_files=["res://.godot/imported/Characters_Texture_01.png-74d2ad91bfca1ae310c076c74448e9fa.ctex"]
+source_file="res://Master_Project/assets/Maps/Samurai_Scenes/textures/Characters_Texture_01.png"
+dest_files=["res://.godot/imported/Characters_Texture_01.png-6851cc9e7fd88d5fe222e0385c6fab07.ctex"]
 
 [params]
 

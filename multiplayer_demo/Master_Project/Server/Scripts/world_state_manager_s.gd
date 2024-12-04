@@ -79,7 +79,7 @@ func _physics_process(delta: float) -> void:
 		world_state_update.add_bomb_ball_state(bomb_ball_ref.position, bomb_ball_ref.rotation, bomb_ball_ref.linear_velocity, bomb_ball_ref.temp_speed)
 		
 		if player_packets.size() > 0:
-			connection_manager_s.send_world_state_updates_to_clients_2(world_state_update._to_dictionary())
+			connection_manager_s.send_world_state_updates_to_clients_actual(world_state_update._to_dictionary())
 			update_packet_id += 1
 			player_packets.clear()
 			

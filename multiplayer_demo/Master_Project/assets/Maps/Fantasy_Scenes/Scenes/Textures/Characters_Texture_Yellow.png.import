@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d010jrutv2mrl"
-path="res://.godot/imported/Characters_Texture_Yellow.png-05b737f9106c4f262ea47501dbc67fc9.ctex"
+path="res://.godot/imported/Characters_Texture_Yellow.png-29a194e0adf268ad9b08c698daae52dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/Textures/Characters_Texture_Yellow.png"
-dest_files=["res://.godot/imported/Characters_Texture_Yellow.png-05b737f9106c4f262ea47501dbc67fc9.ctex"]
+source_file="res://Master_Project/assets/Maps/Fantasy_Scenes/Scenes/textures/Characters_Texture_Yellow.png"
+dest_files=["res://.godot/imported/Characters_Texture_Yellow.png-29a194e0adf268ad9b08c698daae52dc.ctex"]
 
 [params]
 

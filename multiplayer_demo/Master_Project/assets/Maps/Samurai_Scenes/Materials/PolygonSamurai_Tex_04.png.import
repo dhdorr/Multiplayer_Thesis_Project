@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bynnqxloooghj"
-path.s3tc="res://.godot/imported/PolygonSamurai_Tex_04.png-88e75371976fd73edec20122f887318e.s3tc.ctex"
+path.s3tc="res://.godot/imported/PolygonSamurai_Tex_04.png-625ca82c5d4c8a3d7fb7955122b9614a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Master_Project/assets/Maps/Samurai_Scenes/Materials/PolygonSamurai_Tex_04.png"
-dest_files=["res://.godot/imported/PolygonSamurai_Tex_04.png-88e75371976fd73edec20122f887318e.s3tc.ctex"]
+source_file="res://Master_Project/assets/Maps/Samurai_Scenes/materials/PolygonSamurai_Tex_04.png"
+dest_files=["res://.godot/imported/PolygonSamurai_Tex_04.png-625ca82c5d4c8a3d7fb7955122b9614a.s3tc.ctex"]
 
 [params]
 
