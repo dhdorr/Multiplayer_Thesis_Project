@@ -10,6 +10,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	#self.linear_velocity = Vector3.ZERO
 	#self.position += self.linear_velocity * delta
 	var dir : Vector3 = self.linear_velocity.normalized()
 	var collision := move_and_collide(dir * temp_speed * delta)

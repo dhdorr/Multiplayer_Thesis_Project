@@ -1,6 +1,6 @@
 class_name LOBBY_MANAGER_S extends Node
 
-const MAX_LOBBY_SIZE := 2
+const MAX_LOBBY_SIZE := 1
 
 @onready var connection_manager_s: Connection_Manager_Server = %Connection_Manager_S
 @onready var world_state_manager_s: World_State_Manager = %World_State_Manager_S
@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 		if _all_players_ready:
 			# this should become, when all players are READY, start match
 			lobby_status = SettingsMp.GLOBAL_LOBBY_STATUS.START_MATCH
+			print("do ready send now ")
 			SignalBusMp.lobby_start_match.emit()
 
 
@@ -40,7 +41,7 @@ func add_new_player_to_lobby(username : String, skin_id : int, player_id : int) 
 
 
 func _update_lobby_status() -> void:
-	if _lobby_player_list.size() == MAX_LOBBY_SIZE:
+	if _lobby_player_list.size() == SettingsMp.MAX_LOBBY_SIZE:
 		lobby_status = SettingsMp.GLOBAL_LOBBY_STATUS.CLOSED
 
 
@@ -49,6 +50,7 @@ func update_lobby_player_status(player_id : int, is_ready : bool):
 		if player["player_id"] == player_id:
 			player["is_ready"] = is_ready
 	
+	#_update_lobby_status()
 	send_out_lobby_update()
 
 

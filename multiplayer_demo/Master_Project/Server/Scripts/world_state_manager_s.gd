@@ -13,7 +13,7 @@ const PLAYER_S_3D = preload("res://Master_Project/Server/Scenes/player_s_3d.tscn
 @onready var world_3d: Node3D = $"../World_3D"
 var spawn_points : Array[Marker3D]
 var used_spawn_points : Array[int]
-
+var spawn_count : int = -1
 var bomb_ball_ref : Bomb_Ball_Server
 
 # this will be refactored to a dictionary of an array for each player
@@ -140,14 +140,16 @@ func init_player_positions_3D(player_id: int) -> Array[Vector3]:
 
 
 func pick_spawn_point() -> int:
-	print(used_spawn_points)
-	var choice : int = 0
-	if used_spawn_points.is_empty():
-		used_spawn_points.append(0)
-		choice = 0
-	else:
-		for i in range(spawn_points.size()):
-			if not used_spawn_points.has(i):
-				used_spawn_points.append(i)
-				choice = i
-	return choice
+	spawn_count += 1
+	return spawn_count
+	#print(used_spawn_points)
+	#var choice : int = 0
+	#if used_spawn_points.is_empty():
+		#used_spawn_points.append(0)
+		#choice = 0
+	#else:
+		#for i in range(spawn_points.size()):
+			#if not used_spawn_points.has(i):
+				#used_spawn_points.append(i)
+				#choice = i
+	#return choice

@@ -2,7 +2,7 @@ extends Node
 
 enum SERVER_STATE_TYPES { OFF, WAITING_FOR_PLAYERS, STARTING_MATCH, RUNNING_MATCH }
 
-const MAX_LOBBY_SIZE : int = 2
+const MAX_LOBBY_SIZE : int = 1
 
 @onready var connection_manager_s: Connection_Manager_Server = %Connection_Manager_S
 @onready var world_state_manager_s: World_State_Manager = %World_State_Manager_S

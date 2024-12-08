@@ -8,7 +8,7 @@ enum SERVER_PACKET_TYPES { NONE, CONNECTION_RESPONSE, LOBBY_UPDATE, WORLD_STATE_
 enum PLAYER_SKIN_ID { BARD=1, CYBORG, DRUID, KING, QUEEN, ROGUE, SAMURAI, SORCERER, WITCH, WIZARD, NONE, VIKING, WARRIOR, KNIGHT }
 
 var protocol_version : String = "0.0.1"
-
+var MAX_LOBBY_SIZE : int = 1
 var enable_client_prediction := true
 var enable_server_reconciliation := true
 var enable_client_entity_interpolation := true
