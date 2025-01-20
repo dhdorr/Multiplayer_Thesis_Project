@@ -1,3 +1,7 @@
+
+# Multiplayer_Thesis_Project
+ Grad School Thesis for Multiplayer Netcode Latency Compensation Techniques Fall 2024
+ 
 # Table of Contents
 
 1. [Overview](#overview)
@@ -12,9 +16,6 @@
 4. [Communication Diagram](#communication-diagram)
 5. [Database Schema](#database-schema)
 
-
-# Multiplayer_Thesis_Project
- Grad School Thesis for Multiplayer Netcode Latency Compensation Techniques Fall 2024
 
  ## Overview
 Multiplayer online games are a flavor of interactive distributed systems in which many disparately connected computers work together to maintain a consensus on a rapidly updating simulation. Looking beyond gameplay loops and graphical fidelity, multiplayer online games have unique challenges they must overcome to be viewed favorably by players, predominantly how the game handles latency. From the player's perspective, latency would be defined as “the time it takes for the player’s input to be shown on screen.” However, from a computer networking perspective, latency is “the time it takes for a packet of data to be sent over the network from one computer to another.” This project will discuss the implications of latency in interactive distributed systems such as multiplayer online games. Furthermore, I will discuss implementing several latency compensation techniques and demonstrate their effectiveness in several different genres of multiplayer online games. The impact of each latency compensation technique is directly related to the pace of the gameplay loop and can range from immensely impactful to not noticeable at all.
