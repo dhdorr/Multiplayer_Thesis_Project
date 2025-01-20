@@ -2,4 +2,8 @@
  Grad School Thesis for Multiplayer Netcode Protocol
 
 ## Communication Diagram
-![fancy_comm_diag_3](https://github.com/user-attachments/assets/053cba8f-268f-45cb-a5db-3b2a15fb7ade)
+![fancy_comm_diag_4](https://github.com/user-attachments/assets/7f72df44-5598-401b-98a2-0e11890b8e90)
+
+
+## Database Schema
+![Untitled](https://github.com/user-attachments/assets/0e89f7f9-d0cc-4c4b-bab2-023d665b5e85)
