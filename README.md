@@ -41,7 +41,7 @@ asdf
 asdf
 
 ### Taxonomy of Latency Compensation Techniques
-I am unable to discuss every possible latency compensation technique. However, a paper from a team of researchers searched and categorized every article, paper, and conference talk about latency compensation and compiled their findings into this taxonomy (family tree) of latency compensation techniques.
+I am unable to discuss every possible latency compensation technique. However, a paper from a team of researchers searched and categorized every article, paper, and conference talk about latency compensation and compiled their findings into this taxonomy of latency compensation techniques.
 <img width="796" alt="taxonomy_for_latency_techniques" src="https://github.com/user-attachments/assets/b658907e-0402-41e3-941a-446c29b3ff31" />
 
 
