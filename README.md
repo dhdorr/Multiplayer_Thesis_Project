@@ -88,6 +88,9 @@ The red ball in the middle is a dangerous projectile called the Bomb-ball. If a 
 
 ![gameplay_1](https://github.com/user-attachments/assets/02995044-1d30-4ac9-a91f-69627e501077)
 
+![final_proj_gif](https://github.com/user-attachments/assets/b42c4f41-5948-43dd-9e22-540d26d59ae0)
+
+
 
 ## Communication Diagram
 This figure is a communication diagram of this project that models the latency between the client and server and shows where latency compensation techniques may be applied to reduce the effects of latency.
